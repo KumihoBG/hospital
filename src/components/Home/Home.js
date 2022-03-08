@@ -6,6 +6,7 @@ import Parallax from '../Parallax/Parallax.js';
 import MiddleSection from '../MiddleSection/MiddleSection.js';
 import Bottom from '../Bottom/Bottom.js';
 import Footer from '../Footer/Footer.js';
+import CoronavirusData from '../CoronavirusData/CoronavirusData.js';
 
 function Home() {
   return (
@@ -15,6 +16,7 @@ function Home() {
         <IconSection />
         <Parallax />
         <MiddleSection />
+        <CoronavirusData />
         <Bottom />
         <Footer />
     </div>
