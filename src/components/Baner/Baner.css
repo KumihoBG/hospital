@@ -1,3 +1,11 @@
 .main-heading {
-    color: #000;
+    color: rgb(5, 44, 41);
+}
+
+#index-banner {
+    height: 600px;
+}
+
+#main-heading-h1 {
+    margin: 5rem 0 1.68rem 0;
 }

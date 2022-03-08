@@ -8,12 +8,12 @@ function Baner() {
                 <div class="section no-pad-bot">
                     <div class="container">
                         <br />
-                        <h1 class="header center teal-text text-lighten-2">Parallax Template</h1>
+                        <h1 id="main-heading-h1" class="header center teal-text text-lighten-2">Our Commitment to Safe Care</h1>
                         <div class="row center">
-                            <h5 class="header col s12 main-heading">A modern responsive front-end framework based on Material Design</h5>
+                            <h5 class="header col s12 main-heading">Because your Life matters</h5>
                         </div>
                         <div class="row center">
-                            <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
+                            <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">FIND A DOCTOR</a>
                         </div>
                         <br />
 

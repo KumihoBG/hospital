@@ -6,7 +6,7 @@ import logoImage from '../../images/logo.png';
 function Navigation() {
     // const userId = localStorage.getItem('userId');
     // const isLogged = userId !== null;
-    const isLogged = true;
+    const isLogged = false;
     // const navigate = useNavigate();
     const location = useLocation();
     const { pathname } = location;
@@ -53,7 +53,6 @@ function Navigation() {
                             </li>
                         </ul>
                     </div>
-
                 }
                 <ul id="nav-mobile" class="sidenav">
                     <li className={pathname === "/home" ? "active" : ""}>
