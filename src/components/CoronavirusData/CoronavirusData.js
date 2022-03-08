@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from "react";
 import '../CoronavirusData/CoronavirusData.css';
 import { getCovidStats } from '../../api/api.js';
+import News from "../News/News.js";
 
 function CoronavirusData() {
-    let [stats, setStats] = useState([]);
+    let [news, setNews] = useState([]);
     useEffect(() => {
-
-        window.scrollTo(0, 0);
-
         async function fetchWebData() {
             try {
                 const res = await getCovidStats();
-                const result = setStats(res);
+                setNews(res);
             } catch (err) {
                 console.log(err);
             }
         }
         fetchWebData();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
-    <div className="news-container"></div>
+    <div className="news-container">
+        {news.length > 0 &&
+            <News news={news} />
+        }
+    </div>
   )
 }
 

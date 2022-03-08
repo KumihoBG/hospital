@@ -1,4 +1,5 @@
 import React from 'react';
+import '../Bottom/Bottom.css';
 
 function Bottom() {
     return (
@@ -6,11 +7,11 @@ function Bottom() {
             <div class="section no-pad-bot">
                 <div class="container">
                     <div class="row center">
-                        <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+                        <h5 class="header col s12 bottom-heading">We are always there for you</h5>
                     </div>
                 </div>
             </div>
-            <div class="parallax"><img src="background3.jpg" alt="Unsplashed background img 3" /></div>
+            <div class="parallax"><img src={require('../../images/background3.jpg')} alt="Unsplashed background img 3" /></div>
         </div>
     )
 }

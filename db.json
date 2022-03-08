@@ -1,0 +1,142 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "India logs over 11,000 Covid cases",
+      "url": "https://www.telegraphindia.com/india/india-logs-over-11000-fresh-covid-cases-255-casualties-in-a-day/cid/1853583",
+      "source": "Telegraph"
+    },
+    {
+      "id": 2,
+      "title": "Covid: Over 13k cases, 302 deaths",
+      "url": "https://www.telegraphindia.com/india/india-logs-over-13k-fresh-covid-cases-302-casualties-in-a-day/cid/1853437",
+      "source": "Telegraph"
+    },
+    {
+      "id": 3,
+      "title": "Covid: Sanofi booster 100% efficacy",
+      "url": "https://www.telegraphindia.com/world/sanofi-gsk-covid-19-vaccine-shows-100-efficacy/cid/1853233",
+      "source": "Telegraph"
+    },
+    {
+      "id": 4,
+      "title": "President lauds Covid warriors",
+      "url": "https://www.telegraphindia.com/india/covid-ram-nath-kovind-lauds-services-of-doctors-nurses-health-workers/cid/1852732",
+      "source": "Telegraph"
+    },
+    {
+      "id": 5,
+      "title": "Covid: Centre refutes LIC data",
+      "url": "https://www.telegraphindia.com/india/government-dismisses-reports-of-lic-ipo-claiming-massive-covid-deaths-in-2021/cid/1852570",
+      "source": "Telegraph"
+    },
+    {
+      "id": 6,
+      "title": "Covid: 22,270 fresh cases, 325 deaths",
+      "url": "https://www.telegraphindia.com/india/india-logs-22270-fresh-covid-19-cases-325-deaths/cid/1852554",
+      "source": "Telegraph"
+    },
+    {
+      "id": 7,
+      "title": "Covid lockdowns fuel surge in Lego profits",
+      "url": "https://www.theguardian.com/lifeandstyle/2022/mar/08/covid-lockdowns-fuel-surge-in-lego-profits",
+      "source": "The Guardian"
+    },
+    {
+      "id": 8,
+      "title": "  UK cancer research studies fell 32% in first year of Covid, say charities ",
+      "url": "https://www.theguardian.com/society/2022/mar/08/uk-cancer-research-studies-fell-32-in-first-year-of-covid-say-charities",
+      "source": "The Guardian"
+    },
+    {
+      "id": 9,
+      "title": "Florida to formally recommend against Covid vaccine for healthy children",
+      "url": "https://www.theguardian.com/us-news/2022/mar/07/florida-formally-recommend-against-covid-vaccine-children",
+      "source": "The Guardian"
+    },
+    {
+      "id": 10,
+      "title": "  Chatham Islands, one of world’s most remote places, records first Covid cases ",
+      "url": "https://www.theguardian.com/world/2022/mar/07/chatham-islands-one-of-worlds-most-remote-places-records-first-covid-cases",
+      "source": "The Guardian"
+    },
+    {
+      "id": 11,
+      "title": "Truck convoy loops around Washington DC to protest Covid restrictions",
+      "url": "https://www.theguardian.com/us-news/2022/mar/06/washington-dc-truck-convoy-protest-covid-restrictions",
+      "source": "The Guardian"
+    },
+    {
+      "id": 12,
+      "title": "Film industry banks on The Batman to mark start of ‘post-Covid’ cinema",
+      "url": "https://www.theguardian.com/film/2022/mar/06/film-industry-the-batman-box-office-sales-covid-pandemic",
+      "source": "The Guardian"
+    },
+    {
+      "id": 13,
+      "title": "Harry Potter star Jessie Cave in hospital after catching Covid while pregnant",
+      "url": "https://www.theguardian.com/culture/2022/mar/06/jessie-cave-admitted-to-hospital-after-catching-covid-while-pregnant",
+      "source": "The Guardian"
+    },
+    {
+      "id": 14,
+      "title": "Australian Bureau of Statistics report on Covid deaths misrepresented by rightwing media",
+      "url": "https://www.theguardian.com/australia-news/2022/feb/23/australian-bureau-of-statistics-report-on-covid-deaths-misrepresented-by-rightwing-media",
+      "source": "The Guardian"
+    },
+    {
+      "id": 15,
+      "title": "Covid cost-cutting will put blinkers on our best Covid research ",
+      "url": "https://www.theguardian.com/world/2022/feb/21/covid-cost-cutting-will-put-blinkers-on-our-best-covid-research",
+      "source": "The Guardian"
+    },
+    {
+      "id": 16,
+      "title": "Tory row over testing casts shadow over PM’s Covid announcement",
+      "url": "https://www.theguardian.com/world/2022/feb/21/tory-row-over-testing-casts-shadow-over-pms-covid-announcement",
+      "source": "The Guardian"
+    },
+    {
+      "id": 17,
+      "title": "Why have some people never caught Covid? The answers could help protect us all",
+      "url": "https://www.theguardian.com/commentisfree/2022/mar/07/never-caught-covid-immune-systems-vaccines",
+      "source": "The Guardian"
+    },
+    {
+      "id": 18,
+      "title": "I’m looking forward to après-Covid birthdays",
+      "url": "https://www.theguardian.com/commentisfree/2022/mar/05/looking-forward-apres-covid-birthdays",
+      "source": "The Guardian"
+    },
+    {
+      "id": 19,
+      "title": "How Covid lockdowns triggered record rainfall in China",
+      "url": "https://www.theguardian.com/news/2022/mar/05/covid-lockdowns-triggered-record-rainfall-china",
+      "source": "The Guardian"
+    },
+    {
+      "id": 20,
+      "title": "Lost to the virus  Has your family been affected by the different variants of Covid-19? ",
+      "url": "https://www.theguardian.com/society/2021/mar/08/has-your-family-been-affected-by-the-brazilian-or-south-african-variants-of-covid-19",
+      "source": "The Guardian"
+    },
+    {
+      "id": 21,
+      "title": "Has your family been affected by the different variants of Covid-19?",
+      "url": "https://www.theguardian.com/society/2021/mar/08/has-your-family-been-affected-by-the-brazilian-or-south-african-variants-of-covid-19",
+      "source": "The Guardian"
+    },
+    {
+      "id": 22,
+      "title": "Full Story  How Australian data on Covid deaths was misinterpreted by rightwing media ",
+      "url": "https://www.theguardian.com/australia-news/audio/2022/mar/03/how-australian-data-on-covid-deaths-was-misinterpreted-by-rightwing-media",
+      "source": "The Guardian"
+    },
+    {
+      "id": 23,
+      "title": "How Australian data on Covid deaths was misinterpreted by rightwing media",
+      "url": "https://www.theguardian.com/australia-news/audio/2022/mar/03/how-australian-data-on-covid-deaths-was-misinterpreted-by-rightwing-media",
+      "source": "The Guardian"
+    }
+  ]
+}

@@ -8,7 +8,7 @@ function Baner() {
                 <div class="section no-pad-bot">
                     <div class="container">
                         <br />
-                        <h1 id="main-heading-h1" class="header center teal-text text-lighten-2">Our Commitment to Safe Care</h1>
+                        <h1 id="main-heading-h1" class="header center teal-text text-lighten-2">Our Commitment to Health Care</h1>
                         <div class="row center">
                             <h5 class="header col s12 main-heading">Because your Life matters</h5>
                         </div>
@@ -19,7 +19,7 @@ function Baner() {
 
                     </div>
                 </div>
-                <div class="parallax"><img src="background1.jpg" alt="Unsplashed background img 1" /></div>
+                <div class="parallax"><img src={require('../../images/background1.jpg')} alt="Unsplashed background img 1" /></div>
             </div>
         </div>
     )
