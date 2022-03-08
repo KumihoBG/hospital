@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
+import '../Navigation/Navigation.css';
+import logoImage from '../../images/logo.png';
 
 function Navigation() {
     // const userId = localStorage.getItem('userId');
@@ -9,7 +11,6 @@ function Navigation() {
     const location = useLocation();
     const { pathname } = location;
     const splitLocation = pathname.split("/");
-
     // async function onLogout() {
     //     try {
     //         await logout();
@@ -22,7 +23,8 @@ function Navigation() {
     return (
         <nav class="white" role="navigation">
             <div class="nav-wrapper container">
-                <Link id="logo-container" to="#" class="brand-logo">NewLife Hospital</Link>
+                <Link id="logo-container" to="#" class="brand-logo"><img src={logoImage} id="logo-image" alt="NewLife Hospital Logo" /> NewLife Hospital</Link>
+
                 {isLogged
                     ?
                     <div className="user">
@@ -38,17 +40,17 @@ function Navigation() {
                                 <NavLink to="/" alt="Home page: NewLife Hospital" end={true}>Home</NavLink>
                             </li>
                             <li className={splitLocation[1] === "register" ? "active" : ""}>
-                            <NavLink to="/register" alt="register">
-                                <span className="nav-icon"><ion-icon name="person-add-outline"></ion-icon></span>
-                                <span className="nav-item-title">Register</span>
-                            </NavLink>
-                        </li>
-                        <li className={splitLocation[1] === "login" ? "active" : ""}>
-                            <NavLink to="/login" alt="login">
-                                <span className="nav-icon"><ion-icon name="log-in-outline"></ion-icon></span>
-                                <span className="nav-item-title">Login</span>
-                            </NavLink>
-                        </li>
+                                <NavLink to="/register" alt="register">
+                                    <span className="nav-icon"><ion-icon name="person-add-outline"></ion-icon></span>
+                                    <span className="nav-item-title">Register</span>
+                                </NavLink>
+                            </li>
+                            <li className={splitLocation[1] === "login" ? "active" : ""}>
+                                <NavLink to="/login" alt="login">
+                                    <span className="nav-icon"><ion-icon name="log-in-outline"></ion-icon></span>
+                                    <span className="nav-item-title">Login</span>
+                                </NavLink>
+                            </li>
                         </ul>
                     </div>
 
