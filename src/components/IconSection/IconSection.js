@@ -11,7 +11,7 @@ function IconSection() {
                             <h2 class="center green-icons"><i class="material-icons">healing</i></h2>
                             <h5 class="center">Find a Doctor</h5>
 
-                            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+                            <p class="light">You do not need to come to us in person to find the right specialist for you. Use our search tool. We have medical professionals with extensive experience in various fields. Trust them, they will not let you down.</p>
                         </div>
                     </div>
 
@@ -20,7 +20,7 @@ function IconSection() {
                             <h2 class="center green-icons"><i class="material-icons">schedule</i></h2>
                             <h5 class="center">Appointments</h5>
 
-                            <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+                            <p class="light">Worried about a physical examination during the Covid-19 pandemic? Stop it! We have taken huge measures to protect you from infection - constant disinfection, wearing protective masks, keeping a physical distance, and limiting patients meeting each other.</p>
                         </div>
                     </div>
 
@@ -29,7 +29,7 @@ function IconSection() {
                             <h2 class="center green-icons"><i class="material-icons">assignment</i></h2>
                             <h5 class="center">Examination Results</h5>
 
-                            <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+                            <p class="light">You have undergone a medical examination and you need to pick up your results? You don't have to wait in line in front of the doctor's office. Your doctor will publish your results on your patient profile as soon as they are ready so you can see them online.</p>
                         </div>
                     </div>
                 </div>

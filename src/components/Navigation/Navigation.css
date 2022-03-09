@@ -10,3 +10,9 @@
 nav .brand-logo {
     font-family: 'Bad Script', cursive;
 }
+
+@media (max-width: 568px) {
+    #logo-container {
+        display: none;
+    }
+}
