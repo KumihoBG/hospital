@@ -1,0 +1,20 @@
+#donation {
+    padding: 10px 30px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.footer-ul {
+    line-height: 2.5;
+}
+
+.grey-text {
+    width: 90%;
+}
+
+#follow {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+}
