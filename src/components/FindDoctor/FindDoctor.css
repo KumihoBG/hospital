@@ -44,16 +44,35 @@
 }
 
 #searchBtn {
-    background: rgb(5, 44, 41);
-    color: #fff;
-    padding: 10px 40px;
-    border-radius: 10px;
-    cursor: pointer;
-    border: none;
-    margin-top: 20px;
+  background: rgb(10, 133, 122);
+  color: #fff;
+  padding: 10px 40px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  margin-top: 20px;
 }
 
 #searchBtn:hover {
-    background: rgb(10, 133, 122);
-    color: #fff;
+  opacity: 0.9;
+}
+
+.requestBtn {
+  width: 30%;
+  align-self: flex-end;
+  background: rgb(10, 133, 122);
+  color: #fff;
+  padding: 15px 40px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  font-size: 20px;
+}
+
+.requestBtn:hover {
+  opacity: 0.9;
+}
+
+.contacts {
+  align-self: flex-end;
 }
