@@ -5,3 +5,31 @@
 .light {
     text-align: justify;
 }
+
+.icon-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.icons-link {
+    display: flex;
+    padding: 10px 30px;
+    background: rgb(16, 75, 68);
+    color: #fff;
+    margin: 5px auto;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.icons-link:hover {
+    transform: translateX(20px);
+    transition: 1s ease-out;
+}
+
+.arrow {
+    font-size: 20px;
+    padding-top: 7px;
+    margin-left: 10px;
+}

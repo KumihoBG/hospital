@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../Baner/Baner.css';
 
 function Baner() {
@@ -13,10 +14,9 @@ function Baner() {
                             <h5 class="header col s12 main-heading">Because your Life matters</h5>
                         </div>
                         <div class="row center">
-                            <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">FIND A DOCTOR</a>
+                        <Link to="/staff" alt="Find the best specialist for you" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">FIND A DOCTOR</Link>
                         </div>
                         <br />
-
                     </div>
                 </div>
                 <div class="parallax"><img src={require('../../images/background1.jpg')} alt="Unsplashed background img 1" /></div>

@@ -5,6 +5,7 @@ import PrivateRoutes from './helpers/PrivateRoutes.js';
 import PublicRoutes from './helpers/PublicRoutes.js';
 import Home from './components/Home/Home.js';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage.js';
+import FindDoctor from './components/FindDoctor/FindDoctor.js';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route element={<PrivateRoutes />}>
             <Route path='/home' element={<Home />} />
           </Route>
+          <Route path='/staff' element={<FindDoctor />} />
           <Route path='*' element={<NotFoundPage />} />
           <Route path='/404' element={<NotFoundPage />} />
         </Routes>
