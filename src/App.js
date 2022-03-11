@@ -6,6 +6,7 @@ import PublicRoutes from './helpers/PublicRoutes.js';
 import Home from './components/Home/Home.js';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage.js';
 import FindDoctor from './components/FindDoctor/FindDoctor.js';
+import MedicalProfessionalCollection from './components/MedicalProfessionalCollection/MedicalProfessionalCollection.js';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path='/home' element={<Home />} />
           </Route>
           <Route path='/staff' element={<FindDoctor />} />
+          <Route path='/medical-professionals' element={<MedicalProfessionalCollection />} />
           <Route path='*' element={<NotFoundPage />} />
           <Route path='/404' element={<NotFoundPage />} />
         </Routes>

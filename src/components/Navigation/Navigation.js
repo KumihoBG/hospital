@@ -51,6 +51,12 @@ function Navigation() {
                                     <span className="nav-item-title">Login</span>
                                 </NavLink>
                             </li>
+                            <li className={splitLocation[1] === "list" ? "active" : ""}>
+                                <NavLink to="/medical-professionals" alt="Our Medical Professionals">
+                                    <span className="nav-icon"><ion-icon name="log-in-outline"></ion-icon></span>
+                                    <span className="nav-item-title">Our Medical Professionals</span>
+                                </NavLink>
+                            </li>
                         </ul>
                     </div>
                 }
