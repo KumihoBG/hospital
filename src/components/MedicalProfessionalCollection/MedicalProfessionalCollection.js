@@ -1,6 +1,7 @@
 import React from 'react';
 import Navigation from '../Navigation/Navigation.js';
 import MedicalProfessional from '../MedicalProfessional/MedicalProfessional.js';
+import Footer from '../Footer/Footer.js';
 import '../MedicalProfessionalCollection/MedicalProfessionalCollection.css';
 
 function MedicalProfessionalCollection() {
@@ -23,6 +24,7 @@ function MedicalProfessionalCollection() {
                     <MedicalProfessional />
                 </li>
             </ul>
+            <Footer />
         </div>
     )
 }
