@@ -1,9 +1,10 @@
 .green-icons {
-    color: rgb(16, 75, 68);
+    color: #219186;
 }
 
 .light {
     text-align: justify;
+    font-weight: 400;
 }
 
 .icon-block {
@@ -11,12 +12,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
 
 .icons-link {
     display: flex;
     padding: 10px 30px;
-    background: rgb(16, 75, 68);
+    background: #219186;
     color: #fff;
     margin: 5px auto;
     font-size: 20px;
