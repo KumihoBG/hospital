@@ -1,0 +1,17 @@
+#searchBoxLabel {
+    display: none;
+}
+
+#search {
+    background: rgb(206, 224, 213);
+    border: none;
+    color: #096157;
+    cursor: pointer;
+    padding: 10px 30px;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    letter-spacing: 1.2px;
+    border: 0.5px solid #096157;
+}

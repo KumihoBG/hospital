@@ -1,6 +1,7 @@
 import React from 'react';
 import '../Footer/Footer.css';
 import Icons from '../Icons/Icons.js';
+import Search from '../Search/Search.js';
 
 function Footer() {
     return (
@@ -32,7 +33,11 @@ function Footer() {
                     </div>
                 </div>
                 <p id="follow">Follow NewLife Hospital</p>
-                <Icons />
+                <div className="footer-small">
+                    <Icons />
+                    <Search />
+                </div>
+
             </div>
             <div class="footer-copyright">
                 <div class="container">
