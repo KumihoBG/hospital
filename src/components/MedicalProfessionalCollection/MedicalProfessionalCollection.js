@@ -3,6 +3,7 @@ import Navigation from '../Navigation/Navigation.js';
 import MedicalProfessional from '../MedicalProfessional/MedicalProfessional.js';
 import Footer from '../Footer/Footer.js';
 import '../MedicalProfessionalCollection/MedicalProfessionalCollection.css';
+import PatientProfile from '../PatientProfile/PatientProfile.js';
 
 function MedicalProfessionalCollection() {
     return (

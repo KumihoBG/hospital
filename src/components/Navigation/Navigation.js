@@ -23,7 +23,7 @@ function Navigation() {
     return (
         <nav class="white" role="navigation">
             <div class="nav-wrapper container">
-                <Link id="logo-container" to="#" class="brand-logo"><img src={logoImage} id="logo-image" alt="NewLife Hospital Logo" /> NewLife Hospital</Link>
+                <Link id="logo-container" to="/" class="brand-logo"><img src={logoImage} id="logo-image" alt="NewLife Hospital Logo" /> NewLife Hospital</Link>
 
                 {isLogged
                     ?
