@@ -5,7 +5,7 @@
 }
 
 .find-doctor-div {
-  background: url("../../images/logo.png") no-repeat left center;
+  background: url('../images/logo.png') no-repeat left center;
   width: 80vw;
   height: 90vh;
   display: flex;
@@ -40,12 +40,12 @@
 }
 
 #search-input::placeholder {
-  color: #000;
+  color: $black;
 }
 
 #searchBtn {
-  background: rgb(10, 133, 122);
-  color: #fff;
+  background: $primary_color;
+  color: $white;
   padding: 10px 40px;
   border-radius: 10px;
   cursor: pointer;
@@ -60,8 +60,8 @@
 .requestBtn {
   width: 30%;
   align-self: flex-end;
-  background: rgb(10, 133, 122);
-  color: #fff;
+  background: $primary_color;
+  color: $white;
   padding: 15px 40px;
   border-radius: 10px;
   cursor: pointer;

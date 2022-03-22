@@ -25,6 +25,7 @@ function MedicalProfessionalCollection() {
                     <MedicalProfessional />
                 </li>
             </ul>
+            <PatientProfile />
             <Footer />
         </div>
     )

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import '../CoronavirusData/CoronavirusData.css';
 import { getCovidStats } from '../../api/api.js';
+import '../../scss/style.css';
 import News from "../News/News.js";
 
 function CoronavirusData() {

@@ -1,8 +1,8 @@
 import React from 'react';
 import Navigation from '../Navigation/Navigation.js';
-import '../FindDoctor/FindDoctor.css';
 import Footer from '../Footer/Footer.js';
 import Contact from '../Contact/Contact.js';
+import '../../scss/style.css';
 
 function FindDoctor() {
     return (
@@ -20,7 +20,7 @@ function FindDoctor() {
                     </form>
                 </div>
                 <button className="requestBtn" type="submit" name="action">Request an appointment
-                    <i class="material-icons right">send</i>
+                    <i className="material-icons right">send</i>
                 </button>
                 <Contact />
             </div>

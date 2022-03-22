@@ -7,6 +7,8 @@ import Home from './components/Home/Home.js';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage.js';
 import FindDoctor from './components/FindDoctor/FindDoctor.js';
 import MedicalProfessionalCollection from './components/MedicalProfessionalCollection/MedicalProfessionalCollection.js';
+import Login from './components/Login/Login.js';
+import Register from './components/Register/Register.js';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Routes>
           <Route element={<PublicRoutes />}>
             <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
           </Route>
 
           <Route element={<PrivateRoutes />}>

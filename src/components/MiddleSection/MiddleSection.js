@@ -3,11 +3,11 @@ import '../MiddleSection/MiddleSection.css';
 
 function MiddleSection() {
     return (
-        <div id="locations-middle-section" class="container">
-            <div class="section">
-                <div class="row">
-                    <div class="col s12 center">
-                        <h3><i class="mdi-content-send brown-text"></i></h3>
+        <div id="locations-middle-section" className="container">
+            <div className="section">
+                <div className="row">
+                    <div className="col s12 center">
+                        <h3><i className="mdi-content-send brown-text"></i></h3>
                         <h4>Locations and Directions</h4>
                         <h6>You can find departments of our hospital in three of the main cities in Bulgaria.</h6>
                         <div className="locations">

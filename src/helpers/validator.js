@@ -1,5 +1,5 @@
-import * as authService from "../services/authService.js";
-import notification from "./notification.js";
+import { register } from "../api/api.js";
+// import notification from "./notification.js";
 
 export async function validateInput(username, email, password, repass) {
     if (username === ''
@@ -10,19 +10,19 @@ export async function validateInput(username, email, password, repass) {
         || password === undefined
         || repass === ''
         || repass === undefined) {
-        return notification('Missing information', 'All fields are required!');
+        // return notification('Missing information', 'All fields are required!');
     }
 
     if (username === 'admin') {
-        return notification('Problem found', 'Username cannot be "admin"');
+        // return notification('Problem found', 'Username cannot be "admin"');
     }
 
     if (password === 'password') {
-        return notification('Problem found', 'Password too easy! Try more unique one')
+        // return notification('Problem found', 'Password too easy! Try more unique one')
     }
 
     if (password !== repass) {
-        return notification('Problem found', 'Two passwords don\'t match!');
+        // return notification('Problem found', 'Two passwords don\'t match!');
     }
 
     if (typeof username !== 'string' || !username instanceof String) {
@@ -62,18 +62,18 @@ export async function validateInput(username, email, password, repass) {
     }
 
     if (isValid === false) {
-        return notification('Problem found', 'Password must be between 6 and 10 characters.');
+        // return notification('Problem found', 'Password must be between 6 and 10 characters.');
     }
 
     if (isInvSymbol === true) {
-        return notification('Problem found', 'Password must consist only of letters and digits.');
+        // return notification('Problem found', 'Password must consist only of letters and digits.');
     }
 
     if (hasDigits === false) {
-        return notification('Problem found', 'Password must have at least 2 digits.');
+        // return notification('Problem found', 'Password must have at least 2 digits.');
     }
     try {
-        await authService.register(username, email, password);
+        await register(username, email, password);
     } catch (error) {
         console.log(error);
     }

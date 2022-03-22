@@ -1,5 +1,5 @@
 .main-heading {
-    color: rgb(5, 44, 41);
+    color: $dark_green;
 }
 
 #index-banner {
@@ -8,5 +8,5 @@
 
 #main-heading-h1 {
     margin: 5rem 0 1.68rem 0;
-    text-shadow: 3px 3px rgb(255, 255, 255, 0.5);
+    text-shadow: 3px 3px $light_grey;
 }

@@ -26,7 +26,7 @@ function PatientProfile() {
                     </div>
                     <div className="personal-details">
                         <div className="section-title">
-                            <h5>Personal Info</h5><i class="small material-icons">mode_edit</i>
+                            <h5>Personal Info</h5><i className="small material-icons">mode_edit</i>
                         </div>
                         <table className="responsive-table">
                             <tbody>
@@ -54,7 +54,7 @@ function PatientProfile() {
 
                     <div className="medication-details">
                         <div className="section-title">
-                            <h5>Medication Details</h5><i class="small material-icons">mode_edit</i>
+                            <h5>Medication Details</h5><i className="small material-icons">mode_edit</i>
                         </div>
                         <p>Patient of Medical Professional: Dr. John Smith</p>
                     </div>
@@ -62,15 +62,15 @@ function PatientProfile() {
                 <Grid id="patient-history-container" item xs={6}>
                     <h4>History</h4>
                     <div className="section-title">
-                        <h5>Diagnosis</h5><i class="small material-icons">mode_edit</i>
+                        <h5>Diagnosis</h5><i className="small material-icons">mode_edit</i>
                     </div>
                     <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
                     <div className="section-title">
-                        <h5>Notes</h5><i class="small material-icons">mode_edit</i>
+                        <h5>Notes</h5><i className="small material-icons">mode_edit</i>
                     </div>
                     <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
                     <div className="section-title">
-                        <h5>Last examination results</h5><i class="small material-icons">mode_edit</i>
+                        <h5>Last examination results</h5><i className="small material-icons">mode_edit</i>
                     </div>
                     <table className="responsive-table">
                         <tbody>
@@ -89,7 +89,7 @@ function PatientProfile() {
                         </tbody>
                     </table>
                     <div className="section-title">
-                        <i class="small material-icons">pageview</i> <Link className="results-link" to="/" alt="Patient Examination Results">View Results</Link>
+                        <i className="small material-icons">pageview</i> <Link className="results-link" to="/" alt="Patient Examination Results">View Results</Link>
                     </div>
                 </Grid>
             </Grid>

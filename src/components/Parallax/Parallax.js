@@ -2,15 +2,15 @@ import React from 'react'
 
 function Parallax() {
     return (
-        <div class="parallax-container valign-wrapper">
-            <div class="section no-pad-bot">
-                <div class="container">
-                    <div class="row center">
-                        <h5 class="header col s12 bottom-heading">You come first</h5>
+        <div className="parallax-container valign-wrapper">
+            <div className="section no-pad-bot">
+                <div className="container">
+                    <div className="row center">
+                        <h5 className="header col s12 bottom-heading">You come first</h5>
                     </div>
                 </div>
             </div>
-            <div class="parallax"><img src={require('../../images/background2.jpg')} alt="Unsplashed background img 2" /></div>
+            <div className="parallax"><img src={require('../../images/background2.jpg')} alt="Unsplashed background img 2" /></div>
         </div>
     )
 }
