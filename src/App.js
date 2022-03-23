@@ -18,8 +18,8 @@ function App() {
         <Routes>
           {/* <Route element={<PublicRoutes />}> */}
             <Route path='/' element={<Home />} />
-            <Route path='/auth/login' element={<Login />} />
-            <Route path='/auth/register' element={<Register />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
           {/* </Route> */}
 
           {/* <Route element={<PrivateRoutes />}> */}

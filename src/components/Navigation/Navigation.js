@@ -38,14 +38,14 @@ function Navigation() {
                             <li className={pathname === "/home" ? "active" : ""}>
                                 <NavLink to="/" alt="Home page: NewLife Hospital" end={true}>Home</NavLink>
                             </li>
-                            <li className={pathname === "/auth/register" ? "active" : ""}>
-                                <NavLink to="/auth/register" alt="register">
+                            <li className={pathname === "/register" ? "active" : ""}>
+                                <NavLink to="/register" alt="register">
                                     <span className="nav-icon"><ion-icon name="person-add-outline"></ion-icon></span>
                                     <span className="nav-item-title">Register</span>
                                 </NavLink>
                             </li>
-                            <li className={pathname === "/auth/login" ? "active" : ""}>
-                                <NavLink to="/auth/login" alt="login">
+                            <li className={pathname === "/login" ? "active" : ""}>
+                                <NavLink to="/login" alt="login">
                                     <span className="nav-icon"><ion-icon name="log-in-outline"></ion-icon></span>
                                     <span className="nav-item-title">Login</span>
                                 </NavLink>

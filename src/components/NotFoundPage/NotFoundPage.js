@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../../scss/style.css';
 
 const NotFoundPage = () => (
   <div className="not-found-page-container">
