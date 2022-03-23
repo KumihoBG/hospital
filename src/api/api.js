@@ -1,3 +1,5 @@
+const URL = 'http://localhost:5000';
+
 export async function getCovidStats() {
     const response = await fetch(`http://localhost:8080/api/articles`, {
         headers: {
@@ -10,40 +12,66 @@ export async function getCovidStats() {
     return news;
 }
 
-export async function register(username, email, password) {
-    sessionStorage.setItem('username', username);
-    sessionStorage.setItem('email', email);
-    sessionStorage.setItem('password', password);
-    console.log(username);
+export async function getAllPatients() {
     try {
-        // await user.signUp();
-        // notification('Almost done!', "Email must be verified. Please, visit your mail inbox for further instructions.");
-        window.location.replace('/login');
+        const response = await fetch(`${URL}/patients`);
+        const data = await response.json();
+        return data;
     } catch (error) {
-        // notification('Ops', `Something went wrong: + ${error}`);
         console.error(error);
     }
 }
 
-export async function login(username, password) {
-    try {
-        // let user = await Parse.User.logIn(username, password);
-        const email = sessionStorage.getItem('email');
-        // if (user.get('emailVerified')) {
-        //     const currentUser = Parse.User.current();
-        //     const sessionToken = currentUser.getSessionToken();
-        //     localStorage.setItem('username', username);
-        //     localStorage.setItem('authToken', sessionToken);
-        //     localStorage.setItem('userId', currentUser.id);
-        //     localStorage.setItem('email', email);
-        //     localStorage.setItem('password', password);
-        // }
-    } catch (error) {
-        // Parse.User.logOut();
-        console.log('Wrong username or password');
-        return null;
+export async function register(user) {
+    const patients = await getAllPatients();
+    console.log(patients);
+    console.log(patients.filter(users => users.email === user.email || users.username === user.username));
+
+    if (!patients.filter(users => users.email === user.email || users.username === user.username)) {
+        alert('Username/email already taken.');
+        return;
+    } else {
+        try {
+            const response = await fetch(`${URL}/users`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                method: 'POST',
+                body: JSON.stringify(user)
+            });
+            const data = await response.json();
+            sessionStorage.setItem('username', data.username);
+            sessionStorage.setItem('email', data.email);
+            sessionStorage.setItem('password', data.id);
+            window.location.replace('/login');
+            // notification('Success', `Please, log in to your account.`);
+            return data;
+        } catch (error) {
+            // notification('Ops', `Something went wrong: + ${error}`);
+            console.error(error);
+        }
     }
 }
+
+// export async function login(username, password) {
+//     try {
+//         // let user = await Parse.User.logIn(username, password);
+//         const email = sessionStorage.getItem('email');
+//         // if (user.get('emailVerified')) {
+//         //     const currentUser = Parse.User.current();
+//         //     const sessionToken = currentUser.getSessionToken();
+//         //     localStorage.setItem('username', username);
+//         //     localStorage.setItem('authToken', sessionToken);
+//         //     localStorage.setItem('userId', currentUser.id);
+//         //     localStorage.setItem('email', email);
+//         //     localStorage.setItem('password', password);
+//         // }
+//     } catch (error) {
+//         // Parse.User.logOut();
+//         console.log('Wrong username or password');
+//         return null;
+//     }
+// }
 
 // export async function logout() {
 //     try {

@@ -1,15 +1,18 @@
 import { register } from "../api/api.js";
 // import notification from "./notification.js";
 
-export async function validateInput(username, email, password, repass) {
-    if (username === ''
+export async function validateInput(name, username, email, password, repass, imageUrl, role) {
+    if (name === ''
+        || name === undefined
+        || username === ''
         || username === undefined
         || email === ''
         || email === undefined
         || password === ''
         || password === undefined
         || repass === ''
-        || repass === undefined) {
+        || repass === undefined
+    ) {
         // return notification('Missing information', 'All fields are required!');
     }
 
@@ -73,7 +76,16 @@ export async function validateInput(username, email, password, repass) {
         // return notification('Problem found', 'Password must have at least 2 digits.');
     }
     try {
-        await register(username, email, password);
+        const user = {
+            name,
+            username,
+            email,
+            password,
+            imageUrl,
+            role
+        }
+        console.log(user);
+        await register(user);
     } catch (error) {
         console.log(error);
     }

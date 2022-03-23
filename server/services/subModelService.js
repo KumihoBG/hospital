@@ -14,7 +14,7 @@ async function getSubmodelById(id) {
 async function createSubmodel(submodelData, id) {
     const subModel = new Submodel(submodelData);
     const currentUser = await User.findById(id);
-    currentUser.tripsHistory.push(subModel._id);
+    currentUser.myMedicalProfessional.push(subModel._id);
     await subModel.save();
     await currentUser.save();
     return subModel;

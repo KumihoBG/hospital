@@ -28,8 +28,8 @@ router.post('/register',
                 const message = errors.map(e => e.msg).join('\n');
                 throw new Error(message);
             }
-            console.log(req.body.gender);
-            await req.authentication.createUser(req.body.email.trim(), req.body.password.trim(), req.body.gender);
+            console.log(req.body.role);
+            await req.authentication.createUser(req.body.name, req.body.username, req.body.email.trim(), req.body.password.trim(), req.body.imageUrl, req.body.role);
             // Change redirect according to the requirements
             res.redirect('/');
         } catch (err) {
@@ -37,8 +37,11 @@ router.post('/register',
             const context = {
                 errors: err.message.split('\n'),
                 userData: {
+                    name: req.body.name, 
+                    username: req.body.username,
                     email: req.body.email,
-                    gender: req.body.gender,
+                    imageUrl: req.body.imageUrl,
+                    role: req.body.role,
                 }
             }
             res.render('user/register', context);
@@ -63,8 +66,10 @@ router.post('/login', isGuest(), async (req, res) => {
         const context = {
             errors,
             userData: {
+                name: req.body.name, 
+                username: req.body.username,
                 email: req.body.email,
-                gender: req.body.gender
+                role: req.body.role
             }
         }
         res.render('user/login', context);

@@ -19,10 +19,10 @@ router.get('/shared-trips', async (req, res) => {
 router.get('/user/:id', async (req, res) => {
     const userEmail = req.user.email;
     const currentUser = await req.storage.getUserByEmail(userEmail);
-    const gender = currentUser.gender;
-    const image = `../static/images/${gender}.png`;
-    currentUser.image = image;
-    currentUser.trips = currentUser.tripsHistory;
+    // const role = currentUser.role;
+    // const image = `../static/images/${role}.png`;
+    // currentUser.image = image;
+    currentUser.doctor = currentUser.myMedicalProfessional;
     const buddies = currentUser.buddies;
 
     res.render('user/profile', {

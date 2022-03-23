@@ -1,7 +1,15 @@
 const { Schema, model } = require('mongoose');
-const { checkSchema } = require('express-validator');
 
 const userSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+        match: [/^[A-Z]{1}[a-z]+\s[A-Z]{1}[a-z]+$/g, 'Please enter first name and last name.'],
+    },
+    username: {
+        type: String,
+        required: true,
+    },
     email: {
         type: String,
         required: true,
@@ -14,17 +22,16 @@ const userSchema = new Schema({
         required: true,
         minlength: 4,
     },
-    gender: {
+    role: {
         type: String,
-        possibleValues: ['male','female'],
-        required: true
+        possibleValues: ['patient'],
     },
-    tripsHistory: [{
+    myMedicalProfessional: [{
         type: Schema.Types.ObjectId,
         ref: 'Submodel',
         default: []
     }],
-    image: {
+    imageUrl: {
         type: String,
     }
 });
