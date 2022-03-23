@@ -791,4 +791,82 @@ nav .brand-logo {
   letter-spacing: 1.2px;
   border: 0.5px solid #0a857a;
 }
+
+.register-container {
+  width: 100%;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 2% 0 7% 0;
+  background: #499cdf url("../images/login.png") no-repeat top right;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.register-container .form-container {
+  width: 30%;
+  padding: 1%;
+  border-radius: 15px;
+  margin-left: 6%;
+  background-color: #fff;
+  padding-bottom: 2%;
+}
+
+.register-container .register-form {
+  width: 90%;
+  margin: 0 auto;
+  font-size: 14px;
+}
+
+.register-container .register-form h3 {
+  color: #499cdf;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 25px;
+}
+
+.register-container .register-form .form-group {
+  margin-bottom: 25px;
+}
+
+.register-container .register-form label {
+  color: #616161;
+  font-size: 14px;
+}
+
+.register-container .register-form .form-control {
+  height: 30px;
+  width: 100%;
+  outline-style: none;
+  border: none;
+  border-bottom: 1px solid #499cdf;
+}
+
+.register-container .register-form #gender label,
+.register-container .register-form #role label {
+  margin-right: 20px;
+}
+
+.register-container .register-form #registerBtn {
+  color: #fff;
+  background: #499cdf;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  font-size: 18px;
+}
+
+.register-container .link {
+  text-decoration: none;
+  color: #499cdf;
+  margin-left: 30px;
+  margin-bottom: 20px;
+}
 /*# sourceMappingURL=style.css.map */

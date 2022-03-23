@@ -1,13 +1,14 @@
+   
 import axios from 'axios';
 
-const API_URL = '/api/patients/';
+const API_URL = '/patients/'
 
 // Register user
 const register = async (userData) => {
-  const response = await axios.post(API_URL, userData);
+  const response = await axios.post(API_URL, userData)
 
   if (response.data) {
-    sessionStorage.setItem('user', JSON.stringify(response.data));
+    sessionStorage.setItem('patient', JSON.stringify(response.data))
   }
 
   return response.data
@@ -15,18 +16,18 @@ const register = async (userData) => {
 
 // Login user
 const login = async (userData) => {
-  const response = await axios.post(API_URL + 'login', userData);
+  const response = await axios.post(API_URL + '/auth/login', userData)
 
   if (response.data) {
-    sessionStorage.setItem('user', JSON.stringify(response.data));
+    sessionStorage.setItem('patient', JSON.stringify(response.data))
   }
 
-  return response.data;
+  return response.data
 }
 
 // Logout user
 const logout = () => {
-  sessionStorage.removeItem('user');
+  sessionStorage.removeItem('user')
 }
 
 const authService = {
@@ -35,4 +36,4 @@ const authService = {
   login,
 }
 
-export default authService;
+export default authService
