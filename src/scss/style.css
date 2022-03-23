@@ -806,7 +806,7 @@ nav .brand-logo {
   min-height: 100%;
   margin: 0 auto;
   padding: 2% 0 7% 0;
-  background: #499cdf url("../images/login.png") no-repeat top right;
+  background: #499cdf url("../images/register.png") no-repeat top right;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -895,7 +895,7 @@ nav .brand-logo {
 }
 
 .login-container {
-  background: #499cdf url("../images/register.png") no-repeat top right;
+  background: #499cdf url("../images/login.png") no-repeat top right;
   width: 100%;
   min-height: 100vh;
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Navigation from '../Navigation/Navigation.js';
 import { login, reset } from '../../features/auth/authSlice.js';
 import Spinner from '../Spinner/Spinner.js';
 
@@ -20,17 +21,17 @@ function Login() {
         (state) => state.auth
     )
 
-    useEffect(() => {
-        if (isError) {
-            toast.error(message)
-        }
+    // useEffect(() => {
+    //     if (isError) {
+    //         toast.error(message)
+    //     }
 
-        if (isSuccess || user) {
-            navigate('/')
-        }
+    //     if (isSuccess || user) {
+    //         navigate('/')
+    //     }
 
-        dispatch(reset())
-    }, [user, isError, isSuccess, message, navigate, dispatch])
+    //     dispatch(reset())
+    // }, [user, isError, isSuccess, message, navigate, dispatch])
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -56,6 +57,7 @@ function Login() {
 
     return (
         <>
+        <Navigation />
             <div className="login-container">
                 <div className="form-container">
                     <form className="register-form" onSubmit={onSubmit}>

@@ -1,6 +1,6 @@
 .login-container {
     @extend .register-container;
-    background: $light-blue url('../images/register.png') no-repeat top right;
+    background: $light-blue url('../images/login.png') no-repeat top right;
     width: 100%;
     min-height: 100vh;
 }
