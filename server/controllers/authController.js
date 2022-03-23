@@ -3,10 +3,6 @@ const router = require('express').Router();
 const { body, validationResult } = require('express-validator');
 const { isGuest, isRegistered } = require('../middleware/guards.js');
 
-router.get('/register', isGuest(), (req, res) => {
-    res.render('user/register');
-});
-
 router.post('/register',
     isGuest(),
     body('email', 'Invalid email').isEmail(),
@@ -29,29 +25,20 @@ router.post('/register',
                 throw new Error(message);
             }
             console.log(req.body.role);
-            await req.authentication.createUser(req.body.name, req.body.username, req.body.email.trim(), req.body.password.trim(), req.body.imageUrl, req.body.role);
-            // Change redirect according to the requirements
-            res.redirect('/');
+
+            const user = await req.authentication.createUser(req.body.name, req.body.username, req.body.email.trim(), req.body.password.trim(), req.body.imageUrl, req.body.role);
+            console.log(user);
+            if (user) {
+                res.status(201).json(user);
+            } else {
+                res.status(400);
+                throw new Error('Invalid user data!');
+            }
         } catch (err) {
             console.log(err);
-            const context = {
-                errors: err.message.split('\n'),
-                userData: {
-                    name: req.body.name, 
-                    username: req.body.username,
-                    email: req.body.email,
-                    imageUrl: req.body.imageUrl,
-                    role: req.body.role,
-                }
-            }
-            res.render('user/register', context);
         }       
     }
 );
-
-router.get('/login', isGuest(), (req, res) => {
-    res.render('user/login');
-});
 
 router.post('/login', isGuest(), async (req, res) => {
     try {

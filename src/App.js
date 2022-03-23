@@ -1,8 +1,9 @@
 import './App.css';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import PrivateRoutes from './helpers/PrivateRoutes.js';
-import PublicRoutes from './helpers/PublicRoutes.js';
+import { ToastContainer } from 'react-toastify';
+// import PrivateRoutes from './helpers/PrivateRoutes.js';
+// import PublicRoutes from './helpers/PublicRoutes.js';
 import Home from './components/Home/Home.js';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage.js';
 import FindDoctor from './components/FindDoctor/FindDoctor.js';
@@ -15,20 +16,21 @@ function App() {
     <div className="App">
       <main>
         <Routes>
-          <Route element={<PublicRoutes />}>
+          {/* <Route element={<PublicRoutes />}> */}
             <Route path='/' element={<Home />} />
             <Route path='/auth/login' element={<Login />} />
             <Route path='/auth/register' element={<Register />} />
-          </Route>
+          {/* </Route> */}
 
-          <Route element={<PrivateRoutes />}>
+          {/* <Route element={<PrivateRoutes />}> */}
             <Route path='/home' element={<Home />} />
-          </Route>
+          {/* </Route> */}
           <Route path='/staff' element={<FindDoctor />} />
           <Route path='/medical-professionals' element={<MedicalProfessionalCollection />} />
           <Route path='*' element={<NotFoundPage />} />
           <Route path='/404' element={<NotFoundPage />} />
         </Routes>
+        <ToastContainer />
       </main>
     </div>
   );

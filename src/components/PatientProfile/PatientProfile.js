@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../PatientProfile/PatientProfile.css';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 

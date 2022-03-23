@@ -12,27 +12,28 @@ export async function getCovidStats() {
     return news;
 }
 
-export async function getAllPatients() {
-    try {
-        const response = await fetch(`${URL}/patients`);
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error(error);
-    }
-}
+// export async function getAllPatients() {
+//     try {
+//         const response = await fetch(`${URL}/patients`);
+//         const data = await response.json();
+//         return data;
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
 
 export async function register(user) {
-    const patients = await getAllPatients();
-    console.log(patients);
-    console.log(patients.filter(users => users.email === user.email || users.username === user.username));
+    // const patients = await getAllPatients();
+    // console.log(patients);
+    // console.log(patients.filter(users => users.email === user.email || users.username === user.username));
 
-    if (!patients.filter(users => users.email === user.email || users.username === user.username)) {
-        alert('Username/email already taken.');
-        return;
-    } else {
+    // if (!patients.filter(users => users.email === user.email || users.username === user.username)) {
+    //     alert('Username/email already taken.');
+    //     return;
+    // } else {
+        console.log(user);
         try {
-            const response = await fetch(`${URL}/users`, {
+            const response = await fetch(`${URL}/patients`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -50,7 +51,7 @@ export async function register(user) {
             // notification('Ops', `Something went wrong: + ${error}`);
             console.error(error);
         }
-    }
+    // }
 }
 
 // export async function login(username, password) {

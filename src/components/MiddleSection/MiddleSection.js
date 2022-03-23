@@ -1,5 +1,4 @@
 import React from 'react';
-import '../MiddleSection/MiddleSection.css';
 
 function MiddleSection() {
     return (

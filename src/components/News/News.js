@@ -1,5 +1,4 @@
 import React from 'react';
-import '../News/News.css';
 
 function News({ news }) {
     const firstArticles = news.slice(0, 10);

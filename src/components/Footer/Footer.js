@@ -1,5 +1,4 @@
 import React from 'react';
-import '../Footer/Footer.css';
 import Icons from '../Icons/Icons.js';
 import Search from '../Search/Search.js';
 

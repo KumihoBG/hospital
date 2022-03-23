@@ -81,10 +81,9 @@ export async function validateInput(name, username, email, password, repass, ima
             username,
             email,
             password,
-            imageUrl,
-            role
+            role,
+            imageUrl
         }
-        console.log(user);
         await register(user);
     } catch (error) {
         console.log(error);

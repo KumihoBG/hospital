@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import '../Navigation/Navigation.css';
 import logoImage from '../../images/logo.png';
 
 function Navigation() {
