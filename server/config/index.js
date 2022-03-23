@@ -1,6 +1,6 @@
 module.exports = {
     PORT: 5000,
     DB_CONNECTION_STRING: 'mongodb://localhost:27017/newlife-hospital',
-    TOKEN_SECRET: 'v6QCHqxD9P5KPS4456gDkLoLa',
+    TOKEN_SECRET: process.env.TOKEN_SECRET,
     COOKIE_NAME: 'Session_Token'
 }
