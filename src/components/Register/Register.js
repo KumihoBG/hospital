@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { register, reset } from '../../features/auth/authSlice.js';
-import Navigation from '../Navigation/Navigation.js';
 import Spinner from '../Spinner/Spinner.js';
 
 function Register() {
@@ -72,7 +71,6 @@ function Register() {
 
     return (
         <>
-        <Navigation />
           <div className="register-container">
             <div className="form-container">
                 <form className="register-form" onSubmit={onSubmit}>

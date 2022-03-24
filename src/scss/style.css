@@ -28,7 +28,7 @@
 .find-doctor-div {
   background: url("../images/logo.png") no-repeat left center;
   width: 80vw;
-  height: 90vh;
+  height: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -898,5 +898,25 @@ nav .brand-logo {
   background: #499cdf url("../images/login.png") no-repeat top right;
   width: 100%;
   min-height: 100vh;
+}
+
+.contacts {
+  width: 85vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 4% auto;
+  padding: 0;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.map {
+  max-width: 100%;
+  width: 640px;
+  height: auto;
+  display: block;
+  margin-left: 30px;
 }
 /*# sourceMappingURL=style.css.map */

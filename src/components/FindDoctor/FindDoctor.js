@@ -1,13 +1,10 @@
 import React from 'react';
-import Navigation from '../Navigation/Navigation.js';
-import Footer from '../Footer/Footer.js';
 import Contact from '../Contact/Contact.js';
 import '../../scss/style.css';
 
 function FindDoctor() {
     return (
         <section id="find-doctor-container">
-            <Navigation />
             <div className="find-doctor-div">
                 <h2 id="find-doctor-h2">Find a Doctor</h2>
                 <div className="search-field">
@@ -24,7 +21,6 @@ function FindDoctor() {
                 </button>
                 <Contact />
             </div>
-            <Footer />
         </section>
     )
 }

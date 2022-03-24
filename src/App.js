@@ -4,6 +4,8 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 // import PrivateRoutes from './helpers/PrivateRoutes.js';
 // import PublicRoutes from './helpers/PublicRoutes.js';
+import Navigation from './components/Navigation/Navigation.js';
+import Footer from './components/Footer/Footer.js';
 import Home from './components/Home/Home.js';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage.js';
 import FindDoctor from './components/FindDoctor/FindDoctor.js';
@@ -14,6 +16,7 @@ import Register from './components/Register/Register.js';
 function App() {
   return (
     <div className="App">
+      <Navigation />
       <main>
         <Routes>
           {/* <Route element={<PublicRoutes />}> */}
@@ -32,6 +35,7 @@ function App() {
         </Routes>
         <ToastContainer />
       </main>
+      <Footer />
     </div>
   );
 }

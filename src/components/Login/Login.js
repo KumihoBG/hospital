@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Navigation from '../Navigation/Navigation.js';
 import { login, reset } from '../../features/auth/authSlice.js';
 import Spinner from '../Spinner/Spinner.js';
 
@@ -57,7 +56,6 @@ function Login() {
 
     return (
         <>
-        <Navigation />
             <div className="login-container">
                 <div className="form-container">
                     <form className="register-form" onSubmit={onSubmit}>
