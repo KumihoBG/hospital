@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Contact from '../Contact/Contact.js';
 import '../../scss/style.css';
 
@@ -16,9 +17,9 @@ function FindDoctor() {
                         <button id="searchBtn">Submit</button>
                     </form>
                 </div>
-                <button className="requestBtn" type="submit" name="action">Request an appointment
+                <Link to="/request-appointment" className="requestBtn" alt="Schedule appointment with your Medical Professional">Request an appointment
                     <i className="material-icons right">send</i>
-                </button>
+                </Link>
                 <Contact />
             </div>
         </section>

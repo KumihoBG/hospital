@@ -12,6 +12,7 @@ import FindDoctor from './components/FindDoctor/FindDoctor.js';
 import MedicalProfessionalCollection from './components/MedicalProfessionalCollection/MedicalProfessionalCollection.js';
 import Login from './components/Login/Login.js';
 import Register from './components/Register/Register.js';
+import Appointments from './components/Appointments/Appointments.js';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           {/* </Route> */}
           <Route path='/staff' element={<FindDoctor />} />
           <Route path='/medical-professionals' element={<MedicalProfessionalCollection />} />
+          <Route path='/request-appointment' element={<Appointments />} />
           <Route path='*' element={<NotFoundPage />} />
           <Route path='/404' element={<NotFoundPage />} />
         </Routes>

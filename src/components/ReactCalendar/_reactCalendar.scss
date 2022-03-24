@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap");
+
+.calendar-container {
+  width: 30vw;
+  margin: 4% auto;
+  font-family: "Kaushan Script", cursive;
+
+  button {
+    background: $white;
+    color: $light_blue;
+    padding: 10px;
+    font-size: 20px;
+    margin: 3px;
+    border-radius: 5px;
+    border: 0.5px solid $light_blue;
+  }
+
+  button:hover {
+    transform: scale(1.1);
+    color: $white;
+    background: $light_blue;
+  }
+
+  .react-calendar__month-view__weekdays {
+    align-items: center;
+    justify-content: space-evenly;
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  abbr[title] {
+    text-decoration: none;
+    font-size: 18px;
+  }
+}
+
+.date-info {
+  text-align: center;
+  width: 50%;
+  margin: 4% auto;
+  background: $light_blue;
+  color: $white;
+  padding: 2%;
+  border-radius: 20px;
+  
+  h5 {
+      text-decoration: underline;
+  }
+
+  .date-text {
+      font-size: 20px;
+  }
+}
+
+.selected {
+    background: $white;
+    color: red;
+    line-height: 2;
+    letter-spacing: 2px;
+    padding: 2px 10px;
+    margin-left: 15px;
+}
