@@ -7,11 +7,11 @@ import Spinner from '../Spinner/Spinner.js';
 
 function Login() {
     const [formData, setFormData] = useState({
-        username: '',
+        email: '',
         password: '',
     })
 
-    const { username, password } = formData
+    const { email, password } = formData
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -20,17 +20,17 @@ function Login() {
         (state) => state.auth
     )
 
-    // useEffect(() => {
-    //     if (isError) {
-    //         toast.error(message)
-    //     }
+    useEffect(() => {
+        if (isError) {
+            toast.error(message)
+        }
 
-    //     if (isSuccess || user) {
-    //         navigate('/')
-    //     }
+        if (isSuccess || user) {
+            navigate('/home')
+        }
 
-    //     dispatch(reset())
-    // }, [user, isError, isSuccess, message, navigate, dispatch])
+        dispatch(reset())
+    }, [user, isError, isSuccess, message, navigate, dispatch])
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -43,7 +43,7 @@ function Login() {
         e.preventDefault()
 
         const userData = {
-            username,
+            email,
             password,
         }
 
@@ -58,17 +58,17 @@ function Login() {
         <>
             <div className="login-container">
                 <div className="form-container">
-                    <form className="register-form" onSubmit={onSubmit}>
+                    <form className="register-form" onSubmit={onSubmit} method="POST">
                     <h3>Login to your account</h3>
                     <div className="form-group">
                             <label>Username</label><br></br>
                             <div className="icon">
                                 <input 
-                                name="username" 
+                                name="email" 
                                 type="text" 
-                                autoComplete="username"
+                                autoComplete="email"
                                 className="form-control"
-                                value={username} 
+                                value={email} 
                                 onChange={onChange}>
                                 </input><br></br>
                             </div>

@@ -4,7 +4,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 // const PrivateRoute = () => {
 // //    const isAuthenticated = authService.isAuthenticated();
 
-//     return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
+//     return isAuthenticated ? <Outlet /> : <Navigate to="/users/login" />
 // }
 
 // export default PrivateRoute;

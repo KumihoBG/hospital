@@ -11,6 +11,10 @@ nav .brand-logo {
     font-family: 'Bad Script', cursive;
 }
 
+#welcome-user {
+    color: $light_blue;
+}
+
 @media (max-width: 568px) {
     #logo-container {
         display: none;

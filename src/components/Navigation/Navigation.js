@@ -1,24 +1,26 @@
 import React from 'react';
-import { NavLink, Link, useLocation } from 'react-router-dom';
+import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
 import logoImage from '../../images/logo.png';
+import { useDispatch } from 'react-redux';
+import { FaHospitalUser } from "react-icons/fa";
+import { logout, reset } from '../../features/auth/authSlice.js';
 
 function Navigation() {
     const isMedical = sessionStorage.getItem('medical');
-    // const userId = localStorage.getItem('userId');
-    // const isLogged = userId !== null;
-    const isLogged = false;
-    // const navigate = useNavigate();
+    const username = sessionStorage.getItem('username');
+    const userId = sessionStorage.getItem('userId');
+    const isLogged = userId !== null;
+    const navigate = useNavigate();
     const location = useLocation();
     const { pathname } = location;
     const splitLocation = pathname.split("/");
-    // async function onLogout() {
-    //     try {
-    //         await logout();
-    //         navigate('/login', { replace: true });
-    //     } catch (err) {
-    //         console.log(err.message)
-    //     }
-    // }
+
+    const dispatch = useDispatch()
+    const onLogout = () => {
+        dispatch(logout())
+        dispatch(reset())
+        navigate('/')
+    }
 
     return (
         <nav className="white" role="navigation">
@@ -47,6 +49,15 @@ function Navigation() {
                                     <span className="nav-item-title">Our Medical Professionals</span>
                                 </NavLink>
                             </li>
+                            <li>
+                                <NavLink to={`#`} alt="Logout from your account" onClick={onLogout}>
+                                    <span className="nav-icon"><ion-icon name="log-in-outline"></ion-icon></span>
+                                    <span className="nav-item-title">Logout</span>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <span id="welcome-user"><FaHospitalUser /> {username}</span>
+                            </li>
                         </ul>
                     </div>
                     : <div className="guest">
@@ -60,14 +71,14 @@ function Navigation() {
                                     <span className="nav-item-title">Register Patient Account</span>
                                 </NavLink>
                             </li>
-                            <li className={pathname === "/register-medical" ? "active" : ""}>
-                                <NavLink to="/register-medical" alt="register">
+                            <li className={pathname === "/users/register-medical" ? "active" : ""}>
+                                <NavLink to="/users/register-medical" alt="register">
                                     <span className="nav-icon"><ion-icon name="person-add-outline"></ion-icon></span>
                                     <span className="nav-item-title">Register Professional Account</span>
                                 </NavLink>
                             </li>
-                            <li className={pathname === "/login" ? "active" : ""}>
-                                <NavLink to="/login" alt="login">
+                            <li className={pathname === "/users/login" ? "active" : ""}>
+                                <NavLink to="/users/login" alt="login">
                                     <span className="nav-icon"><ion-icon name="log-in-outline"></ion-icon></span>
                                     <span className="nav-item-title">Login</span>
                                 </NavLink>

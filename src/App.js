@@ -27,9 +27,9 @@ function App() {
         <Routes>
           {/* <Route element={<PublicRoutes />}> */}
           <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/users/login' element={<Login />} />
           <Route path='/users/register-patient' element={<Register />} />
-          <Route path='/register-medical' element={<RegisterMedical />} />
+          <Route path='/users/register-medical' element={<RegisterMedical />} />
           {/* </Route> */}
 
           {/* <Route element={<PrivateRoutes />}> */}

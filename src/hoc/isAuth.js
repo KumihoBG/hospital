@@ -7,7 +7,7 @@ export const isAuth = ((Component) => {
 
         return isAuthenticated
         ? <Component {...props} />
-        : <Navigate to='/login' />
+        : <Navigate to='/users/login' />
     }
 
     return WrapperComponent;
