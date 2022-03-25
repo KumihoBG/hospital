@@ -14,7 +14,7 @@ const register = async (userData) => {
     });
     const data = await response.json();
     console.log(data);
-    sessionStorage.setItem('userId', data.id);
+    sessionStorage.setItem('userId', data._id);
     sessionStorage.setItem('username', data.username);
     sessionStorage.setItem('email', data.email);
     sessionStorage.setItem('role', data.role);
