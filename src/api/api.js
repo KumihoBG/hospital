@@ -8,7 +8,6 @@ export async function getCovidStats() {
         method: 'GET',
     });
     const news = await response.json();
-    console.log(news);
     return news;
 }
 

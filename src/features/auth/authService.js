@@ -1,16 +1,27 @@
 import axios from 'axios';
-
-const API_URL = '/api/users/'
+const BASE_LOCAL_URL = 'http://localhost:5000';
+const API_URL = '/users/register-patient';
 
 // Register user
 const register = async (userData) => {
-  const response = await axios.post(API_URL, userData)
-
-  if (response.data) {
-    sessionStorage.setItem('user', JSON.stringify(response.data))
+  try {
+    const response = await fetch(`${BASE_LOCAL_URL}/users/register-patient`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(userData)
+    });
+    const data = await response.json();
+    console.log(data);
+    sessionStorage.setItem('userId', data.id);
+    sessionStorage.setItem('username', data.username);
+    sessionStorage.setItem('email', data.email);
+    sessionStorage.setItem('role', data.role);
+    return data;
+  } catch (error) {
+    console.error(error);
   }
-
-  return response.data
 }
 
 // Login user

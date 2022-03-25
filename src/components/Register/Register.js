@@ -66,7 +66,6 @@ function Register() {
                 phone,
                 age
             }
-
             dispatch(register(userData))
         }
     }
@@ -79,7 +78,7 @@ function Register() {
         <>
             <div className="register-container">
                 <div className="form-container">
-                    <form className="register-form" onSubmit={onSubmit}>
+                    <form className="register-form" onSubmit={onSubmit} method="POST">
                         <h3>Register new account</h3>
                         <div className="form-group">
                             <label>Name</label><br></br>
@@ -204,6 +203,7 @@ function Register() {
                                 name="gender"
                                 value="male"
                                 required
+                                onChange={onChange} 
                             />
                             <label htmlFor="male">Male</label>
 
@@ -212,6 +212,7 @@ function Register() {
                                 id="female"
                                 name="gender"
                                 value="female"
+                                onChange={onChange} 
                             />
                             <label htmlFor="female">Female</label>
                         </div>

@@ -54,8 +54,8 @@ function Navigation() {
                             <li className={pathname === "/home" ? "active" : ""}>
                                 <NavLink to="/" alt="Home page: NewLife Hospital" end={true}>Home</NavLink>
                             </li>
-                            <li className={pathname === "/register-patient" ? "active" : ""}>
-                                <NavLink to="/register-patient" alt="register">
+                            <li className={pathname === "/users/register-patient" ? "active" : ""}>
+                                <NavLink to="/users/register-patient" alt="register">
                                     <span className="nav-icon"><ion-icon name="person-add-outline"></ion-icon></span>
                                     <span className="nav-item-title">Register Patient Account</span>
                                 </NavLink>

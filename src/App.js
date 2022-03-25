@@ -28,7 +28,7 @@ function App() {
           {/* <Route element={<PublicRoutes />}> */}
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/register-patient' element={<Register />} />
+          <Route path='/users/register-patient' element={<Register />} />
           <Route path='/register-medical' element={<RegisterMedical />} />
           {/* </Route> */}
 
