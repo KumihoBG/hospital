@@ -81,3 +81,8 @@
         margin-bottom: 20px;
     }
 }
+
+.register-container-medical {
+    @extend .register-container;
+    background: $light-blue url('../images/register-medical.png') no-repeat top right;
+}

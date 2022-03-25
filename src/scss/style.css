@@ -799,7 +799,7 @@ nav .brand-logo {
   border: 0.5px solid #0a857a;
 }
 
-.register-container, .login-container {
+.register-container, .register-container-medical, .login-container {
   width: 100%;
   min-height: 100%;
   margin: 0 auto;
@@ -813,7 +813,7 @@ nav .brand-logo {
           justify-content: flex-start;
 }
 
-.register-container .form-container, .login-container .form-container {
+.register-container .form-container, .register-container-medical .form-container, .login-container .form-container {
   width: 30%;
   padding: 1%;
   border-radius: 15px;
@@ -822,30 +822,30 @@ nav .brand-logo {
   padding-bottom: 2%;
 }
 
-.register-container .register-form, .login-container .register-form {
+.register-container .register-form, .register-container-medical .register-form, .login-container .register-form {
   width: 90%;
   margin: 0 auto;
   font-size: 14px;
 }
 
-.register-container .register-form h3, .login-container .register-form h3 {
+.register-container .register-form h3, .register-container-medical .register-form h3, .login-container .register-form h3 {
   color: #499cdf;
   text-align: center;
   margin-bottom: 30px;
   font-size: 25px;
 }
 
-.register-container .register-form .form-group, .login-container .register-form .form-group {
+.register-container .register-form .form-group, .register-container-medical .register-form .form-group, .login-container .register-form .form-group {
   margin-bottom: 25px;
   color: #000;
 }
 
-.register-container .register-form label, .login-container .register-form label {
+.register-container .register-form label, .register-container-medical .register-form label, .login-container .register-form label {
   color: #616161;
   font-size: 14px;
 }
 
-.register-container .register-form .form-control, .login-container .register-form .form-control {
+.register-container .register-form .form-control, .register-container-medical .register-form .form-control, .login-container .register-form .form-control {
   height: 30px;
   width: 100%;
   outline-style: none;
@@ -853,12 +853,15 @@ nav .brand-logo {
   border-bottom: 1px solid #499cdf;
 }
 
-.register-container .register-form #male, .login-container .register-form #male,
+.register-container .register-form #male, .register-container-medical .register-form #male, .login-container .register-form #male,
 .register-container .register-form #female,
+.register-container-medical .register-form #female,
 .login-container .register-form #female,
 .register-container .register-form #patient,
+.register-container-medical .register-form #patient,
 .login-container .register-form #patient,
 .register-container .register-form #medical-professional,
+.register-container-medical .register-form #medical-professional,
 .login-container .register-form #medical-professional {
   position: relative;
   opacity: 1;
@@ -866,13 +869,14 @@ nav .brand-logo {
   pointer-events: all;
 }
 
-.register-container .register-form #gender label, .login-container .register-form #gender label,
+.register-container .register-form #gender label, .register-container-medical .register-form #gender label, .login-container .register-form #gender label,
 .register-container .register-form #role label,
+.register-container-medical .register-form #role label,
 .login-container .register-form #role label {
   margin-right: 30px;
 }
 
-.register-container .register-form #registerBtn, .login-container .register-form #registerBtn, .register-container .register-form #loginBtn, .login-container .register-form #loginBtn {
+.register-container .register-form #registerBtn, .register-container-medical .register-form #registerBtn, .login-container .register-form #registerBtn, .register-container .register-form #loginBtn, .register-container-medical .register-form #loginBtn, .login-container .register-form #loginBtn {
   color: #fff;
   background: #499cdf;
   padding: 10px 30px;
@@ -885,11 +889,15 @@ nav .brand-logo {
   font-size: 18px;
 }
 
-.register-container .link, .login-container .link {
+.register-container .link, .register-container-medical .link, .login-container .link {
   text-decoration: none;
   color: #499cdf;
   margin-left: 30px;
   margin-bottom: 20px;
+}
+
+.register-container-medical {
+  background: #499cdf url("../images/register-medical.png") no-repeat top right;
 }
 
 .login-container {
