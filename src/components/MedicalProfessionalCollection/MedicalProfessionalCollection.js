@@ -1,6 +1,5 @@
 import React from 'react';
 import MedicalProfessional from '../MedicalProfessional/MedicalProfessional.js';
-import PatientProfile from '../PatientProfile/PatientProfile.js';
 
 function MedicalProfessionalCollection() {
     return (
@@ -21,7 +20,6 @@ function MedicalProfessionalCollection() {
                     <MedicalProfessional />
                 </li>
             </ul>
-            <PatientProfile />
         </div>
     )
 }

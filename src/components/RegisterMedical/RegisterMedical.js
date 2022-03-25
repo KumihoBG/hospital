@@ -5,22 +5,24 @@ import { toast } from 'react-toastify';
 import { register, reset } from '../../features/auth/authSlice.js';
 import Spinner from '../Spinner/Spinner.js';
 
-function Register() {
+function RegisterMedical() {
     const [formData, setFormData] = useState({
         name: '',
         username: '',
         email: '',
         password: '',
         rePass: '',
+        role: 'medical-professional',
         gender: '',
-        role: 'patient',
         imageUrl: '',
-        address: '',
         phone: '',
-        age: ''
+        age: '',
+        department: '',
+        areas: '',
+        practiceLocation: '',
     })
 
-    const { name, username, email, password, rePass, gender, role, imageUrl, address, phone, age } = formData
+    const { name, username, email, password, rePass, gender, role, imageUrl, phone, age, department, areas, practiceLocation } = formData
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -62,9 +64,11 @@ function Register() {
                 gender,
                 role,
                 imageUrl,
-                address,
                 phone,
-                age
+                age,
+                department,
+                areas,
+                practiceLocation
             }
 
             dispatch(register(userData))
@@ -157,20 +161,44 @@ function Register() {
                                     onChange={onChange} />
                             </div>
                         </div>
-                       
-                                <div className="form-group">
-                                    <label>Address</label><br></br>
-                                    <div className="input-container">
-                                        <input
-                                            value={address}
-                                            className="form-control"
-                                            name="address"
-                                            type="text"
-                                            onChange={onChange} />
-                                    </div>
-                                </div>
-                            
-                           
+
+
+
+
+                        <div className="form-group">
+                            <label>Department</label><br></br>
+                            <div className="input-container">
+                                <input
+                                    value={department}
+                                    className="form-control"
+                                    name="department"
+                                    type="text"
+                                    onChange={onChange} />
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label>Areas of focus</label><br></br>
+                            <div className="input-container">
+                                <input
+                                    value={areas}
+                                    className="form-control"
+                                    name="areas"
+                                    type="text"
+                                    onChange={onChange} />
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label>Practice Location</label><br></br>
+                            <div className="input-container">
+                                <input
+                                    value={practiceLocation}
+                                    className="form-control"
+                                    name="practiceLocation"
+                                    type="text"
+                                    onChange={onChange} />
+                            </div>
+                        </div>
+
                         <div className="form-group">
                             <label>Phone number</label><br></br>
                             <div className="input-container">
@@ -229,4 +257,4 @@ function Register() {
     )
 }
 
-export default Register
+export default RegisterMedical;

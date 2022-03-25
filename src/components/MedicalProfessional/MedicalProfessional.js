@@ -15,7 +15,7 @@ function MedicalProfessional() {
       <div className="card">
         <div className="card-image">
           <img src={require('../../images/doctor.jpg')} alt="Medical Professional"/>
-          <span className="card-title">{medic.fullName}</span>
+          <span className="card-title">Name: {medic.fullName}</span>
           <i className="material-icons stars">grade</i>
           <i className="material-icons stars">grade</i>
           <i className="material-icons stars">grade</i>

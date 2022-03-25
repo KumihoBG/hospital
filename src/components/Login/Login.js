@@ -94,7 +94,7 @@ function Login() {
                         </div>
                     </form>
                     <div className="second">
-                        <Link className="link" to="/register" alt="register">Create new account</Link>
+                        <p>Don't have an account? Create new <Link className="register-redirect" to="/register-patient" alt="register">patient</Link> or <Link className="register-redirect" to="/register-medical" alt="register">professional</Link> account</p>
                     </div>
                 </div>
             </div>
@@ -102,4 +102,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Login;

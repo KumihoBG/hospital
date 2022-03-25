@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 
-function PatientProfile() {
+function MedicalProfile() {
     const isMedical = sessionStorage.getItem('medical');
 
     return (
@@ -16,20 +16,20 @@ function PatientProfile() {
                         </div>
                         <div>
                             <p>
-                                <span>Patient ID: 98983983</span><br />
-                                <span id="full-name">Ivan Ivanov</span><br />
-                                <span>M | 42</span>
+                                <span>Medical Professional ID: 98983983</span><br />
+                                <span id="full-name">Ivan Nikolov</span><br />
+                                <span>M | 48</span>
                             </p>
                         </div>
                     </div>
-                    {isMedical
+                    {!isMedical
                         ? <div className="send-message">
                             <button className="sendMessageBtn">Send Message</button>
                         </div>
                         : ""
                     }
                     <div className="personal-details">
-                        {!isMedical
+                        {isMedical
                             ? <div className="section-title">
                                 <h5>Personal information:</h5><i className="small material-icons">mode_edit</i>
                             </div>
@@ -38,7 +38,7 @@ function PatientProfile() {
                         <table className="responsive-table">
                             <tbody>
                                 <tr>
-                                    <td>Date of Birth</td><td>01/04/1980</td>
+                                    <td>Department</td><td>Orthopedic Surgeon</td>
                                 </tr>
                                 <tr>
                                     <td>Phone Number</td><td>+359 888 881188</td>
@@ -47,30 +47,17 @@ function PatientProfile() {
                                     <td>Email</td> <td>ivan.ivanov@gmail.com</td>
                                 </tr>
                                 <tr>
-                                    <td>Address</td><td>Sofia, Druzba 240, A-34</td>
+                                    <td>Areas of Focus</td><td>Hip surgery, Hip replacement, Hip fracture surgery, Hip replacement revision, Knee replacement, Knee reconstruction</td>
                                 </tr>
                                 <tr>
-                                    <td>Height</td><td>181 cm</td>
-                                </tr>
-                                <tr>
-                                    <td>Weight</td><td>75 kg</td>
+                                    <td>Practice location:</td><td>Sofia</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-
-                    <div className="medication-details">
-                        {!isMedical
-                            ? <div className="section-title">
-                                <h5>Treated by:</h5><i className="small material-icons">mode_edit</i>
-                            </div>
-                            : ""
-                        }
-                        <p>Patient of Medical Professional: Dr. John Smith</p>
-                    </div>
                 </Grid>
                 <Grid id="patient-history-container" item xs={6}>
-                    <h4>History</h4>
+                    <h4>My patients list</h4>
                     {isMedical
                         ? <div className="section-title">
                             <h5>Diagnosis</h5><i className="small material-icons">mode_edit</i>
@@ -94,21 +81,15 @@ function PatientProfile() {
                     <table className="responsive-table">
                         <tbody>
                             <tr>
-                                <td>Date</td><td>12/03/2022</td>
+                                <td>Current patients' count</td><td>324</td>
                             </tr>
                             <tr>
-                                <td>All BP Averages</td><td>112/67.2 mm/Hg</td>
-                            </tr>
-                            <tr>
-                                <td>Day BP Averages</td><td>116/67.4 mm/Hg</td>
-                            </tr>
-                            <tr>
-                                <td>Night BP Averages</td> <td>104/61.3 mm/Hg</td>
+                                <td>Accept patient</td><td>Yes | No</td>
                             </tr>
                         </tbody>
                     </table>
                     <div className="section-title">
-                        <i className="small material-icons">pageview</i> <Link className="results-link" to="/" alt="Patient Examination Results">View Results</Link>
+                        <i className="small material-icons">pageview</i> <Link className="results-link" to="/" alt="Patient Examination Results">Upload Results</Link>
                     </div>
                 </Grid>
             </Grid>
@@ -116,4 +97,4 @@ function PatientProfile() {
     )
 }
 
-export default PatientProfile;
+export default MedicalProfile;
