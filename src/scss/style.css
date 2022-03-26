@@ -142,12 +142,25 @@
   margin: 3% auto;
 }
 
-#donation {
+.teal {
+  background-color: #499cdf !important;
+}
+
+#donation, #search {
   padding: 10px 30px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  color: #096157;
+  background: #fff;
+  color: #616161;
+  border: 0.5px solid #616161;
+}
+
+#donation:hover, #search:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #616161;
+  border: 0.5px solid #fff;
+  font-weight: 500;
 }
 
 .footer-ul {
@@ -176,13 +189,6 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding-bottom: 30px;
-}
-
-#donation:hover,
-#search:hover {
-  background: #096157;
-  color: #fff;
-  border: 0.5px solid #fff;
 }
 
 .icons-container {
@@ -786,17 +792,12 @@ nav .brand-logo {
 }
 
 #search {
-  background: #cee0d5;
-  border: none;
-  color: #0a857a;
-  cursor: pointer;
   padding: 10px 30px;
   border-radius: 10px;
   margin-top: 15px;
   margin-bottom: 15px;
   font-size: 16px;
   letter-spacing: 1.2px;
-  border: 0.5px solid #0a857a;
 }
 
 .register-container, .register-container-medical, .login-container {
@@ -876,7 +877,7 @@ nav .brand-logo {
   margin-right: 30px;
 }
 
-.register-container .register-form #registerBtn, .register-container-medical .register-form #registerBtn, .login-container .register-form #registerBtn, .register-container .register-form #loginBtn, .register-container-medical .register-form #loginBtn, .login-container .register-form #loginBtn {
+.register-container .register-form #registerBtn, .register-container-medical .register-form #registerBtn, .login-container .register-form #registerBtn, .register-container .register-form .loginBtn, .register-container-medical .register-form .loginBtn, .login-container .register-form .loginBtn {
   color: #fff;
   background: #499cdf;
   padding: 10px 30px;

@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { login, reset } from '../../features/auth/authSlice.js';
+import { loginMedicalProfessional, reset } from '../../features/auth/authSlice.js';
 import Spinner from '../Spinner/Spinner.js';
 
-function Login() {
+function LoginMedical() {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -46,8 +46,7 @@ function Login() {
             email,
             password,
         }
-
-        dispatch(login(userData));
+        dispatch(loginMedicalProfessional(userData));
     }
 
     if (isLoading) {
@@ -59,17 +58,17 @@ function Login() {
             <div className="login-container">
                 <div className="form-container">
                     <form className="register-form" onSubmit={onSubmit} method="POST">
-                    <h3>Login to your account</h3>
-                    <div className="form-group">
+                        <h3>Login to your account</h3>
+                        <div className="form-group">
                             <label>Username</label><br></br>
                             <div className="icon">
-                                <input 
-                                name="email" 
-                                type="text" 
-                                autoComplete="email"
-                                className="form-control"
-                                value={email} 
-                                onChange={onChange}>
+                                <input
+                                    name="email"
+                                    type="text"
+                                    autoComplete="email"
+                                    className="form-control"
+                                    value={email}
+                                    onChange={onChange}>
                                 </input><br></br>
                             </div>
                         </div>
@@ -78,13 +77,13 @@ function Login() {
                             <label>Password</label><br></br>
                             <div className="icon">
                                 <input
-                                    className="form-control" 
+                                    className="form-control"
                                     autoComplete="current-password"
                                     name="password"
-                                    value={password} 
+                                    value={password}
                                     type="password"
                                     onChange={onChange}>
-                                    </input>
+                                </input>
                                 <br></br>
                             </div>
                         </div>
@@ -102,4 +101,4 @@ function Login() {
     )
 }
 
-export default Login;
+export default LoginMedical;

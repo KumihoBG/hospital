@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { register, reset } from '../../features/auth/authSlice.js';
+import { registerMedical, reset } from '../../features/auth/authSlice.js';
 import Spinner from '../Spinner/Spinner.js';
 
 function RegisterMedical() {
@@ -22,10 +22,10 @@ function RegisterMedical() {
         practiceLocation: '',
     })
 
-    const { name, username, email, password, rePass, gender, role, imageUrl, phone, age, department, areas, practiceLocation } = formData
+    const { name, username, email, password, rePass, gender, role, imageUrl, phone, age, department, areas, practiceLocation } = formData;
 
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const { user, isLoading, isError, isSuccess, message } = useSelector(
         (state) => state.auth
@@ -33,11 +33,11 @@ function RegisterMedical() {
 
     useEffect(() => {
         if (isError) {
-            toast.error(message)
+            toast.error(message);
         }
 
         if (isSuccess || user) {
-            navigate('/')
+            navigate('/');
         }
 
         dispatch(reset())
@@ -71,7 +71,7 @@ function RegisterMedical() {
                 practiceLocation
             }
 
-            dispatch(register(userData))
+            dispatch(registerMedical(userData))
         }
     }
 
@@ -232,6 +232,7 @@ function RegisterMedical() {
                                 name="gender"
                                 value="male"
                                 required
+                                onChange={onChange}
                             />
                             <label htmlFor="male">Male</label>
 
@@ -240,6 +241,7 @@ function RegisterMedical() {
                                 id="female"
                                 name="gender"
                                 value="female"
+                                onChange={onChange}
                             />
                             <label htmlFor="female">Female</label>
                         </div>
@@ -249,7 +251,7 @@ function RegisterMedical() {
                         </div>
                     </form>
                     <div className="second">
-                        <Link className="link" to="/login" alt="login">Already have an account?</Link><br></br>
+                        <Link className="link" to="/users/medical/login" alt="login">Already have an account?</Link><br></br>
                     </div>
                 </div>
             </div>

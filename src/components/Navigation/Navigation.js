@@ -6,7 +6,7 @@ import { FaHospitalUser } from "react-icons/fa";
 import { logout, reset } from '../../features/auth/authSlice.js';
 
 function Navigation() {
-    const isMedical = sessionStorage.getItem('medical');
+    const isMedical = sessionStorage.getItem('medical-professional');
     const username = sessionStorage.getItem('username');
     const userId = sessionStorage.getItem('userId');
     const isLogged = userId !== null;
@@ -77,8 +77,23 @@ function Navigation() {
                                     <span className="nav-item-title">Register Professional Account</span>
                                 </NavLink>
                             </li>
-                            <li className={pathname === "/users/login" ? "active" : ""}>
-                                <NavLink to="/users/login" alt="login">
+                            {!isMedical
+                                ? <li className={pathname === "/users/patient/login" ? "active" : ""}>
+                                    <NavLink to="/users/patient/login" alt="login">
+                                        <span className="nav-icon"><ion-icon name="log-in-outline"></ion-icon></span>
+                                        <span className="nav-item-title">Login</span>
+                                    </NavLink>
+                                </li>
+                                : <li className={pathname === "/users/patient/login" ? "active" : ""}>
+                                    <NavLink to="/users/patient/login" alt="login">
+                                        <span className="nav-icon"><ion-icon name="log-in-outline"></ion-icon></span>
+                                        <span className="nav-item-title">Login</span>
+                                    </NavLink>
+                                </li>
+                            }
+
+                            <li className={pathname === "/users/medical/login" ? "active" : ""}>
+                                <NavLink to="/users/medical/login" alt="login">
                                     <span className="nav-icon"><ion-icon name="log-in-outline"></ion-icon></span>
                                     <span className="nav-item-title">Login</span>
                                 </NavLink>

@@ -21,10 +21,52 @@ const register = async (userData) => {
   }
 }
 
+// Register medical professional
+const registerMedical = async (userData) => {
+  try {
+    const response = await fetch(`${BASE_LOCAL_URL}/users/register-medical`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(userData)
+    });
+    const data = await response.json();
+    sessionStorage.setItem('userId', data._id);
+    sessionStorage.setItem('username', data.username);
+    sessionStorage.setItem('email', data.email);
+    sessionStorage.setItem('role', data.role);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // Login user
 const login = async (userData) => {
   try {
-    const response = await fetch(`${BASE_LOCAL_URL}/users/login`, {
+    const response = await fetch(`${BASE_LOCAL_URL}/users/patient/login`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(userData)
+    });
+    const data = await response.json();
+    sessionStorage.setItem('userId', data._id);
+    sessionStorage.setItem('username', data.username);
+    sessionStorage.setItem('email', data.email);
+    sessionStorage.setItem('role', data.role);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Login medical
+const loginMedical = async (userData) => {
+  try {
+    const response = await fetch(`${BASE_LOCAL_URL}/users/medical/login`, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -52,8 +94,10 @@ const logout = async () => {
 
 const authService = {
   register,
+  registerMedical,
   logout,
   login,
+  loginMedical
 }
 
-export default authService
+export default authService;

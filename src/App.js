@@ -13,6 +13,7 @@ import PatientProfile from './components/PatientProfile/PatientProfile.js';
 import MedicalProfile from './components/MedicalProfile/MedicalProfile.js';
 import MedicalProfessionalCollection from './components/MedicalProfessionalCollection/MedicalProfessionalCollection.js';
 import Login from './components/Login/Login.js';
+import LoginMedical from './components/LoginMedical/LoginMedical.js';
 import Register from './components/Register/Register.js';
 import RegisterMedical from './components/RegisterMedical/RegisterMedical.js';
 import Appointments from './components/Appointments/Appointments.js';
@@ -27,7 +28,8 @@ function App() {
         <Routes>
           {/* <Route element={<PublicRoutes />}> */}
           <Route path='/' element={<Home />} />
-          <Route path='/users/login' element={<Login />} />
+          <Route path='/users/patient/login' element={<Login />} />
+          <Route path='/users/medical/login' element={<LoginMedical />} />
           <Route path='/users/register-patient' element={<Register />} />
           <Route path='/users/register-medical' element={<RegisterMedical />} />
           {/* </Route> */}

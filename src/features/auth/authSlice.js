@@ -30,10 +30,41 @@ export const register = createAsyncThunk(
   }
 )
 
+// Register medical professional
+export const registerMedical = createAsyncThunk(
+  'register-medical',
+  async (user, thunkAPI) => {
+    try {
+      return await authService.registerMedical(user)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 // Login user
-export const login = createAsyncThunk('login', async (user, thunkAPI) => {
+export const login = createAsyncThunk('patient/login', async (user, thunkAPI) => {
   try {
     return await authService.login(user)
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+// Login user
+export const loginMedicalProfessional = createAsyncThunk('medical/login', async (user, thunkAPI) => {
+  try {
+    return await authService.loginMedical(user);
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
@@ -74,6 +105,20 @@ export const authSlice = createSlice({
         state.message = action.payload;
         state.user = null;
       })
+      .addCase(registerMedical.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(registerMedical.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(registerMedical.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.user = null;
+      })
       .addCase(login.pending, (state) => {
         state.isLoading = true;
       })
@@ -83,6 +128,20 @@ export const authSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(login.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.user = null;
+      })
+      .addCase(loginMedicalProfessional.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(loginMedicalProfessional.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(loginMedicalProfessional.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

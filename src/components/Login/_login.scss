@@ -5,7 +5,7 @@
     min-height: 100vh;
 }
 
-#loginBtn {
+.loginBtn {
     @extend #registerBtn;
 }
 
