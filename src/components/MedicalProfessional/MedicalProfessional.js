@@ -22,10 +22,10 @@ function MedicalProfessional({medical}) {
           </div>
           {userId
             ? <div className="card-action">
-              <Link to={`/request-appointment/${medical._id}`}>Request an appointment</Link>
+              <Link to={`/request-appointment/${medical._id}`} state={medical._id}>Request an appointment</Link>
             </div>
             : <div className="card-action">
-              <Link to={`/request-appointment/${medical._id}`}>Choose this specialist</Link>
+              <Link to={`/choose-medical/${medical._id}`} state={medical._id}>Choose this specialist</Link>
             </div>
           }
         </div>

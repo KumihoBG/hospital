@@ -6,9 +6,10 @@ import { FaHospitalUser, FaUserInjured, FaUserGraduate, FaSignInAlt, FaSignOutAl
 import { logout, reset } from '../../features/auth/authSlice.js';
 
 function Navigation() {
-    const isMedical = sessionStorage.getItem('medical-professional');
+    const isMedical = sessionStorage.getItem('role') === 'medical-professional';
     const username = sessionStorage.getItem('username');
     const userId = sessionStorage.getItem('userId');
+    const checkMedical = isMedical === true;
     const isLogged = userId !== null;
     const navigate = useNavigate();
     const location = useLocation();
@@ -34,7 +35,7 @@ function Navigation() {
                             <li className={pathname === "/home" ? "active" : ""}>
                                 <NavLink to="/" alt="Home page: NewLife Hospital" end={true}>Home</NavLink>
                             </li>
-                            {isMedical
+                            {checkMedical
                                 ? <li className={pathname === "/profile/:medicalId" ? "active" : ""}>
                                     <NavLink to="/profile/:medicalId" alt="Medical account" end={true}>My Account</NavLink>
                                 </li>
@@ -42,12 +43,18 @@ function Navigation() {
                                     <NavLink to="/profile/:patientId" alt="My Patient account" end={true}>My Account</NavLink>
                                 </li>
                             }
-
-                            <li className={splitLocation[1] === "/medicals" ? "active" : ""}>
-                                <NavLink to="/medicals" alt="Our Medical Professionals">
-                                    <span className="nav-item-title">Our Medical Professionals</span>
-                                </NavLink>
-                            </li>
+                             {checkMedical
+                                ? <li className={splitLocation[1] === "/my-patients" ? "active" : ""}>
+                                    <NavLink to="/my-patients" alt="My Patients">
+                                        <span className="nav-item-title">My Patients</span>
+                                    </NavLink>
+                                </li>
+                                : <li className={splitLocation[1] === "/medicals" ? "active" : ""}>
+                                    <NavLink to="/medicals" alt="Our Medical Professionals">
+                                        <span className="nav-item-title">Our Medical Professionals</span>
+                                    </NavLink>
+                                </li>
+                            }
                             <li>
                                 <NavLink to={`#`} alt="Logout from your account" onClick={onLogout}>
                                     <FaSignOutAlt />
@@ -89,18 +96,6 @@ function Navigation() {
                                     <span className="nav-item-title"> Professionals</span>
                                 </NavLink>
                             </li>
-                            {!isMedical
-                                ? <li className={splitLocation[1] === "/medicals" ? "active" : ""}>
-                                    <NavLink to="/medicals" alt="Our Medical Professionals">
-                                        <span className="nav-item-title">Our Medical Professionals</span>
-                                    </NavLink>
-                                </li>
-                                : <li className={splitLocation[1] === "/my-patients" ? "active" : ""}>
-                                <NavLink to="/my-patients" alt="My Patients">
-                                    <span className="nav-item-title">My Patients</span>
-                                </NavLink>
-                            </li>
-                            }
                         </ul>
                     </div>
                 }
