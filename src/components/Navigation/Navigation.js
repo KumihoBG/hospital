@@ -43,9 +43,8 @@ function Navigation() {
                                 </li>
                             }
 
-                            <li className={splitLocation[1] === "list" ? "active" : ""}>
-                                <NavLink to="/medical-professionals" alt="Our Medical Professionals">
-                                    <span className="nav-icon"><ion-icon name="log-in-outline"></ion-icon></span>
+                            <li className={splitLocation[1] === "/medicals" ? "active" : ""}>
+                                <NavLink to="/medicals" alt="Our Medical Professionals">
                                     <span className="nav-item-title">Our Medical Professionals</span>
                                 </NavLink>
                             </li>
@@ -90,13 +89,18 @@ function Navigation() {
                                     <span className="nav-item-title"> Professionals</span>
                                 </NavLink>
                             </li>
-
-                            <li className={splitLocation[1] === "/medicals" ? "active" : ""}>
-                                <NavLink to="/medicals" alt="Our Medical Professionals">
-                                    <span className="nav-icon"><ion-icon name="log-in-outline"></ion-icon></span>
-                                    <span className="nav-item-title">Our Medical Professionals</span>
+                            {!isMedical
+                                ? <li className={splitLocation[1] === "/medicals" ? "active" : ""}>
+                                    <NavLink to="/medicals" alt="Our Medical Professionals">
+                                        <span className="nav-item-title">Our Medical Professionals</span>
+                                    </NavLink>
+                                </li>
+                                : <li className={splitLocation[1] === "/my-patients" ? "active" : ""}>
+                                <NavLink to="/my-patients" alt="My Patients">
+                                    <span className="nav-item-title">My Patients</span>
                                 </NavLink>
                             </li>
+                            }
                         </ul>
                     </div>
                 }
