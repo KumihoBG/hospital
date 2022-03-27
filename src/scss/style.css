@@ -107,23 +107,6 @@
   opacity: 0.9;
 }
 
-.requestBtn {
-  width: 30%;
-  -ms-flex-item-align: end;
-      align-self: flex-end;
-  background: #0a857a;
-  color: #fff;
-  padding: 15px 40px;
-  border-radius: 10px;
-  cursor: pointer;
-  border: none;
-  font-size: 20px;
-}
-
-.requestBtn:hover {
-  opacity: 0.9;
-}
-
 .contacts {
   -ms-flex-item-align: end;
       align-self: flex-end;

@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
 import logoImage from '../../images/logo.png';
 import { useDispatch } from 'react-redux';
-import { FaHospitalUser } from "react-icons/fa";
+import { FaHospitalUser, FaUserInjured, FaUserGraduate, FaSignInAlt, FaSignOutAlt, FaPlus } from "react-icons/fa";
 import { logout, reset } from '../../features/auth/authSlice.js';
 
 function Navigation() {
@@ -51,8 +51,8 @@ function Navigation() {
                             </li>
                             <li>
                                 <NavLink to={`#`} alt="Logout from your account" onClick={onLogout}>
-                                    <span className="nav-icon"><ion-icon name="log-in-outline"></ion-icon></span>
-                                    <span className="nav-item-title">Logout</span>
+                                    <FaSignOutAlt />
+                                    <span className="nav-item-title"> Logout </span>
                                 </NavLink>
                             </li>
                             <li>
@@ -67,39 +67,32 @@ function Navigation() {
                             </li>
                             <li className={pathname === "/users/register-patient" ? "active" : ""}>
                                 <NavLink to="/users/register-patient" alt="register">
-                                    <span className="nav-icon"><ion-icon name="person-add-outline"></ion-icon></span>
-                                    <span className="nav-item-title">Register Patient Account</span>
+                                    <FaUserInjured /><FaPlus />
+                                    <span className="nav-item-title"> Patient Account</span>
                                 </NavLink>
                             </li>
                             <li className={pathname === "/users/register-medical" ? "active" : ""}>
                                 <NavLink to="/users/register-medical" alt="register">
-                                    <span className="nav-icon"><ion-icon name="person-add-outline"></ion-icon></span>
-                                    <span className="nav-item-title">Register Professional Account</span>
+                                    <FaUserGraduate /><FaPlus />
+                                    <span className="nav-item-title"> Professional Account</span>
                                 </NavLink>
                             </li>
-                            {!isMedical
-                                ? <li className={pathname === "/users/patient/login" ? "active" : ""}>
-                                    <NavLink to="/users/patient/login" alt="login">
-                                        <span className="nav-icon"><ion-icon name="log-in-outline"></ion-icon></span>
-                                        <span className="nav-item-title">Login</span>
-                                    </NavLink>
-                                </li>
-                                : <li className={pathname === "/users/patient/login" ? "active" : ""}>
-                                    <NavLink to="/users/patient/login" alt="login">
-                                        <span className="nav-icon"><ion-icon name="log-in-outline"></ion-icon></span>
-                                        <span className="nav-item-title">Login</span>
-                                    </NavLink>
-                                </li>
-                            }
 
+                            <li className={pathname === "/users/patient/login" ? "active" : ""}>
+                                <NavLink to="/users/patient/login" alt="login">
+                                    <FaSignInAlt />
+                                    <span className="nav-item-title"> Patients</span>
+                                </NavLink>
+                            </li>
                             <li className={pathname === "/users/medical/login" ? "active" : ""}>
                                 <NavLink to="/users/medical/login" alt="login">
-                                    <span className="nav-icon"><ion-icon name="log-in-outline"></ion-icon></span>
-                                    <span className="nav-item-title">Login</span>
+                                    <FaSignInAlt />
+                                    <span className="nav-item-title"> Professionals</span>
                                 </NavLink>
                             </li>
-                            <li className={splitLocation[1] === "list" ? "active" : ""}>
-                                <NavLink to="/medical-professionals" alt="Our Medical Professionals">
+
+                            <li className={splitLocation[1] === "/medicals" ? "active" : ""}>
+                                <NavLink to="/medicals" alt="Our Medical Professionals">
                                     <span className="nav-icon"><ion-icon name="log-in-outline"></ion-icon></span>
                                     <span className="nav-item-title">Our Medical Professionals</span>
                                 </NavLink>

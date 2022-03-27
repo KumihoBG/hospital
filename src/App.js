@@ -42,8 +42,8 @@ function App() {
             ? <Route path='/profile/:medicalId' element={<MedicalProfile />} />
             : <Route path='/profile/:patientId' element={<PatientProfile />} />
           }
-          <Route path='/medical-professionals' element={<MedicalProfessionalCollection />} />
-          <Route path='/request-appointment' element={<Appointments />} />
+          <Route path='/medicals' element={<MedicalProfessionalCollection />} />
+          <Route path='/request-appointment/:medicalId' element={<Appointments />} />
           <Route path='*' element={<NotFoundPage />} />
           <Route path='/404' element={<NotFoundPage />} />
         </Routes>

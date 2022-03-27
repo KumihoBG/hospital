@@ -1,36 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function MedicalProfessional() {
-  const medic = {
-    fullName: 'John Smith',
-    department: 'Orthopedic Surgeon',
-    areas: 'Hip surgery, Hip replacement, Hip fracture surgery, Hip replacement revision, Knee replacement, Knee reconstruction',
-    location: 'Sofia'
-  }
+function MedicalProfessional({medical}) {
+  const userId = sessionStorage.getItem('userId');
 
   return (
     <div className="row">
-    <div className="col s12 m7">
-      <div className="card">
-        <div className="card-image">
-          <img src={require('../../images/doctor.jpg')} alt="Medical Professional"/>
-          <span className="card-title">Name: {medic.fullName}</span>
-          <i className="material-icons stars">grade</i>
-          <i className="material-icons stars">grade</i>
-          <i className="material-icons stars">grade</i>
-        </div>
-        <div className="card-content">
-          <p><span className="description-paragraph">Department:</span> {medic.department}</p>
-          <p><span className="description-paragraph">Areas of Focus:</span> {medic.areas}</p>
-          <p><span className="description-paragraph">Practice location:</span> {medic.location}</p>
-        </div>
-        <div className="card-action">
-          <Link to={`/request-appointment/${medic.medicalId}`}>Request an appointment</Link>
+      <div className="col s12 m7">
+        <div className="card">
+          <div className="card-image">
+            <img src={`${medical.imageUrl}`} alt="Medical Professional" />
+            <i className="material-icons stars">grade</i>
+            <i className="material-icons stars">grade</i>
+            <i className="material-icons stars">grade</i>
+          </div>
+          <div className="card-content">
+          <p><span className="description-paragraph">Name:</span> {medical.name}</p>
+            <p><span className="description-paragraph">Department:</span> {medical.department}</p>
+            <p><span className="description-paragraph">Areas of Focus:</span> {medical.areas}</p>
+            <p><span className="description-paragraph">Practice location:</span> {medical.practiceLocation}</p>
+          </div>
+          {userId
+            ? <div className="card-action">
+              <Link to={`/request-appointment/${medical._id}`}>Request an appointment</Link>
+            </div>
+            : <div className="card-action">
+              <Link to={`/request-appointment/${medical._id}`}>Choose this specialist</Link>
+            </div>
+          }
         </div>
       </div>
     </div>
-  </div>
   )
 }
 
