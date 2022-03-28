@@ -1,8 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { chooseMyDoctor } from '../../features/auth/authAPI.js';
 
 function MedicalProfessional({ medical }) {
   const userId = sessionStorage.getItem('userId');
+  const medicalId = medical._id;
+  const navigate = useNavigate();
+  const hasDoctor = sessionStorage.getItem('hasDoctor');
+  const myDoctor = sessionStorage.getItem('myDoctor');
+
+  useEffect(() => {
+    if (hasDoctor === 'true') {
+      navigate('/medicals');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  async function chooseADoctor() {
+    try {
+      const patient = await chooseMyDoctor(medicalId, userId);
+      sessionStorage.setItem('hasDoctor', true);
+      sessionStorage.setItem('myDoctor', medicalId);
+      return patient;
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
 
   return (
     <div className="row">
@@ -22,12 +45,22 @@ function MedicalProfessional({ medical }) {
           </div>
           {userId
             ? <div>
-              <div className="card-action">
-                <Link to={`/request-appointment/${medical._id}`} state={medical._id}>Request an appointment</Link>
-              </div>
-              <div className="card-action">
-                <Link to={`/choose-medical/${medical._id}`} state={medical._id}>Choose this specialist</Link>
-              </div>
+              {hasDoctor
+                ? <div>
+                  {myDoctor === medical._id
+                    ? <div><div className="card-action">
+                      <Link onClick={chooseADoctor} to={`/patient/${userId}/my-medical-professional`} state={medical._id}>Cancel Service</Link>
+                    </div>
+                      <div className="card-action">
+                        <Link to={`/request-appointment/${medical._id}`} state={medical._id}>Request an appointment</Link>
+                      </div>
+                    </div>
+                    : ""}
+                </div>
+                : <div className="card-action">
+                  <Link onClick={chooseADoctor} to={`/patient/${userId}/my-medical-professional`} state={medical._id}>Choose this specialist</Link>
+                </div>
+              }
             </div>
             : ""
           }

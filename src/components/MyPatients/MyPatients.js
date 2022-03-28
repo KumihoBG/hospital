@@ -21,7 +21,7 @@ function MedicalProfessionalCollection() {
             <h6>Browse information about your patients.</h6>
             <ul className="collection">
                 {medicals.map(medical => {
-                    return <MedicalProfessional medical={medical} key={medical.id} />
+                    return <MedicalProfessional medical={medical} key={medical._id} />
                 })}
             </ul>
         </div>

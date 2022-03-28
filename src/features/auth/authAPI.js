@@ -95,6 +95,7 @@ const logout = async () => {
   sessionStorage.removeItem('email');
   sessionStorage.removeItem('role');
   sessionStorage.removeItem('user');
+  sessionStorage.removeItem('hasDoctor');
 }
 
 // Get single medical
@@ -119,12 +120,44 @@ export const getPatientProfile = async (userId) => {
   }
 }
 
+
+// Get all medicals
+export const getMyDoctor = async (userId) => {
+  try {
+    const response = await fetch(`${BASE_LOCAL_URL}/users/patient/${userId}/my-medical-professional`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Get all medicals
+export const chooseMyDoctor = async (medicalId, userId) => {
+  try {
+    const myDoctor = await getMedicalProfile(medicalId);
+    const response = await fetch(`${BASE_LOCAL_URL}/users/patient/${userId}/my-medical-professional`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(myDoctor)
+    });
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 const authService = {
   register,
   registerMedical,
   logout,
   login,
-  loginMedical
+  loginMedical,
+  chooseMyDoctor
 }
 
 export default authService;

@@ -2,16 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
-import { getPatientProfile } from '../../features/auth/authAPI.js';
+import { getPatientProfile, getMyDoctor } from '../../features/auth/authAPI.js';
 
 function PatientProfile() {
     const isMedical = sessionStorage.getItem('role') === 'medical-professional';
     const checkMedical = isMedical === true;
     const userId = sessionStorage.getItem('userId');
     const [profile, setProfile] = useState([]);
+    const [doctor, setDoctor] = useState([]);
 
     useEffect(() => {
         getMedicalProfileInfo();
+        getMyDoctorInfo();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -19,6 +21,15 @@ function PatientProfile() {
         try {
             const singleProfile = await getPatientProfile(userId);
             setProfile(singleProfile);
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+
+    const getMyDoctorInfo = async () => {
+        try {
+            const doctorsName = await getMyDoctor(userId);
+            setDoctor(doctorsName);
         } catch (err) {
             console.log(err.message)
         }
@@ -75,7 +86,7 @@ function PatientProfile() {
                             </div>
                             : ""
                         }
-                        <p>Patient of Medical Professional: {profile.myMedicalProfessional}</p>
+                        <p>Patient of Medical Professional: {doctor[0] || 'Not chosen yet'}</p>
                     </div>
                 </Grid>
                 <Grid id="patient-history-container" item xs={6}>
