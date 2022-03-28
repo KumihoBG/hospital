@@ -94,6 +94,7 @@ const logout = async () => {
   sessionStorage.removeItem('username');
   sessionStorage.removeItem('email');
   sessionStorage.removeItem('role');
+  sessionStorage.removeItem('user');
 }
 
 // Get single medical

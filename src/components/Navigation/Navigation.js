@@ -74,27 +74,32 @@ function Navigation() {
                             <li className={pathname === "/users/register-patient" ? "active" : ""}>
                                 <NavLink to="/users/register-patient" alt="register">
                                     <FaUserInjured /><FaPlus />
-                                    <span className="nav-item-title"> Patient Account</span>
+                                    <span className="nav-item-title"> New Patient Account</span>
                                 </NavLink>
                             </li>
                             <li className={pathname === "/users/register-medical" ? "active" : ""}>
                                 <NavLink to="/users/register-medical" alt="register">
                                     <FaUserGraduate /><FaPlus />
-                                    <span className="nav-item-title"> Professional Account</span>
+                                    <span className="nav-item-title"> New Professional Account</span>
                                 </NavLink>
                             </li>
 
                             <li className={pathname === "/users/patient/login" ? "active" : ""}>
                                 <NavLink to="/users/patient/login" alt="login">
                                     <FaSignInAlt />
-                                    <span className="nav-item-title"> Patients</span>
+                                    <span className="nav-item-title"> Login Patients</span>
                                 </NavLink>
                             </li>
                             <li className={pathname === "/users/medical/login" ? "active" : ""}>
                                 <NavLink to="/users/medical/login" alt="login">
                                     <FaSignInAlt />
-                                    <span className="nav-item-title"> Professionals</span>
+                                    <span className="nav-item-title"> Login Professionals</span>
                                 </NavLink>
+                            </li>
+                            <li className={splitLocation[1] === "/medicals" ? "active" : ""}>
+                                    <NavLink to="/medicals" alt="Our Medical Professionals">
+                                        <span className="nav-item-title">Our Medical Professionals</span>
+                                    </NavLink>
                             </li>
                         </ul>
                     </div>

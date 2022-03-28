@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function MedicalProfessional({medical}) {
+function MedicalProfessional({ medical }) {
   const userId = sessionStorage.getItem('userId');
 
   return (
@@ -15,18 +15,21 @@ function MedicalProfessional({medical}) {
             <i className="material-icons stars">grade</i>
           </div>
           <div className="card-content">
-          <p><span className="description-paragraph">Name:</span> {medical.name}</p>
+            <p><span className="description-paragraph">Name:</span> {medical.name}</p>
             <p><span className="description-paragraph">Department:</span> {medical.department}</p>
             <p><span className="description-paragraph">Areas of Focus:</span> {medical.areas}</p>
             <p><span className="description-paragraph">Practice location:</span> {medical.practiceLocation}</p>
           </div>
           {userId
-            ? <div className="card-action">
-              <Link to={`/request-appointment/${medical._id}`} state={medical._id}>Request an appointment</Link>
+            ? <div>
+              <div className="card-action">
+                <Link to={`/request-appointment/${medical._id}`} state={medical._id}>Request an appointment</Link>
+              </div>
+              <div className="card-action">
+                <Link to={`/choose-medical/${medical._id}`} state={medical._id}>Choose this specialist</Link>
+              </div>
             </div>
-            : <div className="card-action">
-              <Link to={`/choose-medical/${medical._id}`} state={medical._id}>Choose this specialist</Link>
-            </div>
+            : ""
           }
         </div>
       </div>
