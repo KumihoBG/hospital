@@ -11,6 +11,7 @@ const register = async (userData) => {
       body: JSON.stringify(userData)
     });
     const data = await response.json();
+    sessionStorage.setItem('user', JSON.stringify(data));
     sessionStorage.setItem('userId', data._id);
     sessionStorage.setItem('username', data.username);
     sessionStorage.setItem('email', data.email);
@@ -32,6 +33,7 @@ const registerMedical = async (userData) => {
       body: JSON.stringify(userData)
     });
     const data = await response.json();
+    sessionStorage.setItem('user', JSON.stringify(data));
     sessionStorage.setItem('userId', data._id);
     sessionStorage.setItem('username', data.username);
     sessionStorage.setItem('email', data.email);
@@ -53,6 +55,7 @@ const login = async (userData) => {
       body: JSON.stringify(userData)
     });
     const data = await response.json();
+    sessionStorage.setItem('user', JSON.stringify(data));
     sessionStorage.setItem('userId', data._id);
     sessionStorage.setItem('username', data.username);
     sessionStorage.setItem('email', data.email);
@@ -74,6 +77,7 @@ const loginMedical = async (userData) => {
       body: JSON.stringify(userData)
     });
     const data = await response.json();
+    sessionStorage.setItem('user', JSON.stringify(data));
     sessionStorage.setItem('userId', data._id);
     sessionStorage.setItem('username', data.username);
     sessionStorage.setItem('email', data.email);
@@ -90,6 +94,28 @@ const logout = async () => {
   sessionStorage.removeItem('username');
   sessionStorage.removeItem('email');
   sessionStorage.removeItem('role');
+}
+
+// Get single medical
+export const getMedicalProfile = async (userId) => {
+  try {
+    const response = await fetch(`${BASE_LOCAL_URL}/users/medical/${userId}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Get single patient
+export const getPatientProfile = async (userId) => {
+  try {
+    const response = await fetch(`${BASE_LOCAL_URL}/users/patient/${userId}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 const authService = {

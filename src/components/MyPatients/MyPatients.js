@@ -11,14 +11,14 @@ function MedicalProfessionalCollection() {
     }, [])
 
     const getAll = async () => {
-        const allMedicals = await getAllMedicals();
-        setMedicals(allMedicals);
+        const myPatients = await getAllMedicals();
+        setMedicals(myPatients);
     }
 
     return (
         <div className="staff-container">
-            <h4 className="staff-title">Doctors & Medical Staff</h4>
-            <h6>Our specialists have extensive knowledge in all areas of medicine.</h6>
+            <h4 className="staff-title">My Patients List</h4>
+            <h6>Browse information about your patients.</h6>
             <ul className="collection">
                 {medicals.map(medical => {
                     return <MedicalProfessional medical={medical} key={medical.id} />

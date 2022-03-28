@@ -12,6 +12,7 @@ import FindDoctor from './components/FindDoctor/FindDoctor.js';
 import PatientProfile from './components/PatientProfile/PatientProfile.js';
 import MedicalProfile from './components/MedicalProfile/MedicalProfile.js';
 import MedicalProfessionalCollection from './components/MedicalProfessionalCollection/MedicalProfessionalCollection.js';
+import MyPatients from './components/MyPatients/MyPatients.js';
 import Login from './components/Login/Login.js';
 import LoginMedical from './components/LoginMedical/LoginMedical.js';
 import Register from './components/Register/Register.js';
@@ -19,7 +20,8 @@ import RegisterMedical from './components/RegisterMedical/RegisterMedical.js';
 import Appointments from './components/Appointments/Appointments.js';
 
 function App() {
-  const isMedical = sessionStorage.getItem('medical');
+  const isMedical = sessionStorage.getItem('role') === 'medical-professional';
+  const checkMedical = isMedical === true;
 
   return (
     <div className="App">
@@ -38,11 +40,12 @@ function App() {
           <Route path='/home' element={<Home />} />
           {/* </Route> */}
           <Route path='/staff' element={<FindDoctor />} />
-          {isMedical
-            ? <Route path='/profile/:medicalId' element={<MedicalProfile />} />
-            : <Route path='/profile/:patientId' element={<PatientProfile />} />
+          {checkMedical
+            ? <Route path='/users/medical/:userId' element={<MedicalProfile />} />
+            : <Route path='/users/patient/:userId' element={<PatientProfile />} />
           }
           <Route path='/medicals' element={<MedicalProfessionalCollection />} />
+          <Route path='/my-patients' element={<MyPatients />} />
           <Route path='/request-appointment/:medicalId' element={<Appointments />} />
           <Route path='*' element={<NotFoundPage />} />
           <Route path='/404' element={<NotFoundPage />} />

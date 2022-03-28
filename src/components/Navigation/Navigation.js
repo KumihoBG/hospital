@@ -36,11 +36,11 @@ function Navigation() {
                                 <NavLink to="/" alt="Home page: NewLife Hospital" end={true}>Home</NavLink>
                             </li>
                             {checkMedical
-                                ? <li className={pathname === "/profile/:medicalId" ? "active" : ""}>
-                                    <NavLink to="/profile/:medicalId" alt="Medical account" end={true}>My Account</NavLink>
+                                ? <li className={pathname === "/users/medical/:userId" ? "active" : ""}>
+                                    <NavLink to={`/users/medical/${userId}`} alt="Medical account" end={true}>My Account</NavLink>
                                 </li>
-                                : <li className={pathname === "/profile/:patientId" ? "active" : ""}>
-                                    <NavLink to="/profile/:patientId" alt="My Patient account" end={true}>My Account</NavLink>
+                                : <li className={pathname === "/users/patient/:userId" ? "active" : ""}>
+                                    <NavLink to={`/users/patient/${userId}`} alt="My Patient account" end={true}>My Account</NavLink>
                                 </li>
                             }
                              {checkMedical

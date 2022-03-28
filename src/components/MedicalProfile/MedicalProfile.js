@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
+import { getMedicalProfile } from '../../features/auth/authAPI';
 
 function MedicalProfile() {
-    const isMedical = sessionStorage.getItem('medical');
+    const isMedical = sessionStorage.getItem('role') === 'medical-professional';
+    const checkMedical = isMedical === true;
+    const userId = sessionStorage.getItem('userId');
+    const [profile, setProfile] = useState([]);
+
+    useEffect(() => {
+        getMedicalProfileInfo();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const getMedicalProfileInfo = async () => {
+        try {
+            const singleProfile = await getMedicalProfile(userId);
+            setProfile(singleProfile);
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
 
     return (
         <div>
@@ -12,24 +30,24 @@ function MedicalProfile() {
                 <Grid id="patient-info-container" item xs={6}>
                     <div className="patient-info">
                         <div>
-                            <Avatar className="avatar" alt="Doctor Smith" src={require('../../images/doctor.jpg')} sx={{ width: 150, height: 150 }} />
+                            <Avatar className="avatar" alt="Doctor Smith" src={profile.imageUrl} sx={{ width: 150, height: 150 }} />
                         </div>
                         <div>
                             <p>
-                                <span>Medical Professional ID: 98983983</span><br />
-                                <span id="full-name">Ivan Nikolov</span><br />
-                                <span>M | 48</span>
+                                <span>Medical Professional ID: {profile._id}</span><br />
+                                <span id="full-name">{profile.name}</span><br />
+                                <span>{profile.gender} | {profile.age}</span>
                             </p>
                         </div>
                     </div>
-                    {!isMedical
+                    {!checkMedical
                         ? <div className="send-message">
                             <button className="sendMessageBtn">Send Message</button>
                         </div>
                         : ""
                     }
                     <div className="personal-details">
-                        {isMedical
+                        {checkMedical
                             ? <div className="section-title">
                                 <h5>Personal information:</h5><i className="small material-icons">mode_edit</i>
                             </div>
@@ -38,19 +56,19 @@ function MedicalProfile() {
                         <table className="responsive-table">
                             <tbody>
                                 <tr>
-                                    <td>Department</td><td>Orthopedic Surgeon</td>
+                                    <td>Department</td><td>{profile.department}</td>
                                 </tr>
                                 <tr>
-                                    <td>Phone Number</td><td>+359 888 881188</td>
+                                    <td>Phone Number</td><td>{profile.phone}</td>
                                 </tr>
                                 <tr>
-                                    <td>Email</td> <td>ivan.ivanov@gmail.com</td>
+                                    <td>Email</td><td>{profile.email}</td>
                                 </tr>
                                 <tr>
-                                    <td>Areas of Focus</td><td>Hip surgery, Hip replacement, Hip fracture surgery, Hip replacement revision, Knee replacement, Knee reconstruction</td>
+                                    <td>Areas of Focus</td><td>{profile.areas}</td>
                                 </tr>
                                 <tr>
-                                    <td>Practice location:</td><td>Sofia</td>
+                                    <td>Practice location:</td><td>{profile.practiceLocation}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -58,21 +76,21 @@ function MedicalProfile() {
                 </Grid>
                 <Grid id="patient-history-container" item xs={6}>
                     <h4>My patients list</h4>
-                    {isMedical
+                    {checkMedical
+                        ? <div className="section-title">
+                            <h5>Patients</h5><i className="small material-icons">mode_edit</i>
+                        </div>
+                        : ""
+                    }
+                    <div className="text-info">{profile.myPatients}</div>
+                    {checkMedical
                         ? <div className="section-title">
                             <h5>Diagnosis</h5><i className="small material-icons">mode_edit</i>
                         </div>
                         : ""
                     }
                     <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
-                    {isMedical
-                        ? <div className="section-title">
-                            <h5>Diagnosis</h5><i className="small material-icons">mode_edit</i>
-                        </div>
-                        : ""
-                    }
-                    <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
-                    {isMedical
+                    {checkMedical
                         ? <div className="section-title">
                             <h5>Diagnosis</h5><i className="small material-icons">mode_edit</i>
                         </div>
