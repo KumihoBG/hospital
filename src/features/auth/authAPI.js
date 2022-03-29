@@ -132,11 +132,11 @@ export const getMyDoctor = async (userId) => {
   }
 }
 
-// Get all medicals
+// Choose single medical
 export const chooseMyDoctor = async (medicalId, userId) => {
   try {
     const myDoctor = await getMedicalProfile(medicalId);
-    const response = await fetch(`${BASE_LOCAL_URL}/users/patient/${userId}/my-medical-professional`, {
+    const response = await fetch(`${BASE_LOCAL_URL}/users/patient/${userId}/choose-my-medical-professional`, {
       headers: {
         'Content-Type': 'application/json'
       },
@@ -151,13 +151,32 @@ export const chooseMyDoctor = async (medicalId, userId) => {
   }
 }
 
+// Cancel my medical
+export const cancelMedical = async (medicalId, userId) => {
+  try {
+    const myDoctor = await getMedicalProfile(medicalId);
+    const response = await fetch(`${BASE_LOCAL_URL}/users/patient/${userId}/cancel-my-medical-professional`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT',
+      body: JSON.stringify(myDoctor)
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 const authService = {
   register,
   registerMedical,
   logout,
   login,
   loginMedical,
-  chooseMyDoctor
+  chooseMyDoctor,
+  cancelMedical
 }
 
 export default authService;

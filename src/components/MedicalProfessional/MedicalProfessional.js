@@ -1,26 +1,33 @@
-import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { chooseMyDoctor } from '../../features/auth/authAPI.js';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+import { chooseMyDoctor, cancelMedical } from '../../features/auth/authAPI.js';
 
 function MedicalProfessional({ medical }) {
   const userId = sessionStorage.getItem('userId');
   const medicalId = medical._id;
   const navigate = useNavigate();
-  const hasDoctor = sessionStorage.getItem('hasDoctor');
-  const myDoctor = sessionStorage.getItem('myDoctor');
-
-  useEffect(() => {
-    if (hasDoctor === 'true') {
-      navigate('/medicals');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  let hasDoctor = sessionStorage.getItem('hasDoctor');
+  let myDoctor = sessionStorage.getItem('myDoctor');
 
   async function chooseADoctor() {
     try {
       const patient = await chooseMyDoctor(medicalId, userId);
       sessionStorage.setItem('hasDoctor', true);
       sessionStorage.setItem('myDoctor', medicalId);
+      navigate(-1);
+      return patient;
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
+
+  async function cancelMedicalAction() {
+    try {
+      const patient = await cancelMedical(medicalId, userId);
+      sessionStorage.removeItem('hasDoctor');
+      sessionStorage.removeItem('myDoctor');
+      navigate(-1);
       return patient;
     } catch (err) {
       console.log(err.message)
@@ -49,7 +56,7 @@ function MedicalProfessional({ medical }) {
                 ? <div>
                   {myDoctor === medical._id
                     ? <div><div className="card-action">
-                      <Link onClick={chooseADoctor} to={`/patient/${userId}/my-medical-professional`} state={medical._id}>Cancel Service</Link>
+                      <Link onClick={cancelMedicalAction} to={`/users/patient/${userId}/cancel-my-medical-professional`} state={medical._id}>Cancel Service</Link>
                     </div>
                       <div className="card-action">
                         <Link to={`/request-appointment/${medical._id}`} state={medical._id}>Request an appointment</Link>
@@ -58,7 +65,7 @@ function MedicalProfessional({ medical }) {
                     : ""}
                 </div>
                 : <div className="card-action">
-                  <Link onClick={chooseADoctor} to={`/patient/${userId}/my-medical-professional`} state={medical._id}>Choose this specialist</Link>
+                  <Link onClick={chooseADoctor} to={`/users/patient/${userId}/choose-my-medical-professional`} state={medical._id}>Choose this specialist</Link>
                 </div>
               }
             </div>
