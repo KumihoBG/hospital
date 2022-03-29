@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
 import { chooseMyDoctor, cancelMedical } from '../../features/auth/authAPI.js';
 
 function MedicalProfessional({ medical }) {
@@ -10,7 +9,8 @@ function MedicalProfessional({ medical }) {
   let hasDoctor = sessionStorage.getItem('hasDoctor');
   let myDoctor = sessionStorage.getItem('myDoctor');
 
-  async function chooseADoctor() {
+  async function chooseADoctor(event) {
+    event.preventDefault();
     try {
       const patient = await chooseMyDoctor(medicalId, userId);
       sessionStorage.setItem('hasDoctor', true);
@@ -22,7 +22,8 @@ function MedicalProfessional({ medical }) {
     }
   }
 
-  async function cancelMedicalAction() {
+  async function cancelMedicalAction(event) {
+    event.preventDefault();
     try {
       const patient = await cancelMedical(medicalId, userId);
       sessionStorage.removeItem('hasDoctor');
