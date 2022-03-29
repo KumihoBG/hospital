@@ -19,6 +19,8 @@ function MedicalProfile() {
     const getMedicalProfileInfo = async () => {
         try {
             const singleProfile = await getMedicalProfile(userId);
+            const patientsList = singleProfile.myPatients?.map(x => x.name).join(', ');
+            console.log(patientsList);
             setProfile(singleProfile);
         } catch (err) {
             console.log(err.message)

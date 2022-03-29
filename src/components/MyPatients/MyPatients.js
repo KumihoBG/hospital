@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import MedicalProfessional from '../MedicalProfessional/MedicalProfessional.js';
-import {getAllMedicals} from '../../features/medicals/medicalAPI.js';
+import Patient from '../Patient/Patient.js';
+import { getAllPatients } from '../../features/medicals/medicalAPI.js';
 
 function MedicalProfessionalCollection() {
-    const [medicals, setMedicals] = useState([]);
+    const [patients, setPatients] = useState([]);
+    const userId = sessionStorage.getItem('userId');
 
     useEffect(() => {
         getAll();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const getAll = async () => {
-        const myPatients = await getAllMedicals();
-        setMedicals(myPatients);
+        const myPatients = await getAllPatients(userId);
+        console.log('myPatients', myPatients);
+        setPatients(myPatients);
     }
 
     return (
@@ -20,8 +22,8 @@ function MedicalProfessionalCollection() {
             <h4 className="staff-title">My Patients List</h4>
             <h6>Browse information about your patients.</h6>
             <ul className="collection">
-                {medicals.map(medical => {
-                    return <MedicalProfessional medical={medical} key={medical._id} />
+                {patients.map(patient => {
+                    return <Patient patient={patient} key={patient._id} />
                 })}
             </ul>
         </div>

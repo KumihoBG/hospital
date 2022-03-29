@@ -44,8 +44,8 @@ function Navigation() {
                                 </li>
                             }
                              {checkMedical
-                                ? <li className={splitLocation[1] === "/my-patients" ? "active" : ""}>
-                                    <NavLink to="/my-patients" alt="My Patients">
+                                ? <li className={splitLocation[1] === "/medicals/my-patients/:userId" ? "active" : ""}>
+                                    <NavLink to={`/medicals/my-patients/${userId}`} alt="My Patients">
                                         <span className="nav-item-title">My Patients</span>
                                     </NavLink>
                                 </li>

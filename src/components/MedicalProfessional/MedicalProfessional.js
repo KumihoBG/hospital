@@ -60,7 +60,7 @@ function MedicalProfessional({ medical }) {
                       <Link onClick={cancelMedicalAction} to={`/users/patient/${userId}/cancel-my-medical-professional`} state={medical._id}>Cancel Service</Link>
                     </div>
                       <div className="card-action">
-                        <Link to={`/request-appointment/${medical._id}`} state={medical._id}>Request an appointment</Link>
+                        <Link to={`/medicals/request-appointment/${medical._id}`} state={medical._id}>Request an appointment</Link>
                       </div>
                     </div>
                     : ""}
