@@ -10,6 +10,7 @@ function PatientProfile() {
     const checkMedical = isMedical === true;
     const userId = sessionStorage.getItem('userId');
     const [profile, setProfile] = useState([]);
+    // eslint-disable-next-line no-unused-vars
     const [doctor, setDoctor] = useState([]);
     const [medicalName, setMedicalName] = useState([]);
     const { user } = useSelector(
