@@ -330,6 +330,7 @@
 
 .card {
   width: 20vw;
+  height: 660px;
 }
 
 .card .card-image {
@@ -768,6 +769,11 @@ nav .brand-logo {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.bolder-names {
+  font-weight: bolder;
+  color: #096157;
 }
 
 #searchBoxLabel {

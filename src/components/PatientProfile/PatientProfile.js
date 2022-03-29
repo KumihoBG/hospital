@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
-import { getPatientProfile, getMyDoctor } from '../../features/auth/authAPI.js';
+import { useSelector } from 'react-redux';
+import { getPatientProfile, getMyDoctor, getMedicalProfile } from '../../features/auth/authAPI.js';
 
 function PatientProfile() {
     const isMedical = sessionStorage.getItem('role') === 'medical-professional';
@@ -10,14 +11,19 @@ function PatientProfile() {
     const userId = sessionStorage.getItem('userId');
     const [profile, setProfile] = useState([]);
     const [doctor, setDoctor] = useState([]);
+    const [medicalName, setMedicalName] = useState([]);
+    const { user } = useSelector(
+        (state) => state.auth
+    )
 
     useEffect(() => {
         getMedicalProfileInfo();
         getMyDoctorInfo();
+        getMedicalName();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const getMedicalProfileInfo = async () => {
+    const getMedicalName = async () => {
         try {
             const singleProfile = await getPatientProfile(userId);
             setProfile(singleProfile);
@@ -35,6 +41,15 @@ function PatientProfile() {
         }
     }
 
+    const getMedicalProfileInfo = async () => {
+        try {
+            const data = await getMedicalProfile(user.medical[0]);
+            setMedicalName(data.name);
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+ 
     return (
         <div>
             <Grid id="profile-container" container spacing={2}>
@@ -86,7 +101,7 @@ function PatientProfile() {
                             </div>
                             : ""
                         }
-                        <p>Patient of Medical Professional: {doctor[0] || 'Not chosen yet'}</p>
+                        <p>Patient of Medical Professional: <span className='bolder-names'>{medicalName || 'Not chosen yet'}</span></p>
                     </div>
                 </Grid>
                 <Grid id="patient-history-container" item xs={6}>

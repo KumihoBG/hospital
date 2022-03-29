@@ -9,6 +9,7 @@ function MedicalProfile() {
     const checkMedical = isMedical === true;
     const userId = sessionStorage.getItem('userId');
     const [profile, setProfile] = useState([]);
+    // trip.buddiesList = trip.buddies?.map(x => x.email).join(', ');
 
     useEffect(() => {
         getMedicalProfileInfo();

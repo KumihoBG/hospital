@@ -55,11 +55,15 @@ const login = async (userData) => {
       body: JSON.stringify(userData)
     });
     const data = await response.json();
+   
     sessionStorage.setItem('user', JSON.stringify(data));
     sessionStorage.setItem('userId', data._id);
     sessionStorage.setItem('username', data.username);
     sessionStorage.setItem('email', data.email);
     sessionStorage.setItem('role', data.role);
+      if(data.myMedicalProfessional !== null || data.myMedicalProfessional !== undefined) {
+        sessionStorage.setItem('hasDoctor', true);
+      }
     return data;
   } catch (error) {
     console.error(error);

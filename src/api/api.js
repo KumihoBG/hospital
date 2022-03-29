@@ -8,8 +8,3 @@ export async function getCovidStats() {
     const news = await response.json();
     return news;
 }
-
-
-// export const isAuthenticated = () => {
-//     return Boolean(getUser())
-// };
