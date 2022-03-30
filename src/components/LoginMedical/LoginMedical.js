@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { loginMedicalProfessional, reset } from '../../features/auth/authSlice.js';
-import Spinner from '../Spinner/Spinner.js';
+// import Spinner from '../Spinner/Spinner.js';
 
 function LoginMedical() {
     const [formData, setFormData] = useState({
@@ -49,9 +49,9 @@ function LoginMedical() {
         dispatch(loginMedicalProfessional(userData));
     }
 
-    if (isLoading) {
-        return <Spinner />
-    }
+    // if (isLoading) {
+    //     return <Spinner />
+    // }
 
     return (
         <>

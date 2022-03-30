@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { login, reset } from '../../features/auth/authSlice.js';
-import Spinner from '../Spinner/Spinner.js';
+// import Spinner from '../Spinner/Spinner.js';
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -51,9 +51,9 @@ function Login() {
         dispatch(login(userData));
     }
 
-    if (isLoading) {
-        return <Spinner />
-    }
+    // if (isLoading) {
+    //     return <Spinner />
+    // }
 
     return (
         <>

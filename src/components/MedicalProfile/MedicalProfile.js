@@ -9,8 +9,7 @@ function MedicalProfile() {
     const checkMedical = isMedical === true;
     const userId = sessionStorage.getItem('userId');
     const [profile, setProfile] = useState([]);
-    // trip.buddiesList = trip.buddies?.map(x => x.email).join(', ');
-
+  
     useEffect(() => {
         getMedicalProfileInfo();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -19,8 +18,6 @@ function MedicalProfile() {
     const getMedicalProfileInfo = async () => {
         try {
             const singleProfile = await getMedicalProfile(userId);
-            const patientsList = singleProfile.myPatients?.map(x => x.name).join(', ');
-            console.log(patientsList);
             setProfile(singleProfile);
         } catch (err) {
             console.log(err.message)
@@ -78,24 +75,16 @@ function MedicalProfile() {
                     </div>
                 </Grid>
                 <Grid id="patient-history-container" item xs={6}>
-                    <h4>My patients list</h4>
                     {checkMedical
                         ? <div className="section-title">
-                            <h5>Patients</h5><i className="small material-icons">mode_edit</i>
-                        </div>
-                        : ""
-                    }
-                    <div className="text-info">{profile.myPatients}</div>
-                    {checkMedical
-                        ? <div className="section-title">
-                            <h5>Diagnosis</h5><i className="small material-icons">mode_edit</i>
+                            <h5>Bio</h5><i className="small material-icons">mode_edit</i>
                         </div>
                         : ""
                     }
                     <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
                     {checkMedical
                         ? <div className="section-title">
-                            <h5>Diagnosis</h5><i className="small material-icons">mode_edit</i>
+                            <h5>Statistics</h5><i className="small material-icons">mode_edit</i>
                         </div>
                         : ""
                     }

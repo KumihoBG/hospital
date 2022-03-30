@@ -41,10 +41,7 @@ function Patient({ patient }) {
       <div className="col s12 m7">
         <div className="card">
           <div className="card-image">
-            <img src={`${patient.imageUrl}`} alt="Medical Professional" />
-            <i className="material-icons stars">grade</i>
-            <i className="material-icons stars">grade</i>
-            <i className="material-icons stars">grade</i>
+            <img src={`${patient.imageUrl}`} alt="Patient" />
           </div>
           <div className="card-content">
             <p><span className="description-paragraph">Id:</span> {patient._id}</p>
