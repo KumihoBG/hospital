@@ -59,6 +59,12 @@ function PublicPatientProfile() {
                             </tbody>
                         </table>
                     </div>
+
+                    <div id="message-container"></div>
+                        <form id="send-container">
+                        <input type="text" id="message-input" />
+                        <button type="submit" id="sendBtn">Send</button>
+                    </form>
                 </Grid>
                 <Grid id="patient-history-container" item xs={6}>
                     <h4>History</h4>

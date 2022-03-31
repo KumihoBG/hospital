@@ -357,7 +357,7 @@
   color: #b37627;
 }
 
-.sendMessageOption {
+.sendMessageOption, #sendBtn {
   background: #499cdf;
   color: #fff;
   padding: 10px 20px;
@@ -772,7 +772,7 @@ nav .brand-logo {
   margin: 2% auto;
 }
 
-.sendMessageBtn, .sendMessageOption {
+.sendMessageBtn, .sendMessageOption, #sendBtn {
   background: #0a857a;
   color: #fff;
   padding: 10px 40px;
@@ -781,7 +781,7 @@ nav .brand-logo {
   cursor: pointer;
 }
 
-.sendMessageOption {
+.sendMessageOption, #sendBtn {
   margin-left: 0;
 }
 
@@ -1112,5 +1112,49 @@ nav .brand-logo {
           align-items: center;
   background-color: #fff;
   color: #0a857a;
+}
+
+#message-container {
+  width: 100%;
+  height: 30%;
+  max-width: 800px;
+  margin-top: 30px;
+  border: 0.5px solid #CCC;
+  border-radius: 20px;
+}
+
+#message-container div {
+  background-color: #CCC;
+  padding: 5px;
+}
+
+#message-container div:nth-child(2n) {
+  background-color: #FFF;
+}
+
+#send-container {
+  background-color: white;
+  max-width: 800px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#message-input {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  border-bottom: 0.5px solid #CCC;
+  margin-right: 20px;
+  margin-top: 30px;
+}
+
+#sendBtn {
+  background: #096157;
+  color: #fff;
+  padding: 5px 30px;
+  line-height: normal;
+  margin-top: 30px;
 }
 /*# sourceMappingURL=style.css.map */
