@@ -62,8 +62,12 @@ function MedicalProfessional({ medical }) {
                       <div className="card-action">
                         <Link to={`/medicals/request-appointment/${medical._id}`} state={medical._id}>Request an appointment</Link>
                       </div>
+                      <div className="send-message">
+                        <button className="sendMessageOption">Send Message</button>
+                      </div>
                     </div>
-                    : ""}
+                    : ""
+                  }
                 </div>
                 : <div className="card-action">
                   <Link onClick={chooseADoctor} to={`/users/patient/${userId}/choose-my-medical-professional`} state={medical._id}>Choose this specialist</Link>

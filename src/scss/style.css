@@ -357,6 +357,16 @@
   color: #b37627;
 }
 
+.sendMessageOption {
+  background: #499cdf;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 2px;
+  margin-left: 25px;
+  font-size: 18px;
+}
+
 .staff-title {
   text-align: center;
   margin: 3% 0 0 0;

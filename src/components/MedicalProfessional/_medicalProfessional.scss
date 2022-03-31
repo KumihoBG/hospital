@@ -26,3 +26,13 @@
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
     color: rgb(179, 118, 39);
 }
+
+.sendMessageOption {
+    background: $light-blue;
+    color: $white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 2px;
+    margin-left: 25px;
+    font-size: 18px;
+}

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
+import { useParams } from 'react-router-dom';
+import { requestAppointment } from '../../features/medicals/medicalAPI.js';
 
 function ReactCalendar() {
     const today = new Date()
@@ -9,7 +11,9 @@ function ReactCalendar() {
     const [time, setTime] = useState();
     const [checkDate, setCheckDate] = useState(false);
     const [appointment, setAppointment] = useState('');
-
+    const [request, setRequest] = useState({});
+    const patient = sessionStorage.getItem('userId');
+    const { userId } = useParams();
 
     const onChange = date => {
         setDate(date);
@@ -27,9 +31,27 @@ function ReactCalendar() {
     async function createAppointment(event) {
         event.preventDefault();
         const hours = document.getElementById('appt').value;
-        setTime(hours)
-    }
+        setTime(hours);
 
+        const newAppointment = {
+            patient: patient,
+            medical: userId,
+            date: appointment,
+            time: hours
+        }
+        if (newAppointment.date !== '' && newAppointment.time !== '') {
+            try {
+                const patientAndMedical = await requestAppointment(userId, newAppointment);
+                setRequest(patientAndMedical);
+                
+            } catch (err) {
+                console.log(err.message)
+            }
+        } else {
+            alert('Please select a date and time');
+        }
+    }
+    console.log('request', request);
     return (
         <>
             <div className='calendar-container'>

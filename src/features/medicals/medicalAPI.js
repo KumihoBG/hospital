@@ -22,3 +22,21 @@ export async function getAllPatients(userId) {
     console.error(error);
   }
 }
+
+// Request an appointment
+export async function requestAppointment(userId, newAppointment) {
+  try {
+    const response = await fetch(`${BASE_LOCAL_URL}/medicals/request-appointment/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(newAppointment)
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
