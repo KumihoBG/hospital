@@ -5,16 +5,18 @@ import { getAllPatients } from '../../features/medicals/medicalAPI.js';
 function MedicalProfessionalCollection() {
     const [patients, setPatients] = useState([]);
     const userId = sessionStorage.getItem('userId');
-
     useEffect(() => {
         getAll();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const getAll = async () => {
-        const myPatients = await getAllPatients(userId);
-        console.log('myPatients', myPatients);
-        setPatients(myPatients);
+        try {
+            const myPatients = await getAllPatients(userId);
+            setPatients(myPatients);
+        } catch (err) {
+            console.log(err.message)
+        }
     }
 
     return (

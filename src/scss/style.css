@@ -772,13 +772,17 @@ nav .brand-logo {
   margin: 2% auto;
 }
 
-.sendMessageBtn {
+.sendMessageBtn, .sendMessageOption {
   background: #0a857a;
   color: #fff;
   padding: 10px 40px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.sendMessageOption {
+  margin-left: 0;
 }
 
 .bolder-names {

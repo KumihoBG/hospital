@@ -1,56 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
-import { useSelector } from 'react-redux';
-import { getPatientProfile, getMyDoctor, getMedicalProfile } from '../../features/auth/authAPI.js';
+import { getPatientProfile } from '../../features/auth/authAPI.js';
 
-function PatientProfile() {
-    const userId = sessionStorage.getItem('userId');
-    let myDoctor = sessionStorage.getItem('myDoctor');
+function PublicPatientProfile() {
+    const location = useLocation();
+    const patientId = location.pathname.split('/')[3];
     const [profile, setProfile] = useState([]);
     // eslint-disable-next-line no-unused-vars
-    const [doctor, setDoctor] = useState([]);
-    const [medicalName, setMedicalName] = useState([]);
-    const { user } = useSelector(
-        (state) => state.auth
-    )
 
     useEffect(() => {
-        getMedicalProfileInfo();
-        getMyDoctorInfo();
         getMedicalName();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const getMedicalName = async () => {
         try {
-            const singleProfile = await getPatientProfile(userId);
+            const singleProfile = await getPatientProfile(patientId);
             setProfile(singleProfile);
         } catch (err) {
             console.log(err.message)
         }
     }
 
-    const getMyDoctorInfo = async () => {
-        try {
-            const medicalId = await getMyDoctor(userId);
-            setDoctor(medicalId);
-        } catch (err) {
-            console.log(err.message)
-        }
-    }
-
-    const getMedicalProfileInfo = async () => {
-        console.log('user', user);
-        try {
-            const data = await getMedicalProfile(myDoctor);
-            setMedicalName(data.name);
-        } catch (err) {
-            console.log(err.message)
-        }
-    }
-    console.log('medicalName', medicalName);
     return (
         <div>
             <Grid id="profile-container" container spacing={2}>
@@ -67,10 +40,11 @@ function PatientProfile() {
                             </p>
                         </div>
                     </div>
+                    <div className="send-message">
+                        <button className="sendMessageOption">Send Message</button>
+                    </div>
+
                     <div className="personal-details">
-                        <div className="section-title">
-                            <h5>Personal information:</h5><i className="small material-icons">mode_edit</i>
-                        </div>
                         <table className="responsive-table">
                             <tbody>
                                 <tr>
@@ -85,19 +59,6 @@ function PatientProfile() {
                             </tbody>
                         </table>
                     </div>
-
-                    <div className="medication-details">
-                        <div className="section-title">
-                            <h5>Treated by:</h5><i className="small material-icons">mode_edit</i>
-                        </div>
-                        <p>Patient of Medical Professional:<br />
-                            <span className='bolder-names'>
-                                <Link to={`/my-medical-professional/${doctor}`}>
-                                    {medicalName || 'Not chosen yet'}
-                                </Link>
-                            </span>
-                        </p>
-                    </div>
                 </Grid>
                 <Grid id="patient-history-container" item xs={6}>
                     <h4>History</h4>
@@ -108,11 +69,11 @@ function PatientProfile() {
                     <div className="section-title">
                         <h5>Diagnosis</h5><i className="small material-icons">mode_edit</i>
                     </div>
-
                     <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
                     <div className="section-title">
                         <h5>Diagnosis</h5><i className="small material-icons">mode_edit</i>
                     </div>
+
                     <table className="responsive-table">
                         <tbody>
                             <tr>
@@ -138,4 +99,4 @@ function PatientProfile() {
     )
 }
 
-export default PatientProfile;
+export default PublicPatientProfile;

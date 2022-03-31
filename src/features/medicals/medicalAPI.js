@@ -16,7 +16,6 @@ export async function getAllPatients(userId) {
   try {
     const response = await fetch(`${BASE_LOCAL_URL}/medicals/my-patients/${userId}`);
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

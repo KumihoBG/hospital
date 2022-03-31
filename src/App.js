@@ -18,6 +18,9 @@ import RegisterMedical from './components/RegisterMedical/RegisterMedical.js';
 import Appointments from './components/Appointments/Appointments.js';
 import MedicalProfile from './components/MedicalProfile/MedicalProfile.js';
 import PatientProfile from './components/PatientProfile/PatientProfile.js';
+import PublicMedicalProfile from './components/PublicMedicalProfile/PublicMedicalProfile.js';
+import PublicPatientProfile from './components/PublicPatientProfile/PublicPatientProfile.js';
+
 const MyPatients = lazy(() => {
   return Promise.all([
     import('./components/MyPatients/MyPatients.js'),
@@ -65,6 +68,8 @@ function App() {
             </Suspense>
           } />
           <Route path='/medicals/request-appointment/:userId' element={<Appointments />} />
+          <Route path='/my-medical-professional/:medicalId' element={<PublicMedicalProfile />} />
+          <Route path='/my-patients/patient/:patientId' element={<PublicPatientProfile />} />
           <Route path='*' element={<NotFoundPage />} />
           <Route path='/404' element={<NotFoundPage />} />
         </Routes>

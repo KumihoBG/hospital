@@ -18,9 +18,9 @@ function Navigation() {
 
     const dispatch = useDispatch()
     const onLogout = () => {
-        dispatch(logout())
-        dispatch(reset())
-        navigate('/')
+        dispatch(logout());
+        dispatch(reset());
+        navigate('/');
     }
 
     return (

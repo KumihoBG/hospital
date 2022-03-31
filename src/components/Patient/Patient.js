@@ -55,7 +55,8 @@ function Patient({ patient }) {
           </div>
 
           <div><div className="card-action">
-            <Link to={`/users/patient/${userId}/cancel-my-medical-professional`} state={patient._id}>Accept Cancelation Request</Link>
+            <Link to={`/users/patient/${userId}/cancel-my-medical-professional`}>Accept Cancelation Request</Link><br />
+            <Link to={{pathname: `/my-patients/patient/${patient._id}`, state: {patientId: patient._id}}}>View Profile</Link>
           </div>
           </div>
         </div>

@@ -80,6 +80,11 @@
     cursor: pointer;
 }
 
+.sendMessageOption {
+    @extend .sendMessageBtn;
+    margin-left: 0;
+}
+
 .bolder-names {
     font-weight: bolder;
     color: $green;
