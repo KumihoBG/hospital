@@ -129,7 +129,7 @@
   background-color: #499cdf !important;
 }
 
-#donation, #search {
+#donation {
   padding: 10px 30px;
   border-radius: 5px;
   border: none;
@@ -139,7 +139,7 @@
   border: 0.5px solid #616161;
 }
 
-#donation:hover, #search:hover {
+#donation:hover {
   background-color: rgba(255, 255, 255, 0.5);
   color: #616161;
   border: 0.5px solid #fff;
@@ -687,19 +687,6 @@ nav .brand-logo {
     font-size: 12px;
     width: 60%;
   }
-}
-
-#searchBoxLabel {
-  display: none;
-}
-
-#search {
-  padding: 10px 30px;
-  border-radius: 10px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  font-size: 16px;
-  letter-spacing: 1.2px;
 }
 
 .register-container, .register-container-medical, .login-container {
