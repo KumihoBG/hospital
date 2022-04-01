@@ -2,15 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
-import { getPatientProfile } from '../../features/auth/authAPI.js';
+import { useSelector } from 'react-redux';
+import { getPatientProfile, getMyDoctor, getMedicalProfile } from '../../features/auth/authAPI.js';
+import Socket from '../Socket/Socket.js';
 
 function PublicPatientProfile() {
     const location = useLocation();
+    const userId = sessionStorage.getItem('userId');
+    let myDoctor = sessionStorage.getItem('myDoctor');
     const patientId = location.pathname.split('/')[3];
     const [profile, setProfile] = useState([]);
+    const isMedical = sessionStorage.getItem('role') === 'medical-professional';
+    const checkMedical = isMedical === true;
+    const [doctor, setDoctor] = useState([]);
+    const [medicalName, setMedicalName] = useState([]);
+    const { user } = useSelector(
+        (state) => state.auth
+    )
     // eslint-disable-next-line no-unused-vars
 
     useEffect(() => {
+        getMedicalProfileInfo();
+        getMyDoctorInfo();
         getMedicalName();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -19,6 +32,24 @@ function PublicPatientProfile() {
         try {
             const singleProfile = await getPatientProfile(patientId);
             setProfile(singleProfile);
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+
+    const getMyDoctorInfo = async () => {
+        try {
+            const medicalId = await getMyDoctor(userId);
+            setDoctor(medicalId);
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+
+    const getMedicalProfileInfo = async () => {
+        try {
+            const data = await getMedicalProfile(myDoctor || user._id);
+            setMedicalName(data.name);
         } catch (err) {
             console.log(err.message)
         }
@@ -40,11 +71,15 @@ function PublicPatientProfile() {
                             </p>
                         </div>
                     </div>
-                    <div className="send-message">
-                        <button className="sendMessageOption">Send Message</button>
-                    </div>
 
                     <div className="personal-details">
+                        <div className="section-title">
+                            <h5>Personal information:</h5>
+                            {!checkMedical
+                                ? <i className="small material-icons">mode_edit</i>
+                                : null
+                            }
+                        </div>
                         <table className="responsive-table">
                             <tbody>
                                 <tr>
@@ -59,25 +94,46 @@ function PublicPatientProfile() {
                             </tbody>
                         </table>
                     </div>
+                    <div className="medication-details">
+                        <div className="section-title">
+                            <h5>Treated by:</h5>
+                        </div>
+                        <p>Patient of Medical Professional:<br />
+                            <span className='bolder-names'>
+                                <Link to={`/my-medical-professional/${doctor}`}>
+                                    {medicalName || 'Not chosen yet'}
+                                </Link>
+                            </span>
+                        </p>
+                    </div>
 
-                    <div id="message-container"></div>
-                        <form id="send-container">
-                        <input type="text" id="message-input" />
-                        <button type="submit" id="sendBtn">Send</button>
-                    </form>
+                    <Socket />
                 </Grid>
+
                 <Grid id="patient-history-container" item xs={6}>
                     <h4>History</h4>
                     <div className="section-title">
-                        <h5>Diagnosis</h5><i className="small material-icons">mode_edit</i>
+                        <h5>Diagnosis</h5>
+                        {checkMedical
+                            ? <i className="small material-icons">mode_edit</i>
+                            : null
+                        }
                     </div>
                     <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
                     <div className="section-title">
-                        <h5>Diagnosis</h5><i className="small material-icons">mode_edit</i>
+                        <h5>Diagnosis</h5>
+                        {checkMedical
+                            ? <i className="small material-icons">mode_edit</i>
+                            : null
+                        }
                     </div>
                     <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
                     <div className="section-title">
-                        <h5>Diagnosis</h5><i className="small material-icons">mode_edit</i>
+                        <h5>Diagnosis</h5>
+                        {checkMedical
+                            ? <i className="small material-icons">mode_edit</i>
+                            : null
+                        }
                     </div>
 
                     <table className="responsive-table">

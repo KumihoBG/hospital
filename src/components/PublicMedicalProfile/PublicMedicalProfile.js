@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import { getMedicalProfile } from '../../features/auth/authAPI';
+import Socket from '../Socket/Socket.js';
 
 function PublicMedicalProfile() {
+    const { userId } = useParams();
     const { medicalId } = useParams();
     const [profile, setProfile] = useState([]);
+    const isMedical = sessionStorage.getItem('role') === 'medical-professional';
+    const checkMedical = isMedical === true;
 
     useEffect(() => {
         getMedicalProfileInfo();
@@ -15,7 +19,7 @@ function PublicMedicalProfile() {
 
     const getMedicalProfileInfo = async () => {
         try {
-            const singleProfile = await getMedicalProfile(medicalId);
+            const singleProfile = await getMedicalProfile(userId || medicalId);
             setProfile(singleProfile);
         } catch (err) {
             console.log(err.message)
@@ -39,12 +43,12 @@ function PublicMedicalProfile() {
                         </div>
                     </div>
 
-                    <div className="send-message">
-                        <button className="sendMessageOption">Send Message</button>
-                    </div>
-
-
                     <div className="personal-details">
+                        <h6>Personal information:</h6>
+                        {checkMedical
+                            ? <i className="small material-icons">mode_edit</i>
+                            : null
+                        }
                         <table className="responsive-table">
                             <tbody>
                                 <tr>
@@ -65,6 +69,39 @@ function PublicMedicalProfile() {
                             </tbody>
                         </table>
                     </div>
+                    <Socket />
+                </Grid>
+                <Grid id="patient-history-container" item xs={6}>
+                    <><div className="section-title">
+                        <h5>Bio</h5>
+                        {checkMedical
+                            ? <i className="small material-icons">mode_edit</i>
+                            : null
+                        }
+                    </div>
+                        <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
+                        <div className="section-title">
+                            <h5>Statistics</h5>
+                            {checkMedical
+                                ? <i className="small material-icons">mode_edit</i>
+                                : null
+                            }
+                        </div>
+
+                        <table className="responsive-table">
+                            <tbody>
+                                <tr>
+                                    <td>Current patients' count</td><td>324</td>
+                                </tr>
+                                <tr>
+                                    <td>Accept patient</td><td>Yes | No</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div className="section-title">
+                            <i className="small material-icons">pageview</i> <Link className="results-link" to="/" alt="Patient Examination Results">Upload Results</Link>
+                        </div>
+                    </>
                 </Grid>
             </Grid>
         </div>

@@ -5,6 +5,7 @@
 
 #patient-info-container {
     padding: 3%;
+    height: auto;
 }
 
 #patient-history-container {
@@ -88,4 +89,11 @@
 .bolder-names {
     font-weight: bolder;
     color: $green;
+}
+#chat-container {
+    grid-column: 1/2;
+    grid-row: 2;
+    width: 100%;
+    height: 40vh;
+    padding: 3%;
 }

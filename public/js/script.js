@@ -10,9 +10,9 @@ const socket = io("http://localhost:3000/", {
 const messageContainer = document.getElementById('message-container');
 const messageForm = document.getElementById('send-container');
 const messageInput = document.getElementById('message-input');
-console.log(messageForm);
-const name = prompt('What is your name?')
-appendMessage('You joined')
+
+const name = sessionStorage.getItem('username');
+appendMessage(`${name} joined`);
 socket.emit('new-user', name)
 
 socket.on('chat-message', data => {

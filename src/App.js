@@ -16,8 +16,6 @@ import LoginMedical from './components/LoginMedical/LoginMedical.js';
 import Register from './components/Register/Register.js';
 import RegisterMedical from './components/RegisterMedical/RegisterMedical.js';
 import Appointments from './components/Appointments/Appointments.js';
-import MedicalProfile from './components/MedicalProfile/MedicalProfile.js';
-import PatientProfile from './components/PatientProfile/PatientProfile.js';
 import PublicMedicalProfile from './components/PublicMedicalProfile/PublicMedicalProfile.js';
 import PublicPatientProfile from './components/PublicPatientProfile/PublicPatientProfile.js';
 
@@ -58,8 +56,8 @@ function App() {
           {/* </Route> */}
           <Route path='/staff' element={<FindDoctor />} />
           {checkMedical
-            ? <Route path='/users/medical/:userId' element={<MedicalProfile />} />
-            : <Route path='/users/patient/:userId' element={<PatientProfile />} />
+            ? <Route path='/users/medical/:userId' element={<PublicMedicalProfile />} />
+            : <Route path='/users/patient/:userId' element={<PublicPatientProfile />} />
           }
           <Route path='/medicals' element={<MedicalProfessionalCollection />} />
           <Route path='/medicals/my-patients/:userId' element={
