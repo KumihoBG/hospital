@@ -3,7 +3,6 @@ import { useParams, Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import { getMedicalProfile } from '../../features/auth/authAPI';
-import Socket from '../Socket/Socket.js';
 
 function PublicMedicalProfile() {
     const { userId } = useParams();
@@ -26,6 +25,12 @@ function PublicMedicalProfile() {
         }
     }
 
+    function setChatName() {
+        if (profile.name) {
+            sessionStorage.setItem('chatName', profile.name);
+        }
+    }
+    
     return (
         <div>
             <Grid id="profile-container" container spacing={2}>
@@ -38,8 +43,12 @@ function PublicMedicalProfile() {
                             <p>
                                 <span>Medical Professional ID: {profile._id}</span><br />
                                 <span id="full-name">{profile.name}</span><br />
-                                <span>{profile.gender} | {profile.age}</span>
+                                <span>{profile.gender} | {profile.age}</span><br />
                             </p>
+                            {checkMedical
+                                ? null
+                                : <Link to={`/chat/${medicalId}`} id="sendMessage" onClick={setChatName}>Send Message</Link>
+                            }
                         </div>
                     </div>
 
@@ -69,7 +78,6 @@ function PublicMedicalProfile() {
                             </tbody>
                         </table>
                     </div>
-                    <Socket />
                 </Grid>
                 <Grid id="patient-history-container" item xs={6}>
                     <><div className="section-title">

@@ -50,12 +50,6 @@
     color: $grey;
 }
 
-/* .material-icons {
-    margin-top: 15px;
-    color: rgb(97, 97, 97);
-    cursor: pointer;
-} */
-
 .text-info {
     text-align: justify;
     padding: 2% 0;
@@ -81,6 +75,10 @@
     cursor: pointer;
 }
 
+#sendMessage {
+    @extend .sendMessageBtn;
+}
+
 .sendMessageOption {
     @extend .sendMessageBtn;
     margin-left: 0;
@@ -90,10 +88,4 @@
     font-weight: bolder;
     color: $green;
 }
-#chat-container {
-    grid-column: 1/2;
-    grid-row: 2;
-    width: 100%;
-    height: 40vh;
-    padding: 3%;
-}
+

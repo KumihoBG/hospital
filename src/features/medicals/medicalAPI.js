@@ -39,3 +39,29 @@ export async function requestAppointment(userId, newAppointment) {
     console.error(error);
   }
 }
+
+// Search for medicals
+export async function searchMedicals(searchText) {
+  let words = searchText.split(' ');
+  let medicalsList = [];
+  try {
+    const response = await fetch(`${BASE_LOCAL_URL}/medicals`);
+    const data = await response.json();
+
+    for (let medical of data) {
+      for (let word of words) {
+        let checkOne = medical.name?.toLowerCase().includes(word?.toLowerCase());
+        let checkTwo = medical.practiceLocation?.toLowerCase().includes(word?.toLowerCase());
+        if (checkOne) {
+          medicalsList.push(medical);
+        }
+        if (checkTwo) {
+          medicalsList.push(medical);
+        }
+      }      
+    }
+    return medicalsList;
+  } catch (error) {
+    console.error(error.message);
+  }
+}

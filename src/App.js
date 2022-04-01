@@ -1,7 +1,8 @@
 import './App.css';
 import React, { Suspense, lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Route, Routes } from 'react-router-dom';
 import { SpinnerDiamond } from 'spinners-react';
 // import PrivateRoutes from './helpers/PrivateRoutes.js';
 // import PublicRoutes from './helpers/PublicRoutes.js';
@@ -18,6 +19,7 @@ import RegisterMedical from './components/RegisterMedical/RegisterMedical.js';
 import Appointments from './components/Appointments/Appointments.js';
 import PublicMedicalProfile from './components/PublicMedicalProfile/PublicMedicalProfile.js';
 import PublicPatientProfile from './components/PublicPatientProfile/PublicPatientProfile.js';
+import Socket from './components/Socket/Socket.js';
 
 const MyPatients = lazy(() => {
   return Promise.all([
@@ -29,6 +31,7 @@ const MyPatients = lazy(() => {
 function App() {
   const isMedical = sessionStorage.getItem('role') === 'medical-professional';
   const checkMedical = isMedical === true;
+  const name = sessionStorage.getItem('chatName');
 
   function FullSpinner() {
     return (
@@ -41,6 +44,7 @@ function App() {
   return (
     <div className="App">
       <Navigation />
+      <ToastContainer />
       <main>
         <Routes>
           {/* <Route element={<PublicRoutes />}> */}
@@ -68,10 +72,10 @@ function App() {
           <Route path='/medicals/request-appointment/:userId' element={<Appointments />} />
           <Route path='/my-medical-professional/:medicalId' element={<PublicMedicalProfile />} />
           <Route path='/my-patients/patient/:patientId' element={<PublicPatientProfile />} />
+          <Route path='/chat/:userId' element={<Socket name={name}/>} />
           <Route path='*' element={<NotFoundPage />} />
           <Route path='/404' element={<NotFoundPage />} />
         </Routes>
-        <ToastContainer />
       </main>
       <Footer />
     </div>

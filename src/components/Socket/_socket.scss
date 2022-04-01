@@ -1,6 +1,14 @@
+#chat-container {
+  grid-column: 1/2;
+  grid-row: 2;
+  width: 100%;
+  height: 90vh;
+  padding: 3%;
+}
+
 #message-container {
     width: 100%;
-    height: 35%;
+    height: 40vh;
     max-width: 800px;
     margin-top: 30px;
     border: 0.5px solid #CCC;
@@ -32,12 +40,14 @@
     margin-top: 30px;
   }
 
-  #sendBtn {
+  #sendBtn,
+  #joinBtn {
       @extend .sendMessageOption;	
       background: $green;
       color: #fff;
       padding: 5px 10px;
       line-height: normal;
       margin-top: 30px;
-      width: 50%;
+      width: 40%;
+      margin-right: 30px;
   }

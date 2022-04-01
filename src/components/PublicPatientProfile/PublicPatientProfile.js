@@ -4,7 +4,6 @@ import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import { useSelector } from 'react-redux';
 import { getPatientProfile, getMyDoctor, getMedicalProfile } from '../../features/auth/authAPI.js';
-import Socket from '../Socket/Socket.js';
 
 function PublicPatientProfile() {
     const location = useLocation();
@@ -55,6 +54,12 @@ function PublicPatientProfile() {
         }
     }
 
+    function setChatName() {
+        if (profile.name) {
+            sessionStorage.setItem('chatName', profile.name);
+        }
+    }
+
     return (
         <div>
             <Grid id="profile-container" container spacing={2}>
@@ -69,6 +74,10 @@ function PublicPatientProfile() {
                                 <span id="full-name">{profile.name}</span><br />
                                 <span>{profile.gender} | {profile.age}</span>
                             </p>
+                            {!checkMedical
+                                ? null
+                                : <Link to={`/chat/${patientId}`} id="sendMessage" onClick={setChatName}>Send Message</Link>
+                            }
                         </div>
                     </div>
 
@@ -106,8 +115,6 @@ function PublicPatientProfile() {
                             </span>
                         </p>
                     </div>
-
-                    <Socket />
                 </Grid>
 
                 <Grid id="patient-history-container" item xs={6}>

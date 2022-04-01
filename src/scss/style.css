@@ -357,7 +357,8 @@
   color: #b37627;
 }
 
-.sendMessageOption, #sendBtn {
+.sendMessageOption, #sendBtn,
+#joinBtn {
   background: #499cdf;
   color: #fff;
   padding: 10px 20px;
@@ -1012,9 +1013,20 @@ nav .brand-logo {
   color: #0a857a;
 }
 
+#chat-container {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+  -ms-grid-row: 2;
+  grid-row: 2;
+  width: 100%;
+  height: 90vh;
+  padding: 3%;
+}
+
 #message-container {
   width: 100%;
-  height: 35%;
+  height: 40vh;
   max-width: 800px;
   margin-top: 30px;
   border: 0.5px solid #CCC;
@@ -1050,13 +1062,15 @@ nav .brand-logo {
   margin-top: 30px;
 }
 
-#sendBtn {
+#sendBtn,
+#joinBtn {
   background: #096157;
   color: #fff;
   padding: 5px 10px;
   line-height: normal;
   margin-top: 30px;
-  width: 50%;
+  width: 40%;
+  margin-right: 30px;
 }
 
 #profile-container {
@@ -1123,11 +1137,6 @@ nav .brand-logo {
   color: #9e9d9d;
 }
 
-/* .material-icons {
-    margin-top: 15px;
-    color: rgb(97, 97, 97);
-    cursor: pointer;
-} */
 .text-info {
   text-align: justify;
   padding: 2% 0;
@@ -1144,7 +1153,8 @@ nav .brand-logo {
   margin: 2% auto;
 }
 
-.sendMessageBtn, .sendMessageOption, #sendBtn {
+.sendMessageBtn, #sendMessage, .sendMessageOption, #sendBtn,
+#joinBtn {
   background: #0a857a;
   color: #fff;
   padding: 10px 40px;
@@ -1153,23 +1163,13 @@ nav .brand-logo {
   cursor: pointer;
 }
 
-.sendMessageOption, #sendBtn {
+.sendMessageOption, #sendBtn,
+#joinBtn {
   margin-left: 0;
 }
 
 .bolder-names {
   font-weight: bolder;
   color: #096157;
-}
-
-#chat-container {
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 1;
-  grid-column: 1/2;
-  -ms-grid-row: 2;
-  grid-row: 2;
-  width: 100%;
-  height: 40vh;
-  padding: 3%;
 }
 /*# sourceMappingURL=style.css.map */

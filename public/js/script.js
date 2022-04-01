@@ -1,42 +1,47 @@
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
-
-const socket = io("http://localhost:3000/", {
-  withCredentials: true,
-  extraHeaders: {
-    "socket.io": "Content-Type"
-  }
-});
-
+const socket = io('http://localhost:5000');
 const messageContainer = document.getElementById('message-container');
 const messageForm = document.getElementById('send-container');
 const messageInput = document.getElementById('message-input');
-
 const name = sessionStorage.getItem('username');
-appendMessage(`${name} joined`);
-socket.emit('new-user', name)
+const chatName = sessionStorage.getItem('chatName');
+const room = 'Connect';
+
+socket.on('connect', function() {
+  console.log("Connected to server");
+  socket.emit('join', room);
+  appendMessage(`${name} joined`);
+  console.log(socket.connected); 
+});
+
+socket.on('join-room', (room) => {
+  socket.emit('join-room', room);
+})
 
 socket.on('chat-message', data => {
-  appendMessage(`${data.name}: ${data.message}`)
+  appendMessage(`${data}`)
 })
 
-socket.on('user-connected', name => {
-  appendMessage(`${name} connected`)
-})
-
-socket.on('user-disconnected', name => {
-  appendMessage(`${name} disconnected`)
+socket.on('receive-message', message => {
+  appendMessage(`${chatName}: ${message}`)
 })
 
 messageForm.addEventListener('submit', e => {
   e.preventDefault()
-  const message = messageInput.value
+  const message = messageInput.value;
+  const room = 'Connect';
+
+  if (message === '') return;
   appendMessage(`You: ${message}`)
-  socket.emit('send-chat-message', message)
-  messageInput.value = ''
+  socket.emit('send-chat-message', message, room);
+  messageInput.value = '';
 })
 
 function appendMessage(message) {
   const messageElement = document.createElement('div')
-  messageElement.innerText = message
-  messageContainer.append(messageElement)
+  if(messageElement) {
+    messageElement.innerText = message;
+    messageContainer.append(messageElement);
+  }
 }
+

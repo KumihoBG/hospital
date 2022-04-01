@@ -101,6 +101,7 @@ const logout = async () => {
   sessionStorage.removeItem('user');
   sessionStorage.removeItem('hasDoctor');
   sessionStorage.removeItem('myDoctor');  
+  sessionStorage.removeItem('chatName');
 }
 
 // Get single medical
