@@ -6,6 +6,7 @@ import { login, reset } from '../../features/auth/authSlice.js';
 
 function Login() {
     const userId = sessionStorage.getItem('userId');
+    console.log('userId', userId);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
