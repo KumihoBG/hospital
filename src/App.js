@@ -3,9 +3,9 @@ import React, { Suspense, lazy } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Route, Routes } from 'react-router-dom';
-import { SpinnerDiamond } from 'spinners-react';
-// import PrivateRoutes from './helpers/PrivateRoutes.js';
-// import PublicRoutes from './helpers/PublicRoutes.js';
+import { SpinnerDiamond } from 'spinners-react/lib/esm/SpinnerDiamond';
+import PrivateRoutes from './helpers/PrivateRoutes';
+import PublicRoutes from './helpers/PublicRoutes.js';
 import Navigation from './components/Navigation/Navigation.js';
 import Footer from './components/Footer/Footer.js';
 import Home from './components/Home/Home.js';
@@ -47,32 +47,34 @@ function App() {
       <ToastContainer />
       <main>
         <Routes>
-          {/* <Route element={<PublicRoutes />}> */}
-          <Route path='/' element={<Home />} />
-          <Route path='/users/patient/login' element={<Login />} />
-          <Route path='/users/medical/login' element={<LoginMedical />} />
-          <Route path='/users/register-patient' element={<Register />} />
-          <Route path='/users/register-medical' element={<RegisterMedical />} />
-          {/* </Route> */}
+          <Route element={<PublicRoutes />}>
+            <Route path='/' element={<Home />}>
+              <Route path='/home' element={<Home />} />
+            </Route>
+            <Route path='/users/patient/login' element={<Login />} />
+            <Route path='/users/medical/login' element={<LoginMedical />} />
+            <Route path='/users/register-patient' element={<Register />} />
+            <Route path='/users/register-medical' element={<RegisterMedical />} />
+            <Route path='/staff' element={<FindDoctor />} />
+            <Route path='/medicals' element={<MedicalProfessionalCollection />} />
+          </Route>
 
-          {/* <Route element={<PrivateRoutes />}> */}
-          <Route path='/home' element={<Home />} />
-          {/* </Route> */}
-          <Route path='/staff' element={<FindDoctor />} />
-          {checkMedical
-            ? <Route path='/users/medical/:userId' element={<PublicMedicalProfile />} />
-            : <Route path='/users/patient/:userId' element={<PublicPatientProfile />} />
-          }
-          <Route path='/medicals' element={<MedicalProfessionalCollection />} />
-          <Route path='/medicals/my-patients/:userId' element={
-            <Suspense fallback={<FullSpinner />}>
-              <MyPatients />
-            </Suspense>
-          } />
-          <Route path='/medicals/request-appointment/:userId' element={<Appointments />} />
-          <Route path='/my-medical-professional/:medicalId' element={<PublicMedicalProfile />} />
-          <Route path='/my-patients/patient/:patientId' element={<PublicPatientProfile />} />
-          <Route path='/chat/:userId' element={<Socket name={name}/>} />
+          <Route element={<PrivateRoutes />}>
+            {checkMedical
+              ? <Route path='/users/medical/:userId' element={<PublicMedicalProfile />} />
+              : <Route path='/users/patient/:userId' element={<PublicPatientProfile />} />
+            }
+            <Route path='/medicals/my-patients/:userId' element={
+              <Suspense fallback={<FullSpinner />}>
+                <MyPatients />
+              </Suspense>
+            } />
+            <Route path='/medicals/request-appointment/:userId' element={<Appointments />} />
+            <Route path='/my-medical-professional/:medicalId' element={<PublicMedicalProfile />} />
+            <Route path='/my-patients/patient/:patientId' element={<PublicPatientProfile />} />
+            <Route path='/chat/:userId' element={<Socket name={name} />} />
+          </Route>
+
           <Route path='*' element={<NotFoundPage />} />
           <Route path='/404' element={<NotFoundPage />} />
         </Routes>
