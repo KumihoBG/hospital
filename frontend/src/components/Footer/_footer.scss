@@ -1,0 +1,42 @@
+.teal {
+    background-color: $light_blue !important;
+}
+
+#donation {
+    padding: 10px 30px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background: $white;
+    color: $dark-grey;
+    border: 0.5px solid $dark-grey;
+    
+    &:hover {
+        background-color: $light_grey;
+        color: $dark-grey;
+        border: 0.5px solid $white;
+        font-weight: 500;
+    }
+  
+}
+
+.footer-ul {
+    line-height: 2.5;
+}
+
+.grey-text {
+    width: 90%;
+}
+
+#follow {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+}
+
+.footer-small {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 30px;
+}

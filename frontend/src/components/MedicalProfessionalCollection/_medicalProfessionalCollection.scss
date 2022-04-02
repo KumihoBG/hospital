@@ -1,0 +1,21 @@
+.staff-title {
+    text-align: center;
+    margin: 3% 0 0 0;
+}
+
+.staff-container h6 {
+    text-align: center;
+    margin-bottom: 1%;
+}
+
+.collection {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 2% 5%;
+    justify-content: center;
+    align-items: center;
+}
+
+ul:not(.browser-default) {
+    padding-left: 5%;
+}

@@ -1,0 +1,83 @@
+.articles-container {
+    background: $white;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    padding: 3%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 3rem;
+}
+
+.articles-container h5 {
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+.articles-image {
+    display: block;
+    width: 80%;
+    height: 80%;
+    margin: 5% auto;
+    background: url('../images/covid.jpg') no-repeat center center/cover;
+}
+
+.article {
+    padding: 3% 0;
+}
+
+.article-flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.article-title {
+    border-bottom: 1px solid $light_blue;
+    padding-bottom: 3px;
+}
+
+.article-paragraph {
+    font-size: 14px;
+    margin: 0;
+    margin-right: 15px;
+}
+
+.article-link {
+    color: $light_blue;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.article-link:hover {
+    color: $light_blue;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+@media (max-width: 568px) {
+    .articles-container {
+        grid-template-rows: 0.8fr 1.5fr;
+        grid-template-columns: 1fr;
+        grid-gap: 0;
+    }
+
+    .articles-image {
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    .news-container h3 {
+        font-size: 1.5rem;
+        margin-top: 20px;
+    }
+
+    .article {
+        padding: 1% 0;
+        margin-top: 0;
+    }
+}
