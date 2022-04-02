@@ -1,12 +1,10 @@
 import { Navigate, Outlet } from 'react-router-dom';
+import * as authService from '../features/auth/authAPI.js';
 import { toast } from 'react-toastify';
 
 const PrivateRoute = () => {
-    const user = sessionStorage.getItem('user');
-
-    let isAuthenticated = user !== null;
-
-    toast('Not authenticated yet. Please login or register new account', {
+    const isAuthenticated = authService.isAuthenticated();
+    toast('Not authenticated!', {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

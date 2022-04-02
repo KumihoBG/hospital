@@ -175,6 +175,16 @@ export const cancelMedical = async (medicalId, userId) => {
   }
 }
 
+
+export const getUser = () => {
+  let username = localStorage.getItem('username');
+  return username;
+};
+
+export const isAuthenticated = () => {
+  return Boolean(getUser())
+};
+
 const authService = {
   register,
   registerMedical,
@@ -182,7 +192,9 @@ const authService = {
   login,
   loginMedical,
   chooseMyDoctor,
-  cancelMedical
+  cancelMedical,
+  getUser,
+  isAuthenticated,
 }
 
 export default authService;

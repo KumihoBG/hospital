@@ -7,11 +7,10 @@ const name = sessionStorage.getItem('username');
 const chatName = sessionStorage.getItem('chatName');
 const room = 'Connect';
 
-socket.on('connect', function() {
+socket.on('connect', function () {
   console.log("Connected to server");
   socket.emit('join', room);
-  appendMessage(`${name} joined`);
-  console.log(socket.connected); 
+  console.log(socket.connected);
 });
 
 socket.on('join-room', (room) => {
@@ -26,22 +25,25 @@ socket.on('receive-message', message => {
   appendMessage(`${chatName}: ${message}`)
 })
 
-messageForm.addEventListener('submit', e => {
-  e.preventDefault()
-  const message = messageInput.value;
-  const room = 'Connect';
+if (messageForm) {
+  messageForm.addEventListener('submit', e => {
+    e.preventDefault()
+    const message = messageInput.value;
+    const room = 'Connect';
 
-  if (message === '') return;
-  appendMessage(`You: ${message}`)
-  socket.emit('send-chat-message', message, room);
-  messageInput.value = '';
-})
+    if (message === '') {
+      return;
+    } else {
+      socket.emit('send-message', message, room);
+      appendMessage(`${name}: ${message}`);
+      messageInput.value = '';
+    }
+  })
+}
 
 function appendMessage(message) {
-  const messageElement = document.createElement('div')
-  if(messageElement) {
-    messageElement.innerText = message;
-    messageContainer.append(messageElement);
-  }
+  const messageElement = document.createElement('div');
+  messageElement.innerText = message;
+  messageContainer.append(messageElement);
 }
 
