@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { chooseMyDoctor, cancelMedical } from '../../features/auth/authAPI.js';
 
 function MedicalProfessional({ medical }) {
+  const isMedical = sessionStorage.getItem('role') === 'medical-professional';
   const userId = sessionStorage.getItem('userId');
   const medicalId = medical._id;
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ function MedicalProfessional({ medical }) {
       console.log(err.message)
     }
   }
-
+  console.log('hasDoctor', hasDoctor);
   return (
     <div className="row">
       <div className="col s12 m7">
@@ -70,7 +71,10 @@ function MedicalProfessional({ medical }) {
                   }
                 </div>
                 : <div className="card-action">
-                  <Link onClick={chooseADoctor} to={`/users/patient/${userId}/choose-my-medical-professional`} state={medical._id}>Choose this specialist</Link>
+                  {!isMedical
+                  ? <div><Link onClick={chooseADoctor} to={`/users/patient/${userId}/choose-my-medical-professional`} state={medical._id}>Choose this specialist</Link></div>
+                  : ""
+                  }
                 </div>
               }
             </div>

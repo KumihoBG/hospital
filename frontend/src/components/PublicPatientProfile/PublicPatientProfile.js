@@ -104,10 +104,6 @@ function PublicPatientProfile() {
                     <div className="personal-details">
                         <div className="section-title">
                             <h5>Personal information:</h5>
-                            {!checkMedical
-                                ? <i className="small material-icons">mode_edit</i>
-                                : null
-                            }
                         </div>
                         <table className="responsive-table">
                             <tbody>
@@ -146,26 +142,14 @@ function PublicPatientProfile() {
                     <h4>History</h4>
                     <div className="section-title">
                         <h5>Diagnosis</h5>
-                        {checkMedical
-                            ? <i className="small material-icons">mode_edit</i>
-                            : null
-                        }
                     </div>
                     <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
                     <div className="section-title">
                         <h5>Diagnosis</h5>
-                        {checkMedical
-                            ? <i className="small material-icons">mode_edit</i>
-                            : null
-                        }
                     </div>
                     <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
                     <div className="section-title">
                         <h5>Diagnosis</h5>
-                        {checkMedical
-                            ? <i className="small material-icons">mode_edit</i>
-                            : null
-                        }
                     </div>
 
                     <table className="responsive-table">

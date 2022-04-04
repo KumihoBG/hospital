@@ -70,10 +70,6 @@ function PublicMedicalProfile() {
 
                     <div className="personal-details">
                         <h6>Personal information:</h6>
-                        {checkMedical
-                            ? <i className="small material-icons">mode_edit</i>
-                            : null
-                        }
                         <table className="responsive-table">
                             <tbody>
                                 <tr>
@@ -103,18 +99,10 @@ function PublicMedicalProfile() {
                 <Grid id="patient-history-container" item xs={6}>
                     <><div className="section-title">
                         <h5>Bio</h5>
-                        {checkMedical
-                            ? <i className="small material-icons">mode_edit</i>
-                            : null
-                        }
                     </div>
                         <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
                         <div className="section-title">
                             <h5>Statistics</h5>
-                            {checkMedical
-                                ? <i className="small material-icons">mode_edit</i>
-                                : null
-                            }
                         </div>
 
                         <table className="responsive-table">
