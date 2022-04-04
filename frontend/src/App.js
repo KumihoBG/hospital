@@ -47,16 +47,16 @@ function App() {
       <ToastContainer />
       <main>
         <Routes>
-          <Route element={<PublicRoutes />}>
             <Route path='/' element={<Home />}>
               <Route path='/home' element={<Home />} />
             </Route>
+            <Route path='/staff' element={<FindDoctor />} />
+            <Route path='/medicals' element={<MedicalProfessionalCollection />} />
+          <Route element={<PublicRoutes />}>
             <Route path='/users/patient/login' element={<Login />} />
             <Route path='/users/medical/login' element={<LoginMedical />} />
             <Route path='/users/register-patient' element={<Register />} />
             <Route path='/users/register-medical' element={<RegisterMedical />} />
-            <Route path='/staff' element={<FindDoctor />} />
-            <Route path='/medicals' element={<MedicalProfessionalCollection />} />
           </Route>
 
           <Route element={<PrivateRoutes />}>

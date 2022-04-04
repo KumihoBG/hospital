@@ -177,7 +177,7 @@ export const cancelMedical = async (medicalId, userId) => {
 
 
 export const getUser = () => {
-  let username = localStorage.getItem('username');
+  let username = sessionStorage.getItem('username');
   return username;
 };
 
