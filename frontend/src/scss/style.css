@@ -1114,7 +1114,7 @@ ul:not(.browser-default) {
 
 #full-name {
   font-size: 20px;
-  color: #0a857a;
+  color: #499cdf;
   font-weight: 500;
 }
 
@@ -1184,7 +1184,6 @@ ul:not(.browser-default) {
   font-weight: 600;
   font-size: 16px;
   letter-spacing: 1.2px;
-  width: 15%;
   text-align: center;
 }
 /*# sourceMappingURL=style.css.map */

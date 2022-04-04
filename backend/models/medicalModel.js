@@ -3,8 +3,7 @@ const { Schema, model } = require('mongoose');
 const medicalSchema = new Schema({
     name: {
       type: String,
-      required: true,
-      match: [/^[A-Z]{1}[a-z]+\s[A-Z]{1}[a-z]+$/g, 'Please enter first name and last name.'],
+      required: [true, 'Full name is required'],
     },
     username: {
       type: String,
@@ -24,9 +23,11 @@ const medicalSchema = new Schema({
     },
     role: {
       type: String,
+      possibleValues: ['patient','medical-professional','admin'],
     },
     gender: {
       type: String,
+      possibleValues: ['male','female'],
     },
     imageUrl: {
       type: String,

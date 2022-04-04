@@ -145,11 +145,11 @@ function PublicPatientProfile() {
                     </div>
                     <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
                     <div className="section-title">
-                        <h5>Diagnosis</h5>
+                        <h5>Medical History</h5>
                     </div>
                     <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
                     <div className="section-title">
-                        <h5>Diagnosis</h5>
+                        <h5>Medical examinations and results</h5>
                     </div>
 
                     <table className="responsive-table">

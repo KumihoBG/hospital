@@ -24,9 +24,11 @@ const userSchema = new Schema({
   },
   role: {
     type: String,
+    possibleValues: ['patient','medical-professional','admin'],
   },
   gender: {
     type: String,
+    possibleValues: ['male','female'],
   },
   imageUrl: {
     type: String,

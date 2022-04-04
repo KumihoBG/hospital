@@ -65,7 +65,7 @@ function LoginMedical() {
         <>
             <div className="login-container">
                 <div className="form-container">
-                    <form className="register-form" onSubmit={onSubmit} method="POST">
+                    <form className="register-form"Федит onSubmit={onSubmit} method="POST">
                         <h3>Login to your Medical account</h3>
                         <div className="form-group">
                             <label>Username</label><br></br>
