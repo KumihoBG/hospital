@@ -48,6 +48,24 @@ export const registerMedical = createAsyncThunk(
   }
 )
 
+// Register admin
+export const registerAdmin = createAsyncThunk(
+  'register-admin',
+  async (user, thunkAPI) => {
+    try {
+      return await authService.registerAdmin(user)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 // Login user
 export const login = createAsyncThunk('patient/login', async (user, thunkAPI) => {
   try {
@@ -61,10 +79,23 @@ export const login = createAsyncThunk('patient/login', async (user, thunkAPI) =>
   }
 })
 
-// Login user
+// Login medical professional
 export const loginMedicalProfessional = createAsyncThunk('medical/login', async (user, thunkAPI) => {
   try {
     return await authService.loginMedical(user);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+// Login admin
+export const loginAdmin = createAsyncThunk('users/login-admin', async (user, thunkAPI) => {
+  try {
+    return await authService.loginAdmin(user)
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
@@ -119,6 +150,20 @@ export const authSlice = createSlice({
         state.message = action.payload;
         state.user = null;
       })
+      .addCase(registerAdmin.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(registerAdmin.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(registerAdmin.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.user = null;
+      })
       .addCase(login.pending, (state) => {
         state.isLoading = true;
       })
@@ -142,6 +187,20 @@ export const authSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(loginMedicalProfessional.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.user = null;
+      })
+      .addCase(loginAdmin.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(loginAdmin.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(loginAdmin.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

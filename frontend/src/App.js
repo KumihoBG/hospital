@@ -20,6 +20,8 @@ import Appointments from './components/Appointments/Appointments.js';
 import PublicMedicalProfile from './components/PublicMedicalProfile/PublicMedicalProfile.js';
 import PublicPatientProfile from './components/PublicPatientProfile/PublicPatientProfile.js';
 import Socket from './components/Socket/Socket.js';
+import RegisterAdmin from './components/RegisterAdmin/RegisterAdmin.js';
+import LoginAdmin from './components/LoginAdmin/LoginAdmin.js';
 
 const MyPatients = lazy(() => {
   return Promise.all([
@@ -30,6 +32,7 @@ const MyPatients = lazy(() => {
 
 function App() {
   const isMedical = sessionStorage.getItem('role') === 'medical-professional';
+  const isAdmin = sessionStorage.getItem('role') === 'admin';
   const checkMedical = isMedical === true;
   const name = sessionStorage.getItem('chatName');
 
@@ -47,17 +50,25 @@ function App() {
       <ToastContainer />
       <main>
         <Routes>
-            <Route path='/' element={<Home />}>
-              <Route path='/home' element={<Home />} />
-            </Route>
-            <Route path='/staff' element={<FindDoctor />} />
-            <Route path='/medicals' element={<MedicalProfessionalCollection />} />
+          <Route path='/' element={<Home />}>
+            <Route path='/home' element={<Home />} />
+          </Route>
+          <Route path='/users/login-admin' element={<LoginAdmin />} />
+              <Route path='/users/register-admin' element={<RegisterAdmin />} />
+          <Route path='/staff' element={<FindDoctor />} />
+          <Route path='/medicals' element={<MedicalProfessionalCollection />} />
           <Route element={<PublicRoutes />}>
             <Route path='/users/patient/login' element={<Login />} />
             <Route path='/users/medical/login' element={<LoginMedical />} />
             <Route path='/users/register-patient' element={<Register />} />
             <Route path='/users/register-medical' element={<RegisterMedical />} />
           </Route>
+          {isAdmin
+            ? <Route>
+              <Route path='/users/admin/dashboard/:userId' element={<LoginAdmin />} />
+            </Route>
+            : null
+          }
 
           <Route element={<PrivateRoutes />}>
             {checkMedical

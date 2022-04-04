@@ -2,18 +2,20 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { loginMedicalProfessional, reset } from '../../features/auth/authSlice.js';
+import { registerAdmin, reset } from '../../features/auth/authSlice.js';
 
-function LoginMedical() {
+function RegisterAdmin() {
     const [formData, setFormData] = useState({
-        email: '',
+        username: '',
         password: '',
+        rePass: '',
+        role: '',
     })
 
-    const { email, password } = formData;
+    let { username, password, rePass } = formData;
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const { user, isError, isSuccess, message } = useSelector(
         (state) => state.auth
@@ -21,11 +23,11 @@ function LoginMedical() {
 
     useEffect(() => {
         if (isError) {
-            toast.error(message);
+            toast.error(message)
         }
 
         if (isSuccess || user) {
-            navigate('/home');
+            navigate('/')
         }
 
         dispatch(reset())
@@ -41,12 +43,8 @@ function LoginMedical() {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        const userData = {
-            email,
-            password,
-        }
-        if (email === '' || password === '') {
-            toast('Please fill in all fields!', {
+        if (password !== rePass) {
+            toast("Two passwords don't match!", {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -54,33 +52,36 @@ function LoginMedical() {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-            });
-            return;
+            })
         } else {
-            dispatch(loginMedicalProfessional(userData));
+            const userData = {
+                username,
+                password,
+                role: 'admin',
+            }
+            dispatch(registerAdmin(userData))
         }
     }
 
     return (
         <>
-            <div className="login-container">
+            <div className="register-container">
                 <div className="form-container">
                     <form className="register-form" onSubmit={onSubmit} method="POST">
-                        <h3>Login to your Medical account</h3>
+                        <h3>Register new Patient account</h3>
                         <div className="form-group">
                             <label>Username</label><br></br>
                             <div className="icon">
                                 <input
-                                    name="email"
-                                    type="text"
-                                    autoComplete="email"
                                     className="form-control"
-                                    value={email}
-                                    onChange={onChange}>
-                                </input><br></br>
+                                    name="username"
+                                    type="text"
+                                    autoComplete="username"
+                                    value={username}
+                                    onChange={onChange}></input><br></br>
                             </div>
                         </div>
-
+    
                         <div className="form-group">
                             <label>Password</label><br></br>
                             <div className="icon">
@@ -96,12 +97,26 @@ function LoginMedical() {
                             </div>
                         </div>
 
+                        <div className="form-group">
+                            <label>Repeat password</label><br></br>
+                            <div className="icon">
+                                <input
+                                    className="form-control"
+                                    autoComplete="current-password"
+                                    name="rePass"
+                                    type="password"
+                                    onChange={onChange}>
+                                </input>
+                                <br></br>
+                            </div>
+                        </div>
+
                         <div>
-                            <button type="submit" className="loginBtn">Login</button>
+                            <button type="submit" id="registerBtn">Register</button>
                         </div>
                     </form>
                     <div className="second">
-                        <p>Don't have an account? Create new <Link className="register-redirect" to="/register-patient" alt="register">patient</Link> or <Link className="register-redirect" to="/register-medical" alt="register">professional</Link> account</p>
+                        <Link className="link" to="/users/patient/login" alt="login">Already have an account?</Link><br></br>
                     </div>
                 </div>
             </div>
@@ -109,4 +124,4 @@ function LoginMedical() {
     )
 }
 
-export default LoginMedical;
+export default RegisterAdmin;

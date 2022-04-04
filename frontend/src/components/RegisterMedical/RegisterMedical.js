@@ -21,7 +21,7 @@ function RegisterMedical() {
         practiceLocation: '',
     })
 
-    const { name, username, email, password, rePass, gender, role, imageUrl, phone, age, department, areas, practiceLocation } = formData;
+    let { name, username, email, password, rePass, gender, role, imageUrl, phone, age, department, areas, practiceLocation } = formData;
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -63,6 +63,13 @@ function RegisterMedical() {
                 progress: undefined,
             })
         } else {
+            if (imageUrl === '') {
+                switch(gender) {
+                    case "male": imageUrl = 'male.jpg'; break;
+                    case "female": imageUrl = 'female.jpg'; break;
+                    default: break;
+                }
+            }
             const userData = {
                 name,
                 username,

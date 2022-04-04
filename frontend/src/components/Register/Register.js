@@ -19,7 +19,7 @@ function Register() {
         age: ''
     })
 
-    const { name, username, email, password, rePass, gender, role, imageUrl, address, phone, age } = formData
+    let { name, username, email, password, rePass, gender, role, imageUrl, address, phone, age } = formData
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -61,6 +61,13 @@ function Register() {
                 progress: undefined,
             })
         } else {
+            if (imageUrl === '') {
+                switch(gender) {
+                    case "male": imageUrl = 'male.jpg'; break;
+                    case "female": imageUrl = 'female.jpg'; break;
+                    default: break;
+                }
+            }
             const userData = {
                 name,
                 username,

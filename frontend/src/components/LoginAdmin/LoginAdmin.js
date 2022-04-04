@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { loginMedicalProfessional, reset } from '../../features/auth/authSlice.js';
+import { loginAdmin, reset } from '../../features/auth/authSlice.js';
 
-function LoginMedical() {
+function LoginAdmin() {
     const [formData, setFormData] = useState({
-        email: '',
+        username: '',
         password: '',
     })
 
-    const { email, password } = formData;
+    const { username, password } = formData;
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -26,6 +26,7 @@ function LoginMedical() {
 
         if (isSuccess || user) {
             navigate('/home');
+            sessionStorage.setItem('myDoctor', user.medical[0]);
         }
 
         dispatch(reset())
@@ -42,10 +43,10 @@ function LoginMedical() {
         e.preventDefault()
 
         const userData = {
-            email,
+            username,
             password,
         }
-        if (email === '' || password === '') {
+        if (username === '' || password === '') {
             toast('Please fill in all fields!', {
                 position: "top-right",
                 autoClose: 5000,
@@ -54,10 +55,10 @@ function LoginMedical() {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-            });
+            })
             return;
         } else {
-            dispatch(loginMedicalProfessional(userData));
+            dispatch(loginAdmin(userData));
         }
     }
 
@@ -66,7 +67,7 @@ function LoginMedical() {
             <div className="login-container">
                 <div className="form-container">
                     <form className="register-form" onSubmit={onSubmit} method="POST">
-                        <h3>Login to your Medical account</h3>
+                        <h3>Login to your Patient account</h3>
                         <div className="form-group">
                             <label>Username</label><br></br>
                             <div className="icon">
@@ -75,7 +76,7 @@ function LoginMedical() {
                                     type="text"
                                     autoComplete="email"
                                     className="form-control"
-                                    value={email}
+                                    value={username}
                                     onChange={onChange}>
                                 </input><br></br>
                             </div>
@@ -109,4 +110,4 @@ function LoginMedical() {
     )
 }
 
-export default LoginMedical;
+export default LoginAdmin;

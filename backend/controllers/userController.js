@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 const Medical = require('../models/medicalModel');
+const Admin = require('../models/adminModel');
 const { getUserByEmail } = require('../services/userService');
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -161,6 +162,77 @@ const generateToken = (id) => {
   })
 }
 
+const registerAdmin = asyncHandler(async (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    res.status(400)
+    throw new Error('Please add all fields')
+  }
+
+  // Check if user exists
+  const userExists = await Admin.findOne({ username });
+
+  if (userExists) {
+    res.status(400)
+    throw new Error('User already exists')
+  }
+
+  // Hash password
+  const salt = await bcrypt.genSalt(10)
+  const hashedPassword = await bcrypt.hash(password, salt)
+  // Create user
+  const user = await Admin.create({
+    username,
+    hashedPassword: hashedPassword,
+    role: 'admin'	,
+  })
+
+  user.save();
+  if (user) {
+    res.status(201).json({
+      _id: user._id,
+      username: user.username,
+      role: user.role,
+      token: generateToken(user._id),
+    })
+  } else {
+    res.status(400)
+    throw new Error('Invalid user data')
+  }
+})
+
+const loginAdmin = asyncHandler(async (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    res.status(400)
+    throw new Error('Please add all fields')
+  }
+
+  const user = await Admin.findOne({ username });
+  if (!user) {
+    throw new Error("Invalid user credentials");
+  } 
+  const isMatch = await bcrypt.compare(password, user.hashedPassword);
+  
+  if (isMatch === false) {
+      throw new Error('Wrong password.');
+  } else {
+    if (user && isMatch === true) {
+      res.json({
+        _id: user._id,
+        username: user.username,
+        role: user.role,
+        token: generateToken(user._id),
+      })
+    } else {
+      res.status(400)
+      throw new Error('Invalid credentials');
+    }
+  }
+})
+
 module.exports = {
   registerUser,
   loginUser,
@@ -168,5 +240,7 @@ module.exports = {
   getSinglePatient,
   getMyMedical,
   chooseMedicalAction,
-  cancelMedical
+  cancelMedical,
+  registerAdmin,
+  loginAdmin
 }
