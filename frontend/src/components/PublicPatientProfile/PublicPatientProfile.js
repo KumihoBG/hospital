@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import { useSelector } from 'react-redux';
-import { getPatientProfile, getMyDoctor, getMedicalProfile } from '../../features/auth/authAPI.js';
+import { getPatientProfile, getMyDoctor, getMedicalProfile, deleteSingleUser } from '../../features/auth/authAPI.js';
 
 function PublicPatientProfile() {
     const location = useLocation();
@@ -61,6 +61,25 @@ function PublicPatientProfile() {
         }
     }
 
+    async function onDeleteUser(event) {
+        event.preventDefault();
+        try {
+        await deleteSingleUser(profile._id);
+        sessionStorage.removeItem('userId');
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('email');
+        sessionStorage.removeItem('role');
+        sessionStorage.removeItem('user');
+        sessionStorage.removeItem('hasDoctor');
+        sessionStorage.removeItem('myDoctor');  
+        sessionStorage.removeItem('chatName');
+        window.location.reload();
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+
+
     return (
         <div>
             <Grid id="profile-container" container spacing={2}>
@@ -103,6 +122,11 @@ function PublicPatientProfile() {
                                 </tr>
                             </tbody>
                         </table>
+                        {!checkMedical
+                        ? <div><button onClick={(e) => { onDeleteUser(e) }} id="deleteUserBtn" type="submit">Delete</button>
+                        <Link to={`/edit/user/${profile.id}`} id="editUserBtn">Edit</Link></div>
+                        : null
+                        }
                     </div>
                     <div className="medication-details">
                         <div className="section-title">

@@ -185,6 +185,30 @@ export const isAuthenticated = () => {
   return Boolean(getUser())
 };
 
+export async function deleteSingleUser(userId) {
+  try {
+      const response = await fetch(`${BASE_LOCAL_URL}/users/${userId}`, {
+          method: 'DELETE'
+      });
+      const data = await response.json();
+      return data;
+  } catch (error) {
+      console.error(error);
+  }
+}
+
+export async function deleteSingleMedical(userId) {
+  try {
+      const response = await fetch(`${BASE_LOCAL_URL}/medicals/${userId}`, {
+          method: 'DELETE'
+      });
+      const data = await response.json();
+      return data;
+  } catch (error) {
+      console.error(error);
+  }
+}
+
 const authService = {
   register,
   registerMedical,
@@ -195,6 +219,8 @@ const authService = {
   cancelMedical,
   getUser,
   isAuthenticated,
+  deleteSingleUser,
+  deleteSingleMedical
 }
 
 export default authService;

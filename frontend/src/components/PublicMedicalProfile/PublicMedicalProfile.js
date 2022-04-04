@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
-import { getMedicalProfile } from '../../features/auth/authAPI';
+import { getMedicalProfile, deleteSingleMedical } from '../../features/auth/authAPI';
 
 function PublicMedicalProfile() {
     const { userId } = useParams();
@@ -31,6 +31,22 @@ function PublicMedicalProfile() {
         }
     }
     
+    async function onDeleteMedical(event) {
+        event.preventDefault();
+        try {
+        await deleteSingleMedical(profile._id);
+        sessionStorage.removeItem('userId');
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('email');
+        sessionStorage.removeItem('role');
+        sessionStorage.removeItem('user');
+        sessionStorage.removeItem('chatName');
+        window.location.reload();
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+
     return (
         <div>
             <Grid id="profile-container" container spacing={2}>
@@ -77,6 +93,11 @@ function PublicMedicalProfile() {
                                 </tr>
                             </tbody>
                         </table>
+                        {checkMedical
+                        ? <div><button onClick={(e) => { onDeleteMedical(e) }} id="deleteUserBtn" type="submit">Delete</button>
+                        <Link to={`/edit/user/${profile.id}`} id="editUserBtn">Edit</Link></div>
+                        : null
+                        }
                     </div>
                 </Grid>
                 <Grid id="patient-history-container" item xs={6}>
