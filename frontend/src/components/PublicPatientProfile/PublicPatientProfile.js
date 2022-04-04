@@ -32,7 +32,7 @@ function PublicPatientProfile() {
             const singleProfile = await getPatientProfile(patientId);
             setProfile(singleProfile);
         } catch (err) {
-            console.log(err.message)
+            console.log(err.message);
         }
     }
 
@@ -50,7 +50,8 @@ function PublicPatientProfile() {
             const data = await getMedicalProfile(myDoctor || user._id);
             setMedicalName(data.name);
         } catch (err) {
-            console.log(err.message)
+            console.log(err.message);
+            setMedicalName('Not chosen yet');
         }
     }
 
@@ -110,7 +111,7 @@ function PublicPatientProfile() {
                         <p>Patient of Medical Professional:<br />
                             <span className='bolder-names'>
                                 <Link to={`/my-medical-professional/${doctor}`}>
-                                    {medicalName || 'Not chosen yet'}
+                                    {medicalName}
                                 </Link>
                             </span>
                         </p>

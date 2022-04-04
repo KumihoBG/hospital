@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { register, reset } from '../../features/auth/authSlice.js';
-// import Spinner from '../Spinner/Spinner.js';
 
 function Register() {
     const [formData, setFormData] = useState({
@@ -25,7 +24,7 @@ function Register() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const { user, isLoading, isError, isSuccess, message } = useSelector(
+    const { user, isError, isSuccess, message } = useSelector(
         (state) => state.auth
     )
 
@@ -52,7 +51,15 @@ function Register() {
         e.preventDefault()
 
         if (password !== rePass) {
-            toast.error('Passwords do not match')
+            toast("Two passwords don't match!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
         } else {
             const userData = {
                 name,
@@ -69,10 +76,6 @@ function Register() {
             dispatch(register(userData))
         }
     }
-
-    // if (isLoading) {
-    //     return <Spinner />
-    // }
 
     return (
         <>

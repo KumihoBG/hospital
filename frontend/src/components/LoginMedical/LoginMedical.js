@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { loginMedicalProfessional, reset } from '../../features/auth/authSlice.js';
-// import Spinner from '../Spinner/Spinner.js';
 
 function LoginMedical() {
     const [formData, setFormData] = useState({
@@ -16,7 +15,7 @@ function LoginMedical() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const { user, isLoading, isError, isSuccess, message } = useSelector(
+    const { user, isError, isSuccess, message } = useSelector(
         (state) => state.auth
     )
 
@@ -46,12 +45,21 @@ function LoginMedical() {
             email,
             password,
         }
-        dispatch(loginMedicalProfessional(userData));
+        if (email === '' || password === '') {
+            toast('Please fill in all fields!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
+            return;
+        } else {
+            dispatch(loginMedicalProfessional(userData));
+        }
     }
-
-    // if (isLoading) {
-    //     return <Spinner />
-    // }
 
     return (
         <>

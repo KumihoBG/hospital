@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import { login, reset } from '../../features/auth/authSlice.js';
 
 function Login() {
-    const userId = sessionStorage.getItem('userId');
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -16,7 +15,7 @@ function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const { user, isLoading, isError, isSuccess, message } = useSelector(
+    const { user, isError, isSuccess, message } = useSelector(
         (state) => state.auth
     )
 
@@ -48,7 +47,15 @@ function Login() {
             password,
         }
         if (email === '' || password === '') {
-            toast.error('Please fill all fields');
+            toast('Please fill in all fields!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
             return;
         } else {
             dispatch(login(userData));
