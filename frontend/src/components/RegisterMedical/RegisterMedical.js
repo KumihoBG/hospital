@@ -87,7 +87,7 @@ function RegisterMedical() {
             <div className="register-container-medical">
                 <div className="form-container">
                     <form className="register-form" onSubmit={onSubmit}>
-                        <h3>Register new account</h3>
+                        <h3>Register new Medical account</h3>
                         <div className="form-group">
                             <label>Name</label><br></br>
                             <input className="form-control"

@@ -469,6 +469,17 @@ nav .brand-logo {
   }
 }
 
+.dropdown-link,
+.dropdown-content li > a {
+  color: #499cdf;
+  text-align: center;
+  margin: 0 auto;
+}
+
+ul:not(.browser-default) {
+  padding-left: 0;
+}
+
 .articles-container {
   background: #fff;
   width: 100%;

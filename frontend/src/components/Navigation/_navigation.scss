@@ -20,3 +20,14 @@ nav .brand-logo {
         display: none;
     }
 }
+
+.dropdown-link,
+.dropdown-content li > a {
+    color: $light_blue;
+    text-align: center;
+    margin: 0 auto;
+}
+
+ul:not(.browser-default) {
+    padding-left: 0;
+}

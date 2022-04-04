@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
 import logoImage from '../../images/logo.png';
 import { useDispatch } from 'react-redux';
-import { FaHospitalUser, FaUserInjured, FaUserGraduate, FaSignInAlt, FaSignOutAlt, FaPlus } from "react-icons/fa";
+import { FaHospitalUser, FaUser, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import { logout, reset } from '../../features/auth/authSlice.js';
 
 function Navigation() {
@@ -23,7 +23,25 @@ function Navigation() {
         navigate('/home');
     }
 
-    return (
+    return (<>
+        <ul id="dropdown1" class="dropdown-content">
+            <li>
+                <a class="dropdown-link" href="/users/register-patient" alt="register">Patient</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a class="dropdown-link" href="/users/register-medical" alt="register">Medical</a>
+            </li>
+        </ul>
+        <ul id="dropdown2" class="dropdown-content">
+            <li>
+                <a class="dropdown-link" href="/users/patient/login" alt="login">Patient</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a class="dropdown-link" href="/users/medical/login" alt="login">Medical</a>
+            </li>
+        </ul>
         <nav className="white" role="navigation">
             <div className="nav-wrapper container">
                 <Link id="logo-container" to="/" className="brand-logo"><img src={logoImage} id="logo-image" alt="NewLife Hospital Logo" /> NewLife Hospital</Link>
@@ -43,7 +61,7 @@ function Navigation() {
                                     <NavLink to={`/users/patient/${userId}`} alt="My Patient account" end={true}>My Account</NavLink>
                                 </li>
                             }
-                             {checkMedical
+                            {checkMedical
                                 ? <li className={splitLocation[1] === "/medicals/my-patients/:userId" ? "active" : ""}>
                                     <NavLink to={`/medicals/my-patients/${userId}`} alt="My Patients">
                                         <span className="nav-item-title">My Patients</span>
@@ -67,39 +85,18 @@ function Navigation() {
                         </ul>
                     </div>
                     : <div className="guest">
-                        <ul className="right hide-on-med-and-down">
+                        <ul class="right hide-on-med-and-down">
                             <li className={pathname === "/home" ? "active" : ""}>
                                 <NavLink to="/" alt="Home page: NewLife Hospital" end={true}>Home</NavLink>
                             </li>
-                            <li className={pathname === "/users/register-patient" ? "active" : ""}>
-                                <NavLink to="/users/register-patient" alt="register">
-                                    <FaUserInjured /><FaPlus />
-                                    <span className="nav-item-title"> New Patient Account</span>
-                                </NavLink>
-                            </li>
-                            <li className={pathname === "/users/register-medical" ? "active" : ""}>
-                                <NavLink to="/users/register-medical" alt="register">
-                                    <FaUserGraduate /><FaPlus />
-                                    <span className="nav-item-title"> New Professional Account</span>
-                                </NavLink>
-                            </li>
 
-                            <li className={pathname === "/users/patient/login" ? "active" : ""}>
-                                <NavLink to="/users/patient/login" alt="login">
-                                    <FaSignInAlt />
-                                    <span className="nav-item-title"> Login Patients</span>
-                                </NavLink>
-                            </li>
-                            <li className={pathname === "/users/medical/login" ? "active" : ""}>
-                                <NavLink to="/users/medical/login" alt="login">
-                                    <FaSignInAlt />
-                                    <span className="nav-item-title"> Login Professionals</span>
-                                </NavLink>
-                            </li>
+                            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><FaUser />   Register<i class="material-icons right">arrow_drop_down</i></a></li>
+                            <li><a class="dropdown-trigger" href="#!" data-target="dropdown2"><FaSignInAlt /> Login<i class="material-icons right">arrow_drop_down</i></a></li>
+
                             <li className={splitLocation[1] === "/medicals" ? "active" : ""}>
-                                    <NavLink to="/medicals" alt="Our Medical Professionals">
-                                        <span className="nav-item-title">Our Medical Professionals</span>
-                                    </NavLink>
+                                <NavLink to="/medicals" alt="Our Medical Professionals">
+                                    <span className="nav-item-title">Our Medical Professionals</span>
+                                </NavLink>
                             </li>
                         </ul>
                     </div>
@@ -111,8 +108,8 @@ function Navigation() {
                 </ul>
                 <Link to="#" data-target="nav-mobile" className="sidenav-trigger"><i className="material-icons">menu</i></Link>
             </div>
-        </nav>
-
+        </nav >
+    </>
     )
 }
 

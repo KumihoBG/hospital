@@ -82,7 +82,7 @@ function Register() {
             <div className="register-container">
                 <div className="form-container">
                     <form className="register-form" onSubmit={onSubmit} method="POST">
-                        <h3>Register new account</h3>
+                        <h3>Register new Patient account</h3>
                         <div className="form-group">
                             <label>Name</label><br></br>
                             <input className="form-control"
