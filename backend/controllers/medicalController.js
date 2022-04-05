@@ -90,14 +90,9 @@ const generateToken = (id) => {
   })
 }
 
-const getSingleMedical = asyncHandler(async (req, res) => {
-  const user = await Medical.findById(req.params.userId);
-  res.status(200).json(user);
-})
 
 module.exports = {
   loginMedicalUser,
   registerMedicalProfessional,
-  logoutUser,
-  getSingleMedical,
+  logoutUser
 }

@@ -1,12 +1,14 @@
 import React from 'react';
 
-function Socket({name}) {
+function Socket() {
+    const name = sessionStorage.getItem('chatName');
+
     return (
         <div id="chat-container">
-            <h3>You can send message to {name}</h3>
+            <h5>You can send message to {name}</h5>
             <div id="message-container"></div>
             <form id="send-container">
-                <input type="text" id="message-input" />
+                <input type="text" id="message-input" placeholder='Type your message here'/>
                 <button type="submit" id="sendBtn">Send Message</button>
             </form>
         </div>

@@ -112,6 +112,7 @@ function PublicPatientProfile() {
                             <p>
                                 <span>Patient ID: {profile._id}</span><br />
                                 <span id="full-name">{profile.name}</span><br />
+                                <span id="username">Username: {profile.username}</span><br />
                                 <span>{profile.gender} | {profile.age}</span>
                             </p>
                             {!checkMedical

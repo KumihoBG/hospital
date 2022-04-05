@@ -52,63 +52,109 @@ const setMedical = asyncHandler(async (req, res) => {
   res.status(200).json(medical);
 })
 
-const updateMedical = asyncHandler(async (req, res) => {
-  const medical = await Medical.findById(req.params.id)
+// const updateMedical = asyncHandler(async (req, res) => {
+//   const medical = await Medical.findById(req.params.id)
 
-  if (!medical) {
-    res.status(400)
-    throw new Error('Medical not found')
-  }
+//   if (!medical) {
+//     res.status(400)
+//     throw new Error('Medical not found')
+//   }
 
-  // Check for user
-  if (!req.user) {
-    res.status(401)
-    throw new Error('User not found')
-  }
+//   // Check for user
+//   if (!req.user) {
+//     res.status(401)
+//     throw new Error('User not found')
+//   }
 
-  // Make sure the logged in user matches the medical user
-  if (medical.user.toString() !== req.user.id) {
-    res.status(401)
-    throw new Error('User not authorized')
-  }
+//   // Make sure the logged in user matches the medical user
+//   if (medical.user.toString() !== req.user.id) {
+//     res.status(401)
+//     throw new Error('User not authorized')
+//   }
 
-  const updatedMedical = await Medical.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  })
+//   const updatedMedical = await Medical.findByIdAndUpdate(req.params.id, req.body, {
+//     new: true,
+//   })
 
-  res.status(200).json(updatedMedical)
-})
+//   res.status(200).json(updatedMedical)
+// })
 
-const deleteMedical = asyncHandler(async (req, res) => {
-  const medical = await Medical.findById(req.params.id)
+// const deleteMedical = asyncHandler(async (req, res) => {
+//   const medical = await Medical.findById(req.params.id)
 
-  if (!medical) {
-    res.status(400)
-    throw new Error('Medical not found')
-  }
+//   if (!medical) {
+//     res.status(400)
+//     throw new Error('Medical not found')
+//   }
 
-  // Check for user
-  if (!req.user) {
-    res.status(401)
-    throw new Error('User not found')
-  }
+//   // Check for user
+//   if (!req.user) {
+//     res.status(401)
+//     throw new Error('User not found')
+//   }
 
-  // Make sure the logged in user matches the medical user
-  if (medical.user.toString() !== req.user.id) {
-    res.status(401)
-    throw new Error('User not authorized')
-  }
+//   // Make sure the logged in user matches the medical user
+//   if (medical.user.toString() !== req.user.id) {
+//     res.status(401)
+//     throw new Error('User not authorized')
+//   }
 
-  await medical.remove()
+//   await medical.remove()
 
-  res.status(200).json({ id: req.params.id })
-})
+//   res.status(200).json({ id: req.params.id })
+// })
+
+const deleteSingleMedical = asyncHandler(async (req, res) => {
+  try {
+    const user = await Medical.findById(req.params.userId);
+    if (!user) {
+        throw new Error('You are not authorized to delete this account.');
+    }
+    res.redirect('/home');
+    console.log('deleting');
+    return await Medical.findByIdAndDelete(user._id);
+} catch(err) {
+    console.log(err.message);
+    return err;
+}});
+
+const editSingleMedical = asyncHandler(async (req, res) => {
+  try {
+    const user = await Medical.findById(req.params.userId);
+
+    const newUser = req.body;
+    if (!user) {
+        throw new Error('You are not authorized to edit this account.');
+    }
+    user.name = newUser.name.trim();
+    user.username = newUser.username.trim();
+    user.email = newUser.email.trim();
+    user.hashedPassword = newUser.hashedPassword.trim();
+    user.role = user.role;
+    user.gender = user.gender;
+    user.imageUrl = newUser.imageUrl.trim();
+    user.phone = newUser.phone.trim();
+    user.age = newUser.age.trim();
+    user.department = newUser.department.trim();
+    user.areas = newUser.areas.trim();
+    user.practiceLocation = newUser.practiceLocation.trim();
+    user.myPatients = user.myPatients;
+    user.myAppointments = user.myAppointments;
+    await user.save();
+    return res.status(200).json(user);
+} catch(err) {
+    console.log(err.message);
+    return err;
+}});
 
 module.exports = {
   getAll,
   setMedical,
-  updateMedical,
-  deleteMedical,
+  // updateMedical,
+  // deleteMedical,
   getAllPatients,
-  requestAppointment
+  requestAppointment,
+  approveAppointment,
+  deleteSingleMedical,
+  editSingleMedical,
 }

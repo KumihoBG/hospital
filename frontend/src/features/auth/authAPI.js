@@ -137,6 +137,7 @@ const loginAdmin = async (userData) => {
 
 // Logout user
 const logout = async () => {
+  window.location.replace('/home')
   sessionStorage.removeItem('userId');
   sessionStorage.removeItem('username');
   sessionStorage.removeItem('email');
@@ -152,6 +153,7 @@ export const getMedicalProfile = async (userId) => {
   try {
     const response = await fetch(`${BASE_LOCAL_URL}/users/medical/${userId}`);
     const data = await response.json();
+    console.log('data', data);
     return data;
   } catch (error) {
     console.error(error);
@@ -169,7 +171,7 @@ export const getPatientProfile = async (userId) => {
   }
 }
 
-// Get all medicals
+// Get my doctor
 export const getMyDoctor = async (userId) => {
   try {
     const response = await fetch(`${BASE_LOCAL_URL}/users/patient/${userId}/my-medical-professional`);
@@ -243,6 +245,37 @@ export async function deleteSingleUser(userId) {
 export async function editSingleUser(userId, newUser) {
   try {
     const userUpdated = await fetch(`${BASE_LOCAL_URL}/users/patient/${userId}/edit`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT',
+      body: JSON.stringify(newUser)
+    });
+    const result = await userUpdated.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+export async function deleteSingleMedical(userId) {
+  try {
+    const response = await fetch(`${BASE_LOCAL_URL}/medicals/delete/${userId}`, {
+      method: 'DELETE'
+    });
+    const data = await response.json();
+    console.log('data', data);
+    return data;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+export async function editSingleMedical(userId, newUser) {
+  try {
+    const userUpdated = await fetch(`${BASE_LOCAL_URL}/medicals/edit/${userId}`, {
       headers: {
         'Content-Type': 'application/json'
       },

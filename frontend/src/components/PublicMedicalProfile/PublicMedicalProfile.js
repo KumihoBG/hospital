@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
-import { getMedicalProfile } from '../../features/auth/authAPI';
+import { useSelector } from 'react-redux';
+import { deleteSingleMedical, getMedicalProfile } from '../../features/auth/authAPI';
+import { toast } from 'react-toastify';
 
 function PublicMedicalProfile() {
     const { userId } = useParams();
@@ -10,6 +12,9 @@ function PublicMedicalProfile() {
     const [profile, setProfile] = useState([]);
     const isMedical = sessionStorage.getItem('role') === 'medical-professional';
     const checkMedical = isMedical === true;
+    const { user } = useSelector(
+        (state) => state.auth
+    )
 
     useEffect(() => {
         getMedicalProfileInfo();
@@ -18,7 +23,7 @@ function PublicMedicalProfile() {
 
     const getMedicalProfileInfo = async () => {
         try {
-            const singleProfile = await getMedicalProfile(userId || medicalId);
+            const singleProfile = await getMedicalProfile(user._id || medicalId);
             setProfile(singleProfile);
         } catch (err) {
             console.log(err.message)
@@ -31,21 +36,41 @@ function PublicMedicalProfile() {
         }
     }
     
-    // async function onDeleteMedical(event) {
-    //     event.preventDefault();
-    //     try {
-    //     await deleteSingleMedical(profile._id);
-    //     sessionStorage.removeItem('userId');
-    //     sessionStorage.removeItem('username');
-    //     sessionStorage.removeItem('email');
-    //     sessionStorage.removeItem('role');
-    //     sessionStorage.removeItem('user');
-    //     sessionStorage.removeItem('chatName');
-    //     window.location.reload();
-    //     } catch (err) {
-    //         console.log(err.message);
-    //     }
-    // }
+    async function onDeleteMedical() {
+        try {
+            sessionStorage.removeItem('userId');
+            sessionStorage.removeItem('username');
+            sessionStorage.removeItem('email');
+            sessionStorage.removeItem('role');
+            sessionStorage.removeItem('user');
+            sessionStorage.removeItem('chatName');
+            await deleteSingleMedical(profile._id);
+
+            toast('Medical account deleted successfully! Redirecting to home page', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
+            setTimeout(() => {
+                window.location.replace('/home');
+            }, 5000);
+        } catch (err) {
+            toast(`${err}`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
+            console.log(err.message);
+        }
+    }
 
     return (
         <div>
@@ -53,17 +78,18 @@ function PublicMedicalProfile() {
                 <Grid id="patient-info-container" item xs={6}>
                     <div className="patient-info">
                         <div>
-                            <Avatar className="avatar" alt="Doctor Smith" src={profile.imageUrl} sx={{ width: 150, height: 150 }} />
+                            <Avatar className="avatar" alt="Doctor Smith" src={profile?.imageUrl} sx={{ width: 150, height: 150 }} />
                         </div>
                         <div>
                             <p>
                                 <span>Medical Professional ID: {profile._id}</span><br />
                                 <span id="full-name">{profile.name}</span><br />
-                                <span>{profile.gender} | {profile.age}</span><br />
+                                <span id="username">Username: {profile.username}</span><br />
+                                <span>{profile?.gender} | {profile?.age}</span><br />
                             </p>
                             {checkMedical
                                 ? null
-                                : <Link to={`/chat/${medicalId}`} id="sendMessage" onClick={setChatName}>Send Message</Link>
+                                : <Link to={`/chat/${userId}`} id="sendMessage" onClick={setChatName}>Send Message</Link>
                             }
                         </div>
                     </div>
@@ -73,25 +99,25 @@ function PublicMedicalProfile() {
                         <table className="responsive-table">
                             <tbody>
                                 <tr>
-                                    <td>Department</td><td>{profile.department}</td>
+                                    <td>Department</td><td>{profile?.department}</td>
                                 </tr>
                                 <tr>
-                                    <td>Phone Number</td><td>{profile.phone}</td>
+                                    <td>Phone Number</td><td>{profile?.phone}</td>
                                 </tr>
                                 <tr>
-                                    <td>Email</td><td>{profile.email}</td>
+                                    <td>Email</td><td>{profile?.email}</td>
                                 </tr>
                                 <tr>
-                                    <td>Areas of Focus</td><td>{profile.areas}</td>
+                                    <td>Areas of Focus</td><td>{profile?.areas}</td>
                                 </tr>
                                 <tr>
-                                    <td>Practice location:</td><td>{profile.practiceLocation}</td>
+                                    <td>Practice location:</td><td>{profile?.practiceLocation}</td>
                                 </tr>
                             </tbody>
                         </table>
                         {checkMedical
-                        ? <div><button id="deleteUserBtn" type="submit">Delete</button>
-                        <Link to={`/edit/user/${profile.id}`} id="editUserBtn">Edit</Link></div>
+                        ? <div><button onClick={onDeleteMedical} id="deleteUserBtn" type="submit">Delete</button>
+                        <Link to={`/medicals/edit/${profile._id}`} id="editUserBtn">Edit</Link></div>
                         : null
                         }
                     </div>

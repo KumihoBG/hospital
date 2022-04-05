@@ -92,7 +92,7 @@ const loginUser = asyncHandler(async (req, res) => {
 })
 
 const logoutUser = ((req, res) => {
-  res.status(200).json({
+  res.status(200).redirect('/home').json({
     message: "User logged out"
   })
 })
@@ -100,7 +100,12 @@ const logoutUser = ((req, res) => {
 const getSinglePatient = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.userId);
   res.status(200).json(user);
-})
+});
+
+const getSingleMedical = asyncHandler(async (req, res) => {
+  const user = await Medical.findById(req.params.userId);
+  res.status(200).json(user);
+});
 
 const getMyMedical = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.userId);
@@ -293,5 +298,6 @@ module.exports = {
   registerAdmin,
   loginAdmin,
   deleteSinglePatient,
-  editSinglePatient
+  editSinglePatient,
+  getSingleMedical
 }

@@ -23,6 +23,7 @@ import Socket from './components/Socket/Socket.js';
 import RegisterAdmin from './components/RegisterAdmin/RegisterAdmin.js';
 import LoginAdmin from './components/LoginAdmin/LoginAdmin.js';
 import EditUser from './components/EditUser/EditUser.js';
+import EditMedical from './components/EditMedical/EditMedical.js';
 
 const MyPatients = lazy(() => {
   return Promise.all([
@@ -32,11 +33,7 @@ const MyPatients = lazy(() => {
 });
 
 function App() {
-  const isMedical = sessionStorage.getItem('role') === 'medical-professional';
   const isAdmin = sessionStorage.getItem('role') === 'admin';
-  const checkMedical = isMedical === true;
-  const name = sessionStorage.getItem('chatName');
-
   function FullSpinner() {
     return (
       <div className="full-spinner">
@@ -51,19 +48,20 @@ function App() {
       <ToastContainer />
       <main>
         <Routes>
-          <Route path='/' element={<Home />}>
-            <Route path='/home' element={<Home />} />
-          </Route>
-          <Route path='/users/login-admin' element={<LoginAdmin />} />
-              <Route path='/users/register-admin' element={<RegisterAdmin />} />
-          <Route path='/staff' element={<FindDoctor />} />
-          <Route path='/medicals' element={<MedicalProfessionalCollection />} />
           <Route element={<PublicRoutes />}>
             <Route path='/users/patient/login' element={<Login />} />
             <Route path='/users/medical/login' element={<LoginMedical />} />
             <Route path='/users/register-patient' element={<Register />} />
             <Route path='/users/register-medical' element={<RegisterMedical />} />
           </Route>
+          
+          <Route path='/' element={<Home />}>
+            <Route path='/home' element={<Home />} />
+          </Route>
+          <Route path='/users/login-admin' element={<LoginAdmin />} />
+          <Route path='/users/register-admin' element={<RegisterAdmin />} />
+          <Route path='/staff' element={<FindDoctor />} />
+          <Route path='/medicals' element={<MedicalProfessionalCollection />} />
           {isAdmin
             ? <Route>
               <Route path='/users/admin/dashboard/:userId' element={<LoginAdmin />} />
@@ -72,20 +70,19 @@ function App() {
           }
 
           <Route element={<PrivateRoutes />}>
-            {checkMedical
-              ? <Route path='/users/medical/:userId' element={<PublicMedicalProfile />} />
-              : <Route path='/users/patient/:userId' element={<PublicPatientProfile />} />
-            }
+            <Route path='/users/medical/:userId' element={<PublicMedicalProfile />} />
+            <Route path='/users/patient/:userId' element={<PublicPatientProfile />} />
             <Route path='/medicals/my-patients/:userId' element={
               <Suspense fallback={<FullSpinner />}>
                 <MyPatients />
               </Suspense>
             } />
             <Route path='/users/patient/:userId/edit' element={<EditUser />} />
+            <Route path='/medicals/edit/:userId' element={<EditMedical />} />
             <Route path='/medicals/request-appointment/:userId' element={<Appointments />} />
             <Route path='/my-medical-professional/:medicalId' element={<PublicMedicalProfile />} />
             <Route path='/my-patients/patient/:patientId' element={<PublicPatientProfile />} />
-            <Route path='/chat/:userId' element={<Socket name={name} />} />
+            <Route path='/chat/:userId' element={<Socket />} />
           </Route>
 
           <Route path='*' element={<NotFoundPage />} />

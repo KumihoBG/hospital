@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { getPatientProfile, editSingleUser } from '../../features/auth/authAPI.js';
+import { getMedicalProfile, editSingleMedical } from '../../features/auth/authAPI.js';
 
-function EditUser() {
-    const [user, setCurrentUser] = useState({});
+function EditMedical() {
     const { userId } = useParams();
+    const [user, setCurrentUser] = useState({});
     const navigate = useNavigate();
-
     useEffect(() => {
-        getCurrentPatient();
+        getCurrentMedical();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const getCurrentPatient = async () => {
+    const getCurrentMedical = async () => {
         try {
-            const singleProfile = await getPatientProfile(userId);
+            const singleProfile = await getMedicalProfile(userId);
             setCurrentUser(singleProfile);
         } catch (err) {
-            console.log(err.message);
+            console.log(err.message)
         }
     }
 
@@ -29,9 +28,11 @@ function EditUser() {
         let username = formData.get('username');
         let email = formData.get('email');
         let imageUrl = formData.get('imageUrl');
-        let address = formData.get('address');
         let phone = formData.get('phone');
         let age = formData.get('age');
+        let department = formData.get('department');
+        let areas = formData.get('areas');
+        let practiceLocation = formData.get('practiceLocation');
 
         const newUser = {
             name: name,
@@ -41,15 +42,17 @@ function EditUser() {
             role: user.role,
             gender: user.gender,
             imageUrl: imageUrl,
-            address: address,
             phone: phone,
             age: age,
-            myMedicalProfessional: user.myMedicalProfessional,
+            department: department,
+            areas: areas,
+            practiceLocation: practiceLocation,
+            myPatients: user.myPatients,
             myAppointments: user.myAppointments
         }
 
         try {
-            const result = await editSingleUser(userId, newUser);
+            const result = await editSingleMedical(userId, newUser);
             toast('Your account was updated successfully!', {
                 position: "top-right",
                 autoClose: 5000,
@@ -59,7 +62,7 @@ function EditUser() {
                 draggable: true,
                 progress: undefined,
             });
-            navigate(`/users/patient/${userId}`, { replace: true });
+            navigate(`/users/medical/${userId}`, { replace: true });
             return result;
         } catch (err) {
             console.log(err.message);
@@ -91,12 +94,16 @@ function EditUser() {
                     <input className="edit-input" type="email" name="email" id="email" defaultValue={user.email}></input><br />
                     <label htmlFor="imageUrl">Edit Image:</label><br />
                     <input className="edit-input" type="text" name="imageUrl" id="imageUrl" defaultValue={user.imageUrl}></input><br />
-                    <label htmlFor="address">Edit Full Name:</label><br />
-                    <input className="edit-input" type="text" name="address" id="address" defaultValue={user.address}></input><br />
                     <label htmlFor="phone">Edit Phone:</label><br />
                     <input className="edit-input" type="text" name="phone" id="phone" defaultValue={user.phone}></input><br />
                     <label htmlFor="age">Edit Age:</label><br />
                     <input className="edit-input" type="text" name="age" id="age" defaultValue={user.age}></input><br />
+                    <label htmlFor="department">Edit Department:</label><br />
+                    <input className="edit-input" type="text" name="department" id="department" defaultValue={user.department}></input><br />
+                    <label htmlFor="age">Edit Areas:</label><br />
+                    <input className="edit-input" type="text" name="areas" id="areas" defaultValue={user.areas}></input><br />
+                    <label htmlFor="age">Edit Practice Location:</label><br />
+                    <input className="edit-input" type="text" name="practiceLocation" id="practiceLocation" defaultValue={user.practiceLocation}></input><br />
                     <button id="submitEditUserBtn" type="submit">Edit</button>
                 </form>
                 <button id="cancelEditUserBtn" type="submit" onClick={goBack}>Cancel</button>
@@ -105,4 +112,4 @@ function EditUser() {
     )
 }
 
-export default EditUser;
+export default EditMedical;

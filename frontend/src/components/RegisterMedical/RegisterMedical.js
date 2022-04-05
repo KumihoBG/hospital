@@ -65,8 +65,8 @@ function RegisterMedical() {
         } else {
             if (imageUrl === '') {
                 switch(gender) {
-                    case "male": imageUrl = 'male.jpg'; break;
-                    case "female": imageUrl = 'female.jpg'; break;
+                    case "male": imageUrl = '/male.jpg'; break;
+                    case "female": imageUrl = '/female.jpg'; break;
                     default: break;
                 }
             }
@@ -84,8 +84,13 @@ function RegisterMedical() {
                 areas,
                 practiceLocation
             }
-
-            dispatch(registerMedical(userData))
+            try {
+                dispatch(registerMedical(userData))
+            } catch(err) {
+                console.log(err.message)
+                dispatch(reset())
+                dispatch(isError(err.message))
+            }   
         }
     }
 
