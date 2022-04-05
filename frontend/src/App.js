@@ -22,6 +22,7 @@ import PublicPatientProfile from './components/PublicPatientProfile/PublicPatien
 import Socket from './components/Socket/Socket.js';
 import RegisterAdmin from './components/RegisterAdmin/RegisterAdmin.js';
 import LoginAdmin from './components/LoginAdmin/LoginAdmin.js';
+import EditUser from './components/EditUser/EditUser.js';
 
 const MyPatients = lazy(() => {
   return Promise.all([
@@ -80,6 +81,7 @@ function App() {
                 <MyPatients />
               </Suspense>
             } />
+            <Route path='/users/patient/:userId/edit' element={<EditUser />} />
             <Route path='/medicals/request-appointment/:userId' element={<Appointments />} />
             <Route path='/my-medical-professional/:medicalId' element={<PublicMedicalProfile />} />
             <Route path='/my-patients/patient/:patientId' element={<PublicPatientProfile />} />

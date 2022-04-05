@@ -24,11 +24,11 @@ function PublicPatientProfile() {
     useEffect(() => {
         getMedicalProfileInfo();
         getMyDoctorInfo();
-        getMedicalName();
+        getCurrentPatient();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const getMedicalName = async () => {
+    const getCurrentPatient = async () => {
         try {
             const singleProfile = await getPatientProfile(patientId);
             setProfile(singleProfile);

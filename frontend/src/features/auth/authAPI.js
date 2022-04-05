@@ -77,15 +77,15 @@ const login = async (userData) => {
       body: JSON.stringify(userData)
     });
     const data = await response.json();
-   
+
     sessionStorage.setItem('user', JSON.stringify(data));
     sessionStorage.setItem('userId', data._id);
     sessionStorage.setItem('username', data.username);
     sessionStorage.setItem('email', data.email);
     sessionStorage.setItem('role', data.role);
-      if(data.myMedicalProfessional !== null || data.myMedicalProfessional !== undefined) {
-        sessionStorage.setItem('hasDoctor', true);
-      }
+    if (data.myMedicalProfessional !== null || data.myMedicalProfessional !== undefined) {
+      sessionStorage.setItem('hasDoctor', true);
+    }
     return data;
   } catch (error) {
     console.error(error);
@@ -143,7 +143,7 @@ const logout = async () => {
   sessionStorage.removeItem('role');
   sessionStorage.removeItem('user');
   sessionStorage.removeItem('hasDoctor');
-  sessionStorage.removeItem('myDoctor');  
+  sessionStorage.removeItem('myDoctor');
   sessionStorage.removeItem('chatName');
 }
 
@@ -228,27 +228,32 @@ export const isAuthenticated = () => {
 
 export async function deleteSingleUser(userId) {
   try {
-      const response = await fetch(`${BASE_LOCAL_URL}/users/patient/${userId}/delete`, {
-          method: 'DELETE'
-      });
-      const data = await response.json();
-      console.log('data', data);
-      return data;
+    const response = await fetch(`${BASE_LOCAL_URL}/users/patient/${userId}/delete`, {
+      method: 'DELETE'
+    });
+    const data = await response.json();
+    console.log('data', data);
+    return data;
   } catch (error) {
-      console.error(error);
-      return error;
+    console.error(error);
+    return error;
   }
 }
 
-export async function deleteSingleMedical(userId) {
+export async function editSingleUser(userId, newUser) {
   try {
-      const response = await fetch(`${BASE_LOCAL_URL}/medicals/${userId}`, {
-          method: 'DELETE'
-      });
-      const data = await response.json();
-      return data;
+    const userUpdated = await fetch(`${BASE_LOCAL_URL}/users/patient/${userId}/edit`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT',
+      body: JSON.stringify(newUser)
+    });
+    const result = await userUpdated.json();
+    return result;
   } catch (error) {
-      console.error(error);
+    console.error(error);
+    return error;
   }
 }
 
@@ -265,7 +270,7 @@ const authService = {
   getUser,
   isAuthenticated,
   deleteSingleUser,
-  deleteSingleMedical
+  editSingleUser
 }
 
 export default authService;

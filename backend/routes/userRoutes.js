@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { registerUser, loginUser, logoutUser, getSinglePatient, getMyMedical, chooseMedicalAction, cancelMedical, registerAdmin, loginAdmin, deleteSinglePatient } = require('../controllers/userController');
+const { registerUser, loginUser, logoutUser, getSinglePatient, getMyMedical, chooseMedicalAction, cancelMedical, registerAdmin, loginAdmin, deleteSinglePatient, editSinglePatient } = require('../controllers/userController');
 const { registerMedicalProfessional, loginMedicalUser, getSingleMedical }  = require('../controllers/medicalController');
 
 // const { protect } = require('../middleware/authMiddleware');
@@ -14,6 +14,7 @@ router.post('/medical/login', loginMedicalUser);
 router.get('/medical/:userId', getSingleMedical);
 router.get('/patient/:userId', getSinglePatient);
 router.delete('/patient/:userId/delete', deleteSinglePatient);
+router.put('/patient/:userId/edit', editSinglePatient);
 router.get('/patient/:userId/my-medical-professional', getMyMedical);
 router.post('/patient/:userId/choose-my-medical-professional', chooseMedicalAction);
 router.put('/patient/:userId/cancel-my-medical-professional', cancelMedical);

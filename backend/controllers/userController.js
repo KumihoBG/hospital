@@ -243,15 +243,40 @@ const loginAdmin = asyncHandler(async (req, res) => {
 })
 
 const deleteSinglePatient = asyncHandler(async (req, res) => {
-  console.log('req.params.userId', req.params.userId);
   try {
     const user = await User.findById(req.params.userId);
     if (!user) {
         throw new Error('You are not authorized to delete this account.');
     }
-    console.log('User deleted');
     res.redirect('/home');
     return await User.findByIdAndDelete(user._id);
+} catch(err) {
+    console.log(err.message);
+    return err;
+}});
+
+const editSinglePatient = asyncHandler(async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+
+    const newUser = req.body;
+    if (!user) {
+        throw new Error('You are not authorized to edit this account.');
+    }
+    user.name = newUser.name.trim();
+    user.username = newUser.username.trim();
+    user.email = newUser.email.trim();
+    user.hashedPassword = newUser.hashedPassword.trim();
+    user.role = user.role;
+    user.gender = user.gender;
+    user.imageUrl = newUser.imageUrl.trim();
+    user.address = newUser.address.trim();
+    user.phone = newUser.phone.trim();
+    user.age = newUser.age.trim();
+    user.myMedicalProfessional = user.myMedicalProfessional;
+    user.myAppointments = user.myAppointments;
+    await user.save();
+    return res.status(200).json(user);
 } catch(err) {
     console.log(err.message);
     return err;
@@ -267,5 +292,6 @@ module.exports = {
   cancelMedical,
   registerAdmin,
   loginAdmin,
-  deleteSinglePatient
+  deleteSinglePatient,
+  editSinglePatient
 }
