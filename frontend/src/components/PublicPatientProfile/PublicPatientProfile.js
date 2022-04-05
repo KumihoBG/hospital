@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import { useSelector } from 'react-redux';
 import { getPatientProfile, getMyDoctor, getMedicalProfile, deleteSingleUser } from '../../features/auth/authAPI.js';
+import { toast } from 'react-toastify';
 
 function PublicPatientProfile() {
     const location = useLocation();
@@ -48,7 +49,7 @@ function PublicPatientProfile() {
     const getMedicalProfileInfo = async () => {
         try {
             const data = await getMedicalProfile(myDoctor || user._id);
-            setMedicalName(data.name);
+            setMedicalName(data?.name);
         } catch (err) {
             console.log(err.message);
             setMedicalName('Not chosen yet');
@@ -61,24 +62,43 @@ function PublicPatientProfile() {
         }
     }
 
-    async function onDeleteUser(event) {
-        event.preventDefault();
+    async function onDeleteUser() {
         try {
-        await deleteSingleUser(profile._id);
-        sessionStorage.removeItem('userId');
-        sessionStorage.removeItem('username');
-        sessionStorage.removeItem('email');
-        sessionStorage.removeItem('role');
-        sessionStorage.removeItem('user');
-        sessionStorage.removeItem('hasDoctor');
-        sessionStorage.removeItem('myDoctor');  
-        sessionStorage.removeItem('chatName');
-        window.location.reload();
+            sessionStorage.removeItem('userId');
+            sessionStorage.removeItem('username');
+            sessionStorage.removeItem('email');
+            sessionStorage.removeItem('role');
+            sessionStorage.removeItem('user');
+            sessionStorage.removeItem('hasDoctor');
+            sessionStorage.removeItem('myDoctor');
+            sessionStorage.removeItem('chatName');
+            await deleteSingleUser(profile._id);
+
+            toast('User deleted successfully! Redirecting to home page', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
+            setTimeout(() => {
+                window.location.replace('/home');
+            }, 5000);
         } catch (err) {
+            toast(`${err}`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
             console.log(err.message);
         }
     }
-
 
     return (
         <div>
@@ -86,7 +106,7 @@ function PublicPatientProfile() {
                 <Grid id="patient-info-container" item xs={6}>
                     <div className="patient-info">
                         <div>
-                            <Avatar className="avatar" alt="Doctor Smith" src={profile.imageUrl} sx={{ width: 150, height: 150 }} />
+                            <Avatar className="avatar" alt="Doctor Smith" src={profile?.imageUrl} sx={{ width: 150, height: 150 }} />
                         </div>
                         <div>
                             <p>
@@ -119,9 +139,9 @@ function PublicPatientProfile() {
                             </tbody>
                         </table>
                         {!checkMedical
-                        ? <div><button onClick={(e) => { onDeleteUser(e) }} id="deleteUserBtn" type="submit">Delete</button>
-                        <Link to={`/edit/user/${profile.id}`} id="editUserBtn">Edit</Link></div>
-                        : null
+                            ? <div><button onClick={onDeleteUser} id="deleteUserBtn" type="submit">Delete</button>
+                                <Link to={`/users/patient/${profile._id}/edit`} id="editUserBtn">Edit</Link></div>
+                            : null
                         }
                     </div>
                     <div className="medication-details">

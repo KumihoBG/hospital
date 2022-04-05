@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
 import logoImage from '../../images/logo.png';
 import { useDispatch } from 'react-redux';
 import { FaHospitalUser, FaUser, FaSignInAlt, FaSignOutAlt, FaWhmcs } from "react-icons/fa";
 import { logout, reset } from '../../features/auth/authSlice.js';
+import { M } from 'materialize-css/dist/js/materialize.min.js';
 
 function Navigation() {
     const isMedical = sessionStorage.getItem('role') === 'medical-professional';
@@ -18,6 +19,14 @@ function Navigation() {
     const splitLocation = pathname.split("/");
 
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        document.addEventListener('DOMContentLoaded', function() {
+            let elems = document.querySelectorAll('.dropdown-trigger');
+            // eslint-disable-next-line no-unused-vars
+            let instances = M.Dropdown.init(elems);
+          });
+    }, [])
     const onLogout = () => {
         dispatch(logout());
         dispatch(reset());

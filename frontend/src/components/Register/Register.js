@@ -63,8 +63,8 @@ function Register() {
         } else {
             if (imageUrl === '') {
                 switch(gender) {
-                    case "male": imageUrl = 'male.jpg'; break;
-                    case "female": imageUrl = 'female.jpg'; break;
+                    case "male": imageUrl = '/male.jpg'; break;
+                    case "female": imageUrl = '/female.jpg'; break;
                     default: break;
                 }
             }
@@ -80,7 +80,13 @@ function Register() {
                 phone,
                 age
             }
-            dispatch(register(userData))
+            try {
+                dispatch(register(userData))
+            } catch(err) {
+                console.log(err.message)
+                dispatch(reset())
+                dispatch(isError(err.message))
+            }   
         }
     }
 

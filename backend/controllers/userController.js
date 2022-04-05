@@ -4,7 +4,6 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 const Medical = require('../models/medicalModel');
 const Admin = require('../models/adminModel');
-const { getUserByEmail } = require('../services/userService');
 
 const registerUser = asyncHandler(async (req, res) => {
   const { name, username, email, password, role, gender, imageUrl, address, phone, age } = req.body;
@@ -133,6 +132,16 @@ const chooseMedicalAction = asyncHandler(async (req, res) => {
   return Promise.all([user.save(), medical.save()]);
 })
 
+async function getUserByEmail(email) {
+  try {
+      const pattern = new RegExp(`^${email}$`, 'i');
+      const user = await User.findOne({ email: { $regex: pattern }});
+      return user;
+  } catch (error) {
+  console.error(error);
+  }
+}
+
 const cancelMedical = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.userId);
   const medical = await Medical.findById(req.body._id);
@@ -233,6 +242,21 @@ const loginAdmin = asyncHandler(async (req, res) => {
   }
 })
 
+const deleteSinglePatient = asyncHandler(async (req, res) => {
+  console.log('req.params.userId', req.params.userId);
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+        throw new Error('You are not authorized to delete this account.');
+    }
+    console.log('User deleted');
+    res.redirect('/home');
+    return await User.findByIdAndDelete(user._id);
+} catch(err) {
+    console.log(err.message);
+    return err;
+}});
+
 module.exports = {
   registerUser,
   loginUser,
@@ -242,5 +266,6 @@ module.exports = {
   chooseMedicalAction,
   cancelMedical,
   registerAdmin,
-  loginAdmin
+  loginAdmin,
+  deleteSinglePatient
 }

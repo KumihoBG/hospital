@@ -19,6 +19,7 @@ const register = async (userData) => {
     return data;
   } catch (error) {
     console.error(error);
+    return error;
   }
 }
 
@@ -227,13 +228,15 @@ export const isAuthenticated = () => {
 
 export async function deleteSingleUser(userId) {
   try {
-      const response = await fetch(`${BASE_LOCAL_URL}/users/${userId}`, {
+      const response = await fetch(`${BASE_LOCAL_URL}/users/patient/${userId}/delete`, {
           method: 'DELETE'
       });
       const data = await response.json();
+      console.log('data', data);
       return data;
   } catch (error) {
       console.error(error);
+      return error;
   }
 }
 
