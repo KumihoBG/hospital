@@ -23,7 +23,7 @@ function PublicPatientProfile() {
         (state) => state.auth
     )
     // eslint-disable-next-line no-unused-vars
-    
+
     useEffect(() => {
         getCurrentPatient();
         getMedicalProfileInfo();
@@ -41,7 +41,7 @@ function PublicPatientProfile() {
         }
     }
 
-    
+
     const getCurrentPatientAppointments = async () => {
         try {
             const singleProfile = await getPatientProfile(patientId);
@@ -60,8 +60,8 @@ function PublicPatientProfile() {
                 progress: undefined,
             })
         }
-    }   
- 
+    }
+
     const getMedicalProfileInfo = async () => {
         try {
             const data = await getMedicalProfile(myDoctor || user._id);
@@ -185,15 +185,19 @@ function PublicPatientProfile() {
                         <h5>Medical History</h5>
                     </div>
                     <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
-                    <div className="section-title">
-                        <h5>My appointments</h5>
-                    </div>
-                    <ul className="appointment-block">
-                        {myAppointments
-                            ? <div id="appointments-list">{<Appointment appointment={myAppointments} key={myAppointments._id} />}</div>
-                            : <div><p id="no-appointments">No appointments yet</p></div>
-                        }
-                    </ul>
+                    {checkMedical
+                        ? ""
+                        : <><div className="section-title">
+                            <h5>My appointments</h5>
+                        </div>
+                            <ul className="appointment-block">
+                                {myAppointments
+                                    ? <div id="appointments-list">{<Appointment appointment={myAppointments} key={myAppointments._id} />}</div>
+                                    : <div><p id="no-appointments">No appointments yet</p></div>
+                                }
+                            </ul></>
+                    }
+
                     <div className="section-title">
                         <h5>Medical examinations and results</h5>
                     </div>
