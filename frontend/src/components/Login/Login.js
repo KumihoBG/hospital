@@ -26,7 +26,9 @@ function Login() {
 
         if (isSuccess || user) {
             navigate('/home');
-            sessionStorage.setItem('myDoctor', user.medical[0]);
+            if (user.medical[0] !== undefined) {
+                sessionStorage.setItem('myDoctor', user.medical[0]);
+            }
         }
 
         dispatch(reset())

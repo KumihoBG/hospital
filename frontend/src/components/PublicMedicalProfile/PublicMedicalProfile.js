@@ -12,6 +12,7 @@ function PublicMedicalProfile() {
     const [profile, setProfile] = useState([]);
     const isMedical = sessionStorage.getItem('role') === 'medical-professional';
     const checkMedical = isMedical === true;
+    // eslint-disable-next-line no-unused-vars
     const { user } = useSelector(
         (state) => state.auth
     )
@@ -23,7 +24,8 @@ function PublicMedicalProfile() {
 
     const getMedicalProfileInfo = async () => {
         try {
-            const singleProfile = await getMedicalProfile(user._id || medicalId);
+            const singleProfile = await getMedicalProfile(userId || medicalId);
+            console.log('singleProfile', singleProfile);
             setProfile(singleProfile);
         } catch (err) {
             console.log(err.message)

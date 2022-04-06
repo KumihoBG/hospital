@@ -35,7 +35,7 @@ function MedicalProfessional({ medical }) {
       console.log(err.message)
     }
   }
-  console.log('hasDoctor', hasDoctor);
+
   return (
     <div className="row">
       <div className="col s12 m7">
@@ -62,9 +62,6 @@ function MedicalProfessional({ medical }) {
                     </div>
                       <div className="card-action">
                         <Link to={`/medicals/request-appointment/${medical._id}`} state={medical._id}>Request an appointment</Link>
-                      </div>
-                      <div className="send-message">
-                        <button className="sendMessageOption">Send Message</button>
                       </div>
                     </div>
                     : ""

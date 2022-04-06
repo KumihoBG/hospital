@@ -77,15 +77,15 @@ const login = async (userData) => {
       body: JSON.stringify(userData)
     });
     const data = await response.json();
-
+    console.log(data.myMedicalProfessional);
     sessionStorage.setItem('user', JSON.stringify(data));
     sessionStorage.setItem('userId', data._id);
     sessionStorage.setItem('username', data.username);
     sessionStorage.setItem('email', data.email);
     sessionStorage.setItem('role', data.role);
-    if (data.myMedicalProfessional !== null || data.myMedicalProfessional !== undefined) {
+    if (data.myMedicalProfessional !== undefined) {
       sessionStorage.setItem('hasDoctor', true);
-    }
+    } 
     return data;
   } catch (error) {
     console.error(error);
@@ -153,7 +153,6 @@ export const getMedicalProfile = async (userId) => {
   try {
     const response = await fetch(`${BASE_LOCAL_URL}/users/medical/${userId}`);
     const data = await response.json();
-    console.log('data', data);
     return data;
   } catch (error) {
     console.error(error);

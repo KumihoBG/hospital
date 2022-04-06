@@ -14,6 +14,7 @@ function PublicPatientProfile() {
     const [profile, setProfile] = useState([]);
     const isMedical = sessionStorage.getItem('role') === 'medical-professional';
     const checkMedical = isMedical === true;
+    // eslint-disable-next-line no-unused-vars
     const [doctor, setDoctor] = useState([]);
     const [medicalName, setMedicalName] = useState([]);
     const { user } = useSelector(
@@ -151,7 +152,7 @@ function PublicPatientProfile() {
                         </div>
                         <p>Patient of Medical Professional:<br />
                             <span className='bolder-names'>
-                                <Link to={`/my-medical-professional/${doctor}`}>
+                                <Link to={`/my-medical-professional/${myDoctor}`}>
                                     {medicalName}
                                 </Link>
                             </span>
