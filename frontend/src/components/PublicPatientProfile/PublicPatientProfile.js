@@ -41,7 +41,6 @@ function PublicPatientProfile() {
         }
     }
 
-
     const getCurrentPatientAppointments = async () => {
         try {
             const singleProfile = await getPatientProfile(patientId);

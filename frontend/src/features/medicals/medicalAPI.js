@@ -65,3 +65,24 @@ export async function searchMedicals(searchText) {
     console.error(error.message);
   }
 }
+
+// Get all patients
+export async function getAllAppointments() {
+  try {
+    const response = await fetch(`${BASE_LOCAL_URL}/medicals/appointments`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function checkForAppointment(userId) {
+  try {
+    const response = await fetch(`${BASE_LOCAL_URL}/medicals/appointments/check-for-approval/${userId}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}

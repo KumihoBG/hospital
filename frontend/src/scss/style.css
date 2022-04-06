@@ -1202,7 +1202,8 @@ ul:not(.browser-default) {
 }
 
 #deleteUserBtn,
-#editUserBtn {
+#editUserBtn,
+#checkBtn {
   background: #9adaff;
   color: rgba(39, 32, 32, 0.6);
   padding: 10px 40px;

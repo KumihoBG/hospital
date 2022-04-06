@@ -14,7 +14,7 @@ async function getAllPatients(userId) {
 }
 
 async function getAllAppointments() {
-  let query = await Appointment.find();
+  let query = await Appointment.find().populate('patient').populate('medical').exec();
   return query;
 }
 
@@ -35,11 +35,12 @@ async function requestAppointment(medicalId, userId, newAppointment) {
   return Promise.all([user.save(), medical.save(), appointment.save()]);
 }
 
-async function approveAppointment(medicalId, userId, appointmentId) {
-  const medical = await Medical.findById(medicalId);
+async function approveAppointment(medicalId) {
   const user = await User.findById(userId);
-  const appointment = await Appointment.findById(appointmentId);
-  medical.myAppointments.push(appointment);
+  const allAppointments = await getAllAppointments();
+  const appointment = allAppointments.find(appointment => appointment._id.toString() === appointmentId);
+  console.log('appointment', appointment);
+  // medical.myAppointments.push(appointment);
   return Promise.all([user.save(), medical.save()]);
 }
 
