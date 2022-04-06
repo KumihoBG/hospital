@@ -77,13 +77,12 @@ const login = async (userData) => {
       body: JSON.stringify(userData)
     });
     const data = await response.json();
-    console.log(data.myMedicalProfessional);
     sessionStorage.setItem('user', JSON.stringify(data));
     sessionStorage.setItem('userId', data._id);
     sessionStorage.setItem('username', data.username);
     sessionStorage.setItem('email', data.email);
     sessionStorage.setItem('role', data.role);
-    if (data.myMedicalProfessional !== undefined) {
+    if (data.medical !== undefined) {
       sessionStorage.setItem('hasDoctor', true);
     } 
     return data;

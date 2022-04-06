@@ -25,7 +25,6 @@ function PublicMedicalProfile() {
     const getMedicalProfileInfo = async () => {
         try {
             const singleProfile = await getMedicalProfile(userId || medicalId);
-            console.log('singleProfile', singleProfile);
             setProfile(singleProfile);
         } catch (err) {
             console.log(err.message)
@@ -80,7 +79,7 @@ function PublicMedicalProfile() {
                 <Grid id="patient-info-container" item xs={6}>
                     <div className="patient-info">
                         <div>
-                            <Avatar className="avatar" alt="Doctor Smith" src={profile?.imageUrl} sx={{ width: 150, height: 150 }} />
+                            <Avatar className="avatar" alt="Doctor" src={profile?.imageUrl} sx={{ width: 150, height: 150 }} />
                         </div>
                         <div>
                             <p>
@@ -91,7 +90,8 @@ function PublicMedicalProfile() {
                             </p>
                             {checkMedical
                                 ? null
-                                : <Link to={`/chat/${userId}`} id="sendMessage" onClick={setChatName}>Send Message</Link>
+                                : <><Link to={`/chat/${userId || user.medical[0]}`} className="profile-buttons" onClick={setChatName}>Send Message</Link><br />
+                                <Link className="profile-buttons" to={`/medicals/request-appointment/${userId || user.medical[0]}`}>Request an appointment</Link></>
                             }
                         </div>
                     </div>

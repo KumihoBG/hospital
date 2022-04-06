@@ -357,8 +357,8 @@
   color: #b37627;
 }
 
-.sendMessageOption, #sendBtn,
-#joinBtn {
+.sendMessageOption, #chat-container #sendBtn,
+#chat-container #joinBtn {
   background: #499cdf;
   color: #fff;
   padding: 10px 20px;
@@ -1022,7 +1022,7 @@ ul:not(.browser-default) {
   padding: 3%;
 }
 
-#message-container {
+#chat-container #message-container {
   width: 100%;
   height: 40vh;
   max-width: 800px;
@@ -1031,18 +1031,18 @@ ul:not(.browser-default) {
   border-radius: 20px;
 }
 
-#message-container div {
+#chat-container #message-container div {
   background-color: #CCC;
   padding: 10px;
   margin-top: 10px;
 }
 
-#message-container div:nth-child(2n) {
+#chat-container #message-container div:nth-child(2n) {
   background-color: #FFF;
   padding: 1%;
 }
 
-#send-container {
+#chat-container #send-container {
   background-color: white;
   max-width: 800px;
   width: 100%;
@@ -1051,17 +1051,28 @@ ul:not(.browser-default) {
   display: flex;
 }
 
-#message-input {
+#chat-container #message-input {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
   border-bottom: 0.5px solid #CCC;
   margin-right: 20px;
   margin-top: 30px;
+  color: #000;
 }
 
-#sendBtn,
-#joinBtn {
+#chat-container #message-input::-webkit-input-placeholder,
+#chat-container input::-webkit-input-placeholder {
+  color: #000;
+}
+
+#chat-container #message-input::placeholder,
+#chat-container input::-webkit-input-placeholder {
+  color: #000;
+}
+
+#chat-container #sendBtn,
+#chat-container #joinBtn {
   background: #096157;
   color: #fff;
   padding: 5px 10px;
@@ -1151,8 +1162,8 @@ ul:not(.browser-default) {
   margin: 2% auto;
 }
 
-.sendMessageBtn, #sendMessage, .sendMessageOption, #sendBtn,
-#joinBtn {
+.sendMessageBtn, #sendMessage, .sendMessageOption, #chat-container #sendBtn,
+#chat-container #joinBtn {
   background: #0a857a;
   color: #fff;
   padding: 10px 40px;
@@ -1161,8 +1172,20 @@ ul:not(.browser-default) {
   cursor: pointer;
 }
 
-.sendMessageOption, #sendBtn,
-#joinBtn {
+.patient-info .profile-buttons {
+  display: block;
+  background: #499cdf;
+  color: #fff;
+  padding: 10px 40px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 70%;
+  text-align: center;
+}
+
+.sendMessageOption, #chat-container #sendBtn,
+#chat-container #joinBtn {
   margin-left: 0;
 }
 
@@ -1221,9 +1244,11 @@ ul:not(.browser-default) {
   color: #499cdf;
 }
 
+#edit-user-details .loginForm-container input[type=text]:not(.browser-default),
 #edit-user-details .loginForm-container .edit-input {
   width: 100%;
-  background: #fff;
+  background-color: transparent;
+  color: #000;
   border: 0.5px solid #499cdf;
   margin: 15px auto;
   height: 30px;
@@ -1265,5 +1290,45 @@ ul:not(.browser-default) {
   background: #fff;
   color: #499cdf;
   margin: 20px 0;
+}
+
+.appointment-block {
+  background: #fff;
+  height: auto;
+  color: #499cdf;
+  border: 2px solid #499cdf;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+#no-appointments {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px;
+}
+
+#appointments-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding: 20px;
 }
 /*# sourceMappingURL=style.css.map */

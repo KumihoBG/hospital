@@ -3,31 +3,34 @@ import { Link, useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import { useSelector } from 'react-redux';
-import { getPatientProfile, getMyDoctor, getMedicalProfile, deleteSingleUser } from '../../features/auth/authAPI.js';
+import { getPatientProfile, getMedicalProfile, deleteSingleUser } from '../../features/auth/authAPI.js';
+import { getMyAppointment } from '../../features/appointments/appointmentsAPI.js';
 import { toast } from 'react-toastify';
+import Appointment from '../Appointment/Appointment.js';
+let appId = '';
+
 
 function PublicPatientProfile() {
     const location = useLocation();
-    const userId = sessionStorage.getItem('userId');
     let myDoctor = sessionStorage.getItem('myDoctor');
     const patientId = location.pathname.split('/')[3];
     const [profile, setProfile] = useState([]);
+    const [myAppointments, setMyAppointments] = useState([]);
     const isMedical = sessionStorage.getItem('role') === 'medical-professional';
     const checkMedical = isMedical === true;
-    // eslint-disable-next-line no-unused-vars
-    const [doctor, setDoctor] = useState([]);
     const [medicalName, setMedicalName] = useState([]);
     const { user } = useSelector(
         (state) => state.auth
     )
     // eslint-disable-next-line no-unused-vars
-
+    
     useEffect(() => {
-        getMedicalProfileInfo();
-        getMyDoctorInfo();
         getCurrentPatient();
+        getMedicalProfileInfo();
+        getCurrentPatientAppointments();
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, []);
 
     const getCurrentPatient = async () => {
         try {
@@ -38,15 +41,18 @@ function PublicPatientProfile() {
         }
     }
 
-    const getMyDoctorInfo = async () => {
+    
+    const getCurrentPatientAppointments = async () => {
         try {
-            const medicalId = await getMyDoctor(userId);
-            setDoctor(medicalId);
+            const singleProfile = await getPatientProfile(patientId);
+            appId = singleProfile.myAppointments[0];
+            const currentAppointment = await getMyAppointment(appId);
+            setMyAppointments(currentAppointment);
         } catch (err) {
-            console.log(err.message)
+            console.log(err.message);
         }
-    }
-
+    }   
+ 
     const getMedicalProfileInfo = async () => {
         try {
             const data = await getMedicalProfile(myDoctor || user._id);
@@ -171,9 +177,17 @@ function PublicPatientProfile() {
                     </div>
                     <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
                     <div className="section-title">
+                        <h5>My appointments</h5>
+                    </div>
+                    <ul className="appointment-block">
+                        {myAppointments
+                            ? <div id="appointments-list">{<Appointment appointment={myAppointments} key={myAppointments._id} />}</div>
+                            : <div><p id="no-appointments">No appointments yet</p></div>
+                        }
+                    </ul>
+                    <div className="section-title">
                         <h5>Medical examinations and results</h5>
                     </div>
-
                     <table className="responsive-table">
                         <tbody>
                             <tr>

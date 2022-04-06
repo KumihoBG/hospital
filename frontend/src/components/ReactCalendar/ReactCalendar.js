@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { requestAppointment } from '../../features/medicals/medicalAPI.js';
+import { toast } from 'react-toastify';
 
 function ReactCalendar() {
+    const navigate = useNavigate();
     const today = new Date()
     let tomorrow = new Date()
     tomorrow.setDate(today.getDate() + 1)
     const [date, setDate] = useState(tomorrow);
+    // eslint-disable-next-line no-unused-vars
     const [time, setTime] = useState();
     const [checkDate, setCheckDate] = useState(false);
     const [appointment, setAppointment] = useState('');
+    // eslint-disable-next-line no-unused-vars
     const [request, setRequest] = useState({});
     const patient = sessionStorage.getItem('userId');
     const { userId } = useParams();
@@ -39,19 +43,52 @@ function ReactCalendar() {
             date: appointment,
             time: hours
         }
+        const time = Number(newAppointment.time.split(':')[0]);
+        const timeCheck = time >= 10 && time <= 19;
+
+        if(timeCheck === false) {
+            toast('Please select a period during the working hours of your medical professional', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
+            return;
+        }
+
         if (newAppointment.date !== '' && newAppointment.time !== '') {
             try {
                 const patientAndMedical = await requestAppointment(userId, newAppointment);
                 setRequest(patientAndMedical);
-                
+                toast(`You requested an appointment for ${appointment} at ${newAppointment.time} o'clock. Please wait for approval.`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
+            navigate(`/users/patient/${patient}`);
             } catch (err) {
-                console.log(err.message)
+                console.log(err.message);
             }
         } else {
-            alert('Please select a date and time');
+            toast('Please select a date and time', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
         }
     }
-    console.log('request', request);
+
     return (
         <>
             <div className='calendar-container'>
@@ -83,10 +120,6 @@ function ReactCalendar() {
                     <small>Office hours are 10am to 7pm</small>
                 </div>
                 <button onClick={(event) => { createAppointment(event) }} type="submit" id='checkAppointmentBtn'>Request and appointment</button>
-
-                <div className="final-info">
-                    <h4>Your appointment is scheduled for {appointment} at {time} o'clock.</h4>
-                </div>
             </div>
         </>
 

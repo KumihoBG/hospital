@@ -1,0 +1,24 @@
+.appointment-block {
+    background: $white;
+    height: auto;
+    color: $light_blue;
+    border: 2px solid $light_blue;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+#no-appointments {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+#appointments-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}

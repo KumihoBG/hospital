@@ -13,20 +13,26 @@ async function getAllPatients(userId) {
   return query.myPatients;
 }
 
-async function createAppointment(appointment) {
-  const newAppointment = new Appointment(appointment);
-  await newAppointment.save();
+async function getAllAppointments() {
+  let query = await Appointment.find();
+  return query;
+}
+
+async function getCurrentAppointment(id) {
+  let query = await Appointment.findById(id).populate('patient').populate('medical').exec();
+  return query;
 }
 
 async function requestAppointment(medicalId, userId, newAppointment) {
   const medical = await Medical.findById(medicalId);
   const user = await User.findById(userId);
-
   if (!medical || !user) {
-    throw new ReferenceError('No such ID in database');
+    throw new ReferenceError('User does not exist');
   }
-  await createAppointment(newAppointment);
-  return Promise.all([user.save(), medical.save()]);
+  const appointment = new Appointment(newAppointment);
+  appointment.isApproved = 'No';
+  user.myAppointments.push(appointment);
+  return Promise.all([user.save(), medical.save(), appointment.save()]);
 }
 
 async function approveAppointment(medicalId, userId, appointmentId) {
@@ -34,7 +40,6 @@ async function approveAppointment(medicalId, userId, appointmentId) {
   const user = await User.findById(userId);
   const appointment = await Appointment.findById(appointmentId);
   medical.myAppointments.push(appointment);
-  user.myAppointments.push(appointment);
   return Promise.all([user.save(), medical.save()]);
 }
 
@@ -157,4 +162,6 @@ module.exports = {
   approveAppointment,
   deleteSingleMedical,
   editSingleMedical,
+  getAllAppointments,
+  getCurrentAppointment
 }

@@ -79,6 +79,20 @@
     @extend .sendMessageBtn;
 }
 
+.patient-info {
+    .profile-buttons {
+        display: block;
+        background:$light_blue;
+        color: $white;
+        padding: 10px 40px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        width: 70%;
+        text-align: center
+    }
+}
+
 .sendMessageOption {
     @extend .sendMessageBtn;
     margin-left: 0;
