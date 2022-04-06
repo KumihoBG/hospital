@@ -373,6 +373,13 @@
   margin: 3% 0 0 0;
 }
 
+.staff-container {
+  margin: 0 auto;
+  padding: 3%;
+  height: auto;
+  width: 100%;
+}
+
 .staff-container h6 {
   text-align: center;
   margin-bottom: 1%;

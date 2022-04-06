@@ -55,9 +55,9 @@ function FindDoctor() {
                     <h4 className="staff-title">Doctors & Medical Staff</h4>
                     <h6>Search Results</h6>
                     <ul className="collection">
-                        <div>{medicals.map(medical => {
+                        {medicals.map(medical => {
                             return <MedicalProfessional medical={medical} key={medical._id} />
-                        })}</div>
+                        })}
                     </ul>
                 </div>
             }

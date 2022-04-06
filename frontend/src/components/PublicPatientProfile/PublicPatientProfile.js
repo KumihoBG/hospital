@@ -50,6 +50,15 @@ function PublicPatientProfile() {
             setMyAppointments(currentAppointment);
         } catch (err) {
             console.log(err.message);
+            toast(`${err.message}`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
         }
     }   
  
