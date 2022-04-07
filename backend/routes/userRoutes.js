@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { registerUser, loginUser, logoutUser, getSinglePatient, getMyMedical, chooseMedicalAction, cancelMedical, registerAdmin, loginAdmin, deleteSinglePatient, editSinglePatient, getSingleMedical } = require('../controllers/userController');
+const { registerUser, loginUser, logoutUser, getSinglePatient, getMyMedical, chooseMedicalAction, cancelMedical, registerAdmin, loginAdmin, deleteSinglePatient, editSinglePatient, getSingleMedical, getMyExaminations } = require('../controllers/userController');
 const { registerMedicalProfessional, loginMedicalUser }  = require('../controllers/medicalController');
 
 router.post('/register-patient', registerUser);
@@ -14,6 +14,7 @@ router.get('/patient/:userId', getSinglePatient);
 router.delete('/patient/:userId/delete', deleteSinglePatient);
 router.put('/patient/:userId/edit', editSinglePatient);
 router.get('/patient/:userId/my-medical-professional', getMyMedical);
+router.get('/patient/:userId/my-examinations', getMyExaminations);
 router.post('/patient/:userId/choose-my-medical-professional', chooseMedicalAction);
 router.put('/patient/:userId/cancel-my-medical-professional', cancelMedical);
 router.get('/logout', logoutUser);

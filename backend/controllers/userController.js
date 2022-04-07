@@ -113,6 +113,12 @@ const getMyMedical = asyncHandler(async (req, res) => {
   res.status(200).json(myDoctor);
 });
 
+const getMyExaminations = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.userId);
+  const myExaminations = user.myExaminations;
+  res.status(200).json(myExaminations);
+});
+
 const chooseMedicalAction = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.userId);
   const medical = await Medical.findById(req.body._id);
@@ -299,5 +305,6 @@ module.exports = {
   loginAdmin,
   deleteSinglePatient,
   editSinglePatient,
-  getSingleMedical
+  getSingleMedical,
+  getMyExaminations
 }

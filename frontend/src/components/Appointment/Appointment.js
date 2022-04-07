@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import { toast } from 'react-toastify';
 import { requestExamination } from '../../features/examinations/examinationAPI';
+import authService from '../../features/auth/authAPI.js';
 const requestExamBtn = document.getElementById('requestExamBtn');
 
 function Appointment({ appointment }) {
   const [medicalInfo, setMedicalInfo] = useState({});
-  const [requested, setRequested] = useState(false);
+  const [examinationId, setExaminationId] = useState('');
+  const userId = sessionStorage.getItem('userId');
 
   useEffect(() => {
     setMedicalInfo(appointment);
+    getMyExaminationId();
+
     if (appointment.isApproved === "Yes") {
       toast('You have approved appointments. Check status.', {
         position: "top-right",
@@ -25,6 +29,16 @@ function Appointment({ appointment }) {
     }
 
   }, [appointment]);
+
+  async function getMyExaminationId() {
+    try {
+      const examinationId = await authService.getMyExamination(userId);
+      setExaminationId(examinationId);
+      return examinationId;
+    } catch(err) {
+      console.log(err.message)
+    }
+  }
 
   async function onRequestExamination(event) {
     event.preventDefault();
@@ -47,7 +61,6 @@ function Appointment({ appointment }) {
         draggable: true,
         progress: undefined,
       })
-      setRequested(true);
       return newExamination;
     } catch (err) {
       console.log(err.message);
@@ -83,9 +96,9 @@ function Appointment({ appointment }) {
           </p>
         </div>
       </div>
-      {!requested
+      {!examinationId
       ? <button id="requestExamBtn" type="submit" onClick={onRequestExamination}>Request examination</button>
-      : <button id="disabledBtn-patient" style={{ disabled: "true"}}>Requested</button>
+      : <button id="disabledBtn-patient" style={{ disabled: "true"}}>Examination Requested</button>
       } 
     </>
   )

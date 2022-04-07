@@ -180,6 +180,17 @@ export const getMyDoctor = async (userId) => {
   }
 }
 
+// Get my examination
+export const getMyExamination = async (userId) => {
+  try {
+    const response = await fetch(`${BASE_LOCAL_URL}/users/patient/${userId}/my-examinations`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // Choose single medical
 export const chooseMyDoctor = async (medicalId, userId) => {
   try {
@@ -301,7 +312,8 @@ const authService = {
   getUser,
   isAuthenticated,
   deleteSingleUser,
-  editSingleUser
+  editSingleUser,
+  getMyExamination
 }
 
 export default authService;

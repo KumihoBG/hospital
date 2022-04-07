@@ -85,7 +85,7 @@ function PublicMedicalProfile() {
             try {
                 const appointmentDetails = await getMyAppointment(currentAppointment);
                 setMyAppointments(appointmentDetails);
-            } catch(err) {
+            } catch (err) {
                 console.log(err.message);
                 toast(`${err.message}`, {
                     position: "top-right",
@@ -179,7 +179,10 @@ function PublicMedicalProfile() {
                                     }
                                 </ul></>
                         }
-                        <button type="submit" id="checkBtn" onClick={onCheck}>Check for appointment requests</button>
+                        {checkMedical
+                            ? <button type="submit" id="checkBtn" onClick={onCheck}>Check for appointment requests</button>
+                            : null
+                        }
                         <div className="section-title">
                             <h5>Statistics</h5>
                         </div>
