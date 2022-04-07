@@ -32,7 +32,40 @@ async function setExamination(newExamination, patientId, medicalId) {
     }
 }
 
+async function uploadResult(selectedFile, examinationId, userId, medicalId) {
+    const examination = await Examination.findById(examinationId);
+    const user = await User.findById(userId);
+    const medical = await Medical.findById(medicalId);
+    console.log('selectedFile', selectedFile);
+    console.log(typeof examination.results);
+    try {
+        if(examination) {
+            examination.results.push(selectedFile);
+            examination.isCompleted = true;
+        } else {
+            throw new Error('Examination does not exist');
+        }
+        if(user.myExaminations.includes(examination._id)){
+            user.myExaminations = [];
+        } else {
+            throw new Error('Examination does not exist');
+        }
+        if(medical.myExaminations.includes(examination._id)){
+            const filtered = medical.myExaminations.filter(examination => examination._id !== examinationId);
+            medical.myExaminations = filtered;
+        } else {
+            throw new Error('Examination does not exist');
+        }
+
+        return Promise.all([medical.save(), user.save(), examination.save()]);
+    } catch (err) {
+        console.log(err.message);
+        return err.message;
+    }
+}
+
 module.exports = {
     getAllExaminations,
-    setExamination
+    setExamination,
+    uploadResult
 }

@@ -16,3 +16,21 @@ export async function requestExamination(examinationData) {
         return error;
     }
 }
+
+export async function uploadExaminationResult(selectedFile, examinationId, medicalId, userId) {
+    console.log('selectedFile', selectedFile);
+    try {
+        const response = await fetch(`${BASE_LOCAL_URL}/examination-results/${examinationId}/${medicalId}/upload/${userId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+            body: selectedFile
+        });
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
+}

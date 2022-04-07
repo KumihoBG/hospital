@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllExaminations, setExamination } = require('../services/examinationService');
+const { getAllExaminations, setExamination, uploadResult } = require('../services/examinationService');
 
 router.get('/', async (req, res) => {
   const allExaminations = await getAllExaminations();
@@ -20,5 +20,14 @@ router.post('/create', async (req, res) => {
     const result = await setExamination(newExamination, patientId, medicalId);
     res.status(200).json(result);
   });
+
+  router.post('/:examinationId/:medicalId/upload/:userId', async (req, res) => {
+    const examinationId = req.params.examinationId;
+    const medicalId = req.params.medicalId;
+    const userId = req.params.userId;
+    const result = await uploadResult(req.body.selectedFile, examinationId, userId, medicalId);
+    console.log('result', result);
+    res.status(200).json(result);
+    });
 
 module.exports = router;

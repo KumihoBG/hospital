@@ -102,3 +102,13 @@ export async function approveAppointment(appointmentId, updatedAppointment) {
     console.error(error);
   }
 }
+
+export async function getMyExaminations(userId) {
+  try {
+    const response = await fetch(`${BASE_LOCAL_URL}/medicals/${userId}/my-examinations`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}

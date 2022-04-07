@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { getAll, getAllPatients, requestAppointment, editSingleMedical, deleteSingleMedical, getAllAppointments, getCurrentAppointment, approveAppointment } = require('../services/medicalService');
+const { getAll, getAllPatients, requestAppointment, editSingleMedical, deleteSingleMedical, getAllAppointments, getCurrentAppointment, approveAppointment, getCurrentExamination, getMyExaminations } = require('../services/medicalService');
 
 router.get('/', async (req, res) => {
   const medicals = await getAll();
@@ -34,6 +34,12 @@ router.get('/appointments', async (req, res) => {
 router.get('/appointments/:id', async (req, res) => {
   const currentAppointment = await getCurrentAppointment(req.params.id);
   return res.status(200).json(currentAppointment);
+});
+
+router.get('/:userId/my-examinations',async (req, res) => {
+  const myExaminations = await getMyExaminations(req.params.userId);
+  console.log('myExaminations', myExaminations);
+  return res.status(200).json(myExaminations);
 });
 
 router.put('/appointments/approve/:id', async (req, res) => {

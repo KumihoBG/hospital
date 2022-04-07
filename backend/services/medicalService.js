@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler');
 const Medical = require('../models/medicalModel');
 const Appointment = require('../models/appointmentModel');
 const User = require('../models/userModel');
+const Examination = require('../models/examinationModel');
 
 async function getAll() {
   const medicals = await Medical.find({ isPublic: true }).lean();
@@ -21,6 +22,18 @@ async function getAllAppointments() {
 async function getCurrentAppointment(id) {
   let query = await Appointment.findById(id).populate('patient').populate('medical').exec();
   return query;
+}
+
+async function getCurrentExamination(id) {
+  let query = await Examination.findById(id).populate('patient').populate('medical').exec();
+  return query;
+}
+
+async function getMyExaminations(medicalId) {
+  const medical = await Medical.findById(medicalId);
+  const examinationId = medical.myExaminations;
+  console.log('examinations from services', examinationId);
+  return examinationId;
 }
 
 async function requestAppointment(medicalId, userId, newAppointment) {
@@ -128,5 +141,7 @@ module.exports = {
   deleteSingleMedical,
   editSingleMedical,
   getAllAppointments,
-  getCurrentAppointment
+  getCurrentAppointment,
+  getCurrentExamination,
+  getMyExaminations,
 }

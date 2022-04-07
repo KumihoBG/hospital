@@ -1205,7 +1205,8 @@ ul:not(.browser-default) {
 #editUserBtn,
 #checkBtn,
 #approveUserBtn,
-#requestExamBtn {
+#requestExamBtn,
+#fileUploadBtn {
   background: #9adaff;
   color: rgba(39, 32, 32, 0.6);
   padding: 10px 40px;
@@ -1234,6 +1235,40 @@ ul:not(.browser-default) {
   letter-spacing: 1.2px;
   text-align: center;
   cursor: 'not-allowed';
+}
+
+#request-link {
+  margin: 20px 0;
+}
+
+.request-examination-block {
+  margin: 30px 0;
+  width: 100%;
+}
+
+.request-examination-block h6 {
+  background: #499cdf;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 20px 0;
+}
+
+.request-examination-block .border {
+  width: 100%;
+  margin: 30px 0;
+  padding: 10%;
+  border: 1px solid #499cdf;
+}
+
+.request-examination-block #file {
+  background: rgba(255, 255, 255, 0.5);
+  margin-top: 20px;
+}
+
+.request-examination-block span {
+  font-weight: 600;
+  font-size: 20px;
+  text-decoration: underline;
 }
 
 #edit-user-details {

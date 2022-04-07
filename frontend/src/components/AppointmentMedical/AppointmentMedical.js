@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import { toast } from 'react-toastify';
-import { approveAppointment } from '../../features/medicals/medicalAPI.js';
+import { approveAppointment, getMyExaminations } from '../../features/medicals/medicalAPI.js';
+import { FaUserInjured, FaExclamationCircle } from 'react-icons/fa';
+import FileUploadPage from '../FileUploadPage/FileUploadPage.js';
 
 function AppointmentMedical({ appointment }) {
   const [patientInfo, setPatientInfo] = useState({});
   const [approved, setApproved] = useState(false);
+  const [examinationId, setExaminationId] = useState('');
 
   useEffect(() => {
     setPatientInfo(appointment);
-    if(appointment.isApproved === 'Yes') {
+    getMyExaminationsId();
+    if (appointment.isApproved === 'Yes') {
       setApproved(true);
     }
   }, [appointment]);
@@ -33,7 +38,7 @@ function AppointmentMedical({ appointment }) {
         pauseOnHover: true,
         draggable: true,
       });
-    } catch(err) {
+    } catch (err) {
       console.log(err.message);
       toast(`${err.message}`, {
         position: 'top-right',
@@ -46,6 +51,23 @@ function AppointmentMedical({ appointment }) {
     }
   }
 
+  async function getMyExaminationsId() {
+    try {
+      const examinationId = await getMyExaminations(appointment.medical._id);
+      setExaminationId(examinationId);
+      return examinationId;
+    } catch (err) {
+      console.log(err.message);
+      toast(`${err.message}`, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  }
   return (
     <>
       <li className="card-content">
@@ -65,12 +87,21 @@ function AppointmentMedical({ appointment }) {
             <span>{patientInfo.patient?.gender} | {patientInfo.patient?.age}</span><br />
           </p>
         </div>
-        <br/>
+        <br />
       </div>
       {!approved
-      ? <button id="approveUserBtn" type="submit" onClick={onApprove}>Approve appointment</button>
-      : <button id="disabledBtn-doctor" style={{ disabled: "true"}}>Approved</button>
-      } 
+        ? <button id="approveUserBtn" type="submit" onClick={onApprove}>Approve appointment</button>
+        : <button id="disabledBtn-doctor" style={{ disabled: "true" }}>Approved</button>
+      }
+      {!examinationId
+        ? ""
+        : <div className="request-examination-block">
+          <h6><FaExclamationCircle /> Requested examination</h6>
+          <div className="border"><FaUserInjured /> <span>Upload results</span>
+            <FileUploadPage medicalId={appointment.medical._id} userId={appointment.patient._id} examinationId={examinationId} />
+          </div>
+        </div>
+      }
     </>
   )
 }
