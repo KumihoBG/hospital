@@ -55,6 +55,11 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Appointment',
     default: []
+  }],
+  myExaminations: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Examination',
+    default: []
   }]
 },
   {

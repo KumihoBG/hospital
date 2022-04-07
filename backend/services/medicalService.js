@@ -9,7 +9,7 @@ async function getAll() {
 }
 
 async function getAllPatients(userId) {
-  let query = await Medical.findById(userId).populate('myPatients').populate('myAppointments').exec();
+  let query = await Medical.findById(userId).populate('myPatients').populate('myAppointments').populate('myExaminations').exec();
   return query.myPatients;
 }
 
