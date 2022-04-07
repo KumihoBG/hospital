@@ -6,6 +6,7 @@ const colors = require('colors');
 const { errorHandler } = require('./middleware/errorMiddleware');
 const usersRoutes = require('./routes/userRoutes.js');
 const medicalRoutes = require('./routes/medicalRoutes.js');
+const examinationRoutes = require('./routes/examinationRoutes.js');
 const connectDB = require('./config/db');
 const port = process.env.PORT || 5000;
 const users = {}
@@ -28,6 +29,7 @@ app.use(cors({ origin: '*' }));
 
 app.use('/medicals', medicalRoutes);
 app.use('/users', usersRoutes);
+app.use('/examination-results', examinationRoutes);
 app.use(errorHandler);
 
 const io = require("socket.io")(httpServer, options);

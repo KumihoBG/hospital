@@ -1,5 +1,5 @@
 const Message = require('../models/messageModel');
-
+const asyncHandler = require('express-async-handler');
 
 const addNewMessage = asyncHandler(async (req, res) => {
     const { patient, medical, messages, date, time } = req.body;

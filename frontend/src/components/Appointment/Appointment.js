@@ -1,34 +1,63 @@
 import React, { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import { toast } from 'react-toastify';
+import { requestExamination } from '../../features/examinations/examinationAPI';
 const requestExamBtn = document.getElementById('requestExamBtn');
 
 function Appointment({ appointment }) {
   const [medicalInfo, setMedicalInfo] = useState({});
-
-
   useEffect(() => {
     setMedicalInfo(appointment);
-    if(appointment.isApproved === "Yes") {
+    if (appointment.isApproved === "Yes") {
       toast('You have approved appointments. Check status.', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       })
-      requestExamBtn.textContent = 'Request examination';
-    } else {
-      requestExamBtn.display = 'none';
+    } else if (appointment.isApproved === "No") {
+      requestExamBtn.style.display = "none";
     }
-    
+
   }, [appointment]);
 
   async function onRequestExamination(event) {
     event.preventDefault();
-    
+
+    const examRequest = {
+      patient: appointment.patient,
+      medical: appointment.medical,
+      isCompleted: false,
+      results: null
+    }
+
+    try {
+      const newExamination = await requestExamination(examRequest);
+      toast('Examination request sent', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+      return newExamination;
+    } catch (err) {
+      console.log(err.message);
+      toast(`${err.message}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+    }
   }
 
   return (

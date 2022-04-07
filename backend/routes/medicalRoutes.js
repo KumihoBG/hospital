@@ -5,17 +5,17 @@ const { getAll, getAllPatients, requestAppointment, editSingleMedical, deleteSin
 
 router.get('/', async (req, res) => {
   const medicals = await getAll();
-  res.status(200).json(medicals);
+  return res.status(200).json(medicals);
 });
 
 router.get('/my-patients/:userId', async (req, res) => {
   const patients = await getAllPatients(req.params.userId);
-  res.status(200).json(patients);
+  return res.status(200).json(patients);
 });
 
 router.get('/request-appointment', async (req, res) => {
   const appointments = await getAllAppointments();
-  res.status(200).json(appointments);
+  return res.status(200).json(appointments);
 });
 
 router.post('/request-appointment/:userId', async (req, res) => {
@@ -23,23 +23,23 @@ router.post('/request-appointment/:userId', async (req, res) => {
   const userId = req.body.patient;
   const newAppointment = req.body;
   const result = await requestAppointment(medicalId, userId, newAppointment);
-  res.status(200).json(result);
+  return res.status(200).json(result);
 });
 
 router.get('/appointments', async (req, res) => {
   const allAppointments = await getAllAppointments();
-  res.status(200).json(allAppointments);
+  return res.status(200).json(allAppointments);
 });
 
 router.get('/appointments/:id', async (req, res) => {
   const currentAppointment = await getCurrentAppointment(req.params.id);
-  res.status(200).json(currentAppointment);
+  return res.status(200).json(currentAppointment);
 });
 
 router.put('/appointments/approve/:id', async (req, res) => {
   const appointmentId = req.params.id;
   const approvedAppointment = await approveAppointment(appointmentId);
-  res.status(200).json(approvedAppointment);
+  return res.status(200).json(approvedAppointment);
 });
 
 router.get('/appointments/check-for-approval/:userId', async (req, res) => {
@@ -60,8 +60,7 @@ router.get('/appointments/check-for-approval/:userId', async (req, res) => {
       return newEntry;
     }
   });
-
-  res.status(200).json(result);
+  return res.status(200).json(result);
 });
 
 

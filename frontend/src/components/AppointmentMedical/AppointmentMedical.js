@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import { toast } from 'react-toastify';
-import { checkForAppointment } from '../../features/medicals/medicalAPI.js';
-const approveUserBtn = document.getElementById('approveUserBtn');
+import { approveAppointment } from '../../features/medicals/medicalAPI.js';
 
 function AppointmentMedical({ appointment }) {
   const [patientInfo, setPatientInfo] = useState({});
+  const [approved, setApproved] = useState(false);
 
   useEffect(() => {
     setPatientInfo(appointment);
+    if(appointment.isApproved === 'Yes') {
+      console.log('isApproved', appointment.isApproved);
+      setApproved(true);
+    }
   }, [appointment]);
-
-  if(appointment.isApproved === "Yes") {
-    approveUserBtn.textContent = 'Approved';
-    approveUserBtn.disabled = true;
-    approveUserBtn.style.backgroundColor = '#D3D3D3';
-    approveUserBtn.style.cursor = 'not-allowed';
-  }
 
   async function onApprove(event) {
     event.preventDefault();
@@ -28,8 +25,8 @@ function AppointmentMedical({ appointment }) {
         time: appointment.time,
         isApproved: 'Yes',
       };
-      await checkForAppointment(appointment._id, updatedAppointment);
-      toast('Appointment approved successfully!', {
+      await approveAppointment(appointment._id, updatedAppointment);
+      toast('Appointment successfully approved!', {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -37,7 +34,6 @@ function AppointmentMedical({ appointment }) {
         pauseOnHover: true,
         draggable: true,
       });
-
     } catch(err) {
       console.log(err.message);
       toast(`${err.message}`, {
@@ -72,7 +68,10 @@ function AppointmentMedical({ appointment }) {
         </div>
         <br/>
       </div>
-        <button id="approveUserBtn" type="submit" onClick={onApprove}>Approve appointment</button>
+      {!approved
+      ? <button id="approveUserBtn" type="submit" onClick={onApprove}>Approve appointment</button>
+      : <button id="disabledBtn" style={{ disabled: "true"}}>Approved</button>
+      } 
     </>
   )
 }

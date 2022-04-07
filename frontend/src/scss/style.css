@@ -1220,6 +1220,22 @@ ul:not(.browser-default) {
   text-align: center;
 }
 
+#disabledBtn {
+  color: rgba(39, 32, 32, 0.6);
+  padding: 10px 40px;
+  margin-top: 15px;
+  margin-right: 15px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1.2px;
+  text-align: center;
+  background: '#D3D3D3';
+  cursor: 'not-allowed';
+}
+
 #edit-user-details {
   background: url("../images/edit.png") no-repeat right center;
   display: -webkit-box;

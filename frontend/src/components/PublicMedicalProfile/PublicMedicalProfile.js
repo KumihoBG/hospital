@@ -82,8 +82,21 @@ function PublicMedicalProfile() {
         try {
             const data = await checkForAppointment(profile._id);
             const currentAppointment = data[0].patient.myAppointments[0];
-            const appointmentDetails = await getMyAppointment(currentAppointment);
-            setMyAppointments(appointmentDetails);
+            try {
+                const appointmentDetails = await getMyAppointment(currentAppointment);
+                setMyAppointments(appointmentDetails);
+            } catch(err) {
+                console.log(err.message);
+                toast(`${err.message}`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
+            }
         } catch (err) {
             console.log(err.message);
             toast(`${err.message}`, {

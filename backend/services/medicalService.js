@@ -29,21 +29,34 @@ async function requestAppointment(medicalId, userId, newAppointment) {
   if (!medical || !user) {
     throw new ReferenceError('User does not exist');
   }
-  const appointment = new Appointment(newAppointment);
-  appointment.isApproved = 'No';
-  user.myAppointments.push(appointment);
+  const check = user.myAppointments.length >= 1;
+  if (!check) {
+    const appointment = new Appointment(newAppointment);
+    appointment.isApproved = 'No';
+    user.myAppointments.push(appointment);
+  } else {
+    throw new Error('You already have an appointment');
+  }
+
   return Promise.all([user.save(), medical.save(), appointment.save()]);
 }
 
 async function approveAppointment(appointmentId) {
   const appointment = await Appointment.findById(appointmentId);
   const medical = await Medical.findById(appointment.medical._id);
-  appointment.isApproved = 'Yes';
-  if(appointment.isApproved !== 'Yes') {
-  medical.myAppointments.push(appointment);
-  return Promise.all([medical.save(), appointment.save()]);
+  const medicalAppointments = medical.myAppointments;
+  const checkIfExisting = medicalAppointments.find(appointment => appointment._id.toString() === appointmentId);
+  if (!checkIfExisting) {
+    if (appointment.isApproved === 'No') {
+      appointment.isApproved = 'Yes';
+      medical.myAppointments.push(appointment);
+      console.log('appointment', appointment);
+      return Promise.all([medical.save(), appointment.save()]);
+    } else {
+      throw new ReferenceError('Appointment already approved');
+    }
   } else {
-    throw new ReferenceError('Appointment already approved');
+    return new ReferenceError('Appointment already exists');
   }
 }
 
@@ -61,71 +74,20 @@ const setMedical = asyncHandler(async (req, res) => {
   res.status(200).json(medical);
 })
 
-// const updateMedical = asyncHandler(async (req, res) => {
-//   const medical = await Medical.findById(req.params.id)
-
-//   if (!medical) {
-//     res.status(400)
-//     throw new Error('Medical not found')
-//   }
-
-//   // Check for user
-//   if (!req.user) {
-//     res.status(401)
-//     throw new Error('User not found')
-//   }
-
-//   // Make sure the logged in user matches the medical user
-//   if (medical.user.toString() !== req.user.id) {
-//     res.status(401)
-//     throw new Error('User not authorized')
-//   }
-
-//   const updatedMedical = await Medical.findByIdAndUpdate(req.params.id, req.body, {
-//     new: true,
-//   })
-
-//   res.status(200).json(updatedMedical)
-// })
-
-// const deleteMedical = asyncHandler(async (req, res) => {
-//   const medical = await Medical.findById(req.params.id)
-
-//   if (!medical) {
-//     res.status(400)
-//     throw new Error('Medical not found')
-//   }
-
-//   // Check for user
-//   if (!req.user) {
-//     res.status(401)
-//     throw new Error('User not found')
-//   }
-
-//   // Make sure the logged in user matches the medical user
-//   if (medical.user.toString() !== req.user.id) {
-//     res.status(401)
-//     throw new Error('User not authorized')
-//   }
-
-//   await medical.remove()
-
-//   res.status(200).json({ id: req.params.id })
-// })
-
 const deleteSingleMedical = asyncHandler(async (req, res) => {
   try {
     const user = await Medical.findById(req.params.userId);
     if (!user) {
-        throw new Error('You are not authorized to delete this account.');
+      throw new Error('You are not authorized to delete this account.');
     }
     res.redirect('/home');
     console.log('deleting');
     return await Medical.findByIdAndDelete(user._id);
-} catch(err) {
+  } catch (err) {
     console.log(err.message);
     return err;
-}});
+  }
+});
 
 const editSingleMedical = asyncHandler(async (req, res) => {
   try {
@@ -133,7 +95,7 @@ const editSingleMedical = asyncHandler(async (req, res) => {
 
     const newUser = req.body;
     if (!user) {
-        throw new Error('You are not authorized to edit this account.');
+      throw new Error('You are not authorized to edit this account.');
     }
     user.name = newUser.name.trim();
     user.username = newUser.username.trim();
@@ -151,16 +113,15 @@ const editSingleMedical = asyncHandler(async (req, res) => {
     user.myAppointments = user.myAppointments;
     await user.save();
     return res.status(200).json(user);
-} catch(err) {
+  } catch (err) {
     console.log(err.message);
     return err;
-}});
+  }
+});
 
 module.exports = {
   getAll,
   setMedical,
-  // updateMedical,
-  // deleteMedical,
   getAllPatients,
   requestAppointment,
   approveAppointment,

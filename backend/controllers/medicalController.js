@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
 const Medical = require('../models/medicalModel');
-const Appointment = require('../models/appointmentModel');
 
 const registerMedicalProfessional = asyncHandler(async (req, res) => {
   const { name, username, email, password, gender, role, imageUrl, phone, age, department, areas, practiceLocation } = req.body;
