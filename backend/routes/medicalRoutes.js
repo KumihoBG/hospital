@@ -36,7 +36,7 @@ router.get('/appointments/:id', async (req, res) => {
   res.status(200).json(currentAppointment);
 });
 
-router.post('/appointments/approve/:id', async (req, res) => {
+router.put('/appointments/approve/:id', async (req, res) => {
   const appointmentId = req.params.id;
   const approvedAppointment = await approveAppointment(appointmentId);
   res.status(200).json(approvedAppointment);

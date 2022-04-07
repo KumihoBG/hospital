@@ -86,3 +86,19 @@ export async function checkForAppointment(userId) {
     console.error(error);
   }
 }
+
+export async function approveAppointment(appointmentId, updatedAppointment) {
+  try {
+    const response = await fetch(`${BASE_LOCAL_URL}/medicals/appointments/approve/${appointmentId}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT',
+      body: JSON.stringify(updatedAppointment)
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}

@@ -35,13 +35,16 @@ async function requestAppointment(medicalId, userId, newAppointment) {
   return Promise.all([user.save(), medical.save(), appointment.save()]);
 }
 
-async function approveAppointment(medicalId) {
-  const user = await User.findById(userId);
-  const allAppointments = await getAllAppointments();
-  const appointment = allAppointments.find(appointment => appointment._id.toString() === appointmentId);
-  console.log('appointment', appointment);
-  // medical.myAppointments.push(appointment);
-  return Promise.all([user.save(), medical.save()]);
+async function approveAppointment(appointmentId) {
+  const appointment = await Appointment.findById(appointmentId);
+  const medical = await Medical.findById(appointment.medical._id);
+  appointment.isApproved = 'Yes';
+  if(appointment.isApproved !== 'Yes') {
+  medical.myAppointments.push(appointment);
+  return Promise.all([medical.save(), appointment.save()]);
+  } else {
+    throw new ReferenceError('Appointment already approved');
+  }
 }
 
 const setMedical = asyncHandler(async (req, res) => {
