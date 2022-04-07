@@ -10,7 +10,6 @@ export async function requestExamination(examinationData) {
             body: JSON.stringify(examinationData)
         });
         const result = await response.json();
-        console.log('result', result);
         return result;
     } catch (error) {
         console.error(error);

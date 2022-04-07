@@ -3,6 +3,11 @@ const Examination = require('../models/examinationModel');
 const User = require('../models/userModel');
 const Medical = require('../models/medicalModel');
 
+async function getAllExaminations() {
+    let query = await Examination.find().populate('patient').populate('medical').exec();
+    return query;
+  }
+
 async function setExamination(newExamination, patientId, medicalId) {
     const examination = new Examination(newExamination);
     const user = await User.findById(patientId);
@@ -28,5 +33,6 @@ async function setExamination(newExamination, patientId, medicalId) {
 }
 
 module.exports = {
+    getAllExaminations,
     setExamination
 }

@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { setExamination } = require('../services/examinationService');
+const { getAllExaminations, setExamination } = require('../services/examinationService');
+
+router.get('/', async (req, res) => {
+  const allExaminations = await getAllExaminations();
+  return res.status(200).json(allExaminations);
+});
 
 router.post('/create', async (req, res) => {
   const patientId = req.body.patient._id;
