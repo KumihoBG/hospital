@@ -6,6 +6,8 @@ const requestExamBtn = document.getElementById('requestExamBtn');
 
 function Appointment({ appointment }) {
   const [medicalInfo, setMedicalInfo] = useState({});
+  const [requested, setRequested] = useState(false);
+
   useEffect(() => {
     setMedicalInfo(appointment);
     if (appointment.isApproved === "Yes") {
@@ -45,6 +47,7 @@ function Appointment({ appointment }) {
         draggable: true,
         progress: undefined,
       })
+      setRequested(true);
       return newExamination;
     } catch (err) {
       console.log(err.message);
@@ -80,7 +83,10 @@ function Appointment({ appointment }) {
           </p>
         </div>
       </div>
-      <button id="requestExamBtn" type="submit" onClick={onRequestExamination}>Request examination</button>
+      {!requested
+      ? <button id="requestExamBtn" type="submit" onClick={onRequestExamination}>Request examination</button>
+      : <button id="disabledBtn-patient" style={{ disabled: "true"}}>Requested</button>
+      } 
     </>
   )
 }

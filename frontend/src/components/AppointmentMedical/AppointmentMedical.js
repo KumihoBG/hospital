@@ -10,7 +10,6 @@ function AppointmentMedical({ appointment }) {
   useEffect(() => {
     setPatientInfo(appointment);
     if(appointment.isApproved === 'Yes') {
-      console.log('isApproved', appointment.isApproved);
       setApproved(true);
     }
   }, [appointment]);
@@ -70,7 +69,7 @@ function AppointmentMedical({ appointment }) {
       </div>
       {!approved
       ? <button id="approveUserBtn" type="submit" onClick={onApprove}>Approve appointment</button>
-      : <button id="disabledBtn" style={{ disabled: "true"}}>Approved</button>
+      : <button id="disabledBtn-doctor" style={{ disabled: "true"}}>Approved</button>
       } 
     </>
   )
