@@ -7,7 +7,9 @@ const { errorHandler } = require('./middleware/errorMiddleware');
 const usersRoutes = require('./routes/userRoutes.js');
 const medicalRoutes = require('./routes/medicalRoutes.js');
 const examinationRoutes = require('./routes/examinationRoutes.js');
+const uploads = require('./routes/uploads.js');
 const connectDB = require('./config/db');
+const methodOverride = require('method-override');
 const port = process.env.PORT || 5000;
 const users = {}
 const room = 'Connect';
@@ -30,8 +32,10 @@ app.use(cors({ origin: '*' }));
 app.use('/medicals', medicalRoutes);
 app.use('/users', usersRoutes);
 app.use('/examination-results', examinationRoutes);
-app.use(errorHandler);
+app.use('/uploads', uploads);
 
+app.use(errorHandler);
+app.use(methodOverride('_method'));
 const io = require("socket.io")(httpServer, options);
 // Serve frontend
 if (process.env.NODE_ENV === 'production') {

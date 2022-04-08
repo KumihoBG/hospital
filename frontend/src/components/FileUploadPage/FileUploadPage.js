@@ -11,23 +11,28 @@ function FileUploadPage({ medicalId, userId, examinationId }) {
         setIsFilePicked(true);
     };
 
-    const handleSubmission = () => {
-        const formData = new FormData();
-
-        formData.append('file', selectedFile);
-
-        try {
-            const uploadResult = uploadExaminationResult(selectedFile, examinationId, medicalId, userId);
-            console.log('uploadResult', uploadResult);
-            toast.success('Upload successful');
-        } catch (err) {
-            console.log(err.message)
+    const handleSubmission = async () => {
+        if (isFilePicked) {
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            uploadExaminationResult(formData, examinationId, medicalId, userId)
+                .then((response) => {
+                    if (response.status === 200) {
+                        toast.success('File uploaded successfully. Examination procedure completed.');
+                        window.location.reload();
+                    } else {
+                        toast.error('Something went wrong');
+                    }
+                })
+                .catch((error) => {
+                    toast.error(`${error.message}`);
+                });
         }
     };
 
     return (
         <div>
-            <form enctype="multipart/form-data" action="" method="POST">
+            <form encType="multipart/form-data" action="/upload" method="POST">
                 <input id="file" type="file" name="file" onChange={changeHandler} />
                 {isFilePicked ? (
                     <div>

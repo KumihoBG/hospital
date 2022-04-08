@@ -32,7 +32,6 @@ async function getCurrentExamination(id) {
 async function getMyExaminations(medicalId) {
   const medical = await Medical.findById(medicalId);
   const examinationId = medical.myExaminations;
-  console.log('examinations from services', examinationId);
   return examinationId;
 }
 
@@ -63,7 +62,6 @@ async function approveAppointment(appointmentId) {
     if (appointment.isApproved === 'No') {
       appointment.isApproved = 'Yes';
       medical.myAppointments.push(appointment);
-      console.log('appointment', appointment);
       return Promise.all([medical.save(), appointment.save()]);
     } else {
       throw new ReferenceError('Appointment already approved');

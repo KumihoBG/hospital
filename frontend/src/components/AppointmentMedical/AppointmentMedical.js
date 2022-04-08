@@ -68,6 +68,7 @@ function AppointmentMedical({ appointment }) {
       });
     }
   }
+
   return (
     <>
       <li className="card-content">

@@ -6,9 +6,13 @@ const schema = new Schema({
     medical: { type: Schema.Types.ObjectId, ref: 'Medical' },
     isCompleted: {
         type: String,
-        possibleValues: ['Yes','No'],
+        possibleValues: ['Yes', 'No'],
     },
-    results: []
+    results: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Image',
+        default: []
+    }]
 });
 
 module.exports = model('Examination', schema);

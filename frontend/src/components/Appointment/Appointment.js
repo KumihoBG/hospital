@@ -32,9 +32,11 @@ function Appointment({ appointment }) {
 
   async function getMyExaminationId() {
     try {
-      const examinationId = await authService.getMyExamination(userId);
-      setExaminationId(examinationId);
-      return examinationId;
+      const examinationIdFetch = await authService.getMyExamination(userId);
+      if (examinationIdFetch.length > 0) {
+        setExaminationId(examinationIdFetch[0]._id);
+        return examinationIdFetch;
+      } 
     } catch(err) {
       console.log(err.message)
     }
@@ -47,7 +49,7 @@ function Appointment({ appointment }) {
       patient: appointment.patient,
       medical: appointment.medical,
       isCompleted: false,
-      results: null
+      results: [],
     }
 
     try {
@@ -96,7 +98,7 @@ function Appointment({ appointment }) {
           </p>
         </div>
       </div>
-      {!examinationId
+      {examinationId
       ? <button id="requestExamBtn" type="submit" onClick={onRequestExamination}>Request examination</button>
       : <button id="disabledBtn-patient" style={{ disabled: "true"}}>Examination Requested</button>
       } 

@@ -18,15 +18,22 @@ export async function requestExamination(examinationData) {
 }
 
 export async function uploadExaminationResult(selectedFile, examinationId, medicalId, userId) {
-    console.log('selectedFile', selectedFile);
     try {
-        const response = await fetch(`${BASE_LOCAL_URL}/examination-results/${examinationId}/${medicalId}/upload/${userId}`, {
+        const response = await fetch(`${BASE_LOCAL_URL}/uploads/upload/${examinationId}/${medicalId}/${userId}`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
             body: selectedFile
         });
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
+}
+
+export async function getMyExaminationStatus(examinationId) {
+    try {
+        const response = await fetch(`${BASE_LOCAL_URL}/examination-results/${examinationId}`);
         const result = await response.json();
         return result;
     } catch (error) {

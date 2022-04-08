@@ -4,9 +4,10 @@ import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import { useSelector } from 'react-redux';
 import { deleteSingleMedical, getMedicalProfile } from '../../features/auth/authAPI';
-import { checkForAppointment } from '../../features/medicals/medicalAPI.js';
+import { checkForAppointment, getMyExaminations } from '../../features/medicals/medicalAPI.js';
 import { getMyAppointment } from '../../features/appointments/appointmentsAPI.js';
 import { toast } from 'react-toastify';
+import { getMyExaminationStatus } from '../../features/examinations/examinationAPI';
 import AppointmentMedical from '../AppointmentMedical/AppointmentMedical.js';
 
 function PublicMedicalProfile() {
@@ -16,6 +17,8 @@ function PublicMedicalProfile() {
     const isMedical = sessionStorage.getItem('role') === 'medical-professional';
     const checkMedical = isMedical === true;
     const [myAppointments, setMyAppointments] = useState([]);
+    const [examinationId, setExaminationId] = useState('');
+    const [isCompleted, setCompleted] = useState(false);
     // eslint-disable-next-line no-unused-vars
     const { user } = useSelector(
         (state) => state.auth
@@ -85,6 +88,7 @@ function PublicMedicalProfile() {
             try {
                 const appointmentDetails = await getMyAppointment(currentAppointment);
                 setMyAppointments(appointmentDetails);
+                getMyExaminationsId();
             } catch (err) {
                 console.log(err.message);
                 toast(`${err.message}`, {
@@ -111,6 +115,38 @@ function PublicMedicalProfile() {
         }
     }
 
+    async function getMyExaminationsId() {
+        try {
+            const examinationId = await getMyExaminations(userId);
+            setExaminationId(examinationId);
+            checkMyExaminationStatus(examinationId);
+            return examinationId;
+        } catch (err) {
+            console.log(err.message);
+            toast(`${err.message}`, {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+        }
+    }
+
+    async function checkMyExaminationStatus(examinationId) {
+        try {
+            const myExaminationStatus = await getMyExaminationStatus(examinationId);
+            if (myExaminationStatus.isCompleted === 'true') {
+                setCompleted(true);
+            }
+            return myExaminationStatus;
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+
+    console.log('isCompleted', isCompleted);
     return (
         <div>
             <Grid id="profile-container" container spacing={2}>
@@ -174,7 +210,11 @@ function PublicMedicalProfile() {
                             </div>
                                 <ul className="appointment-block">
                                     {myAppointments.length !== 0
-                                        ? <div id="appointments-list">{<AppointmentMedical appointment={myAppointments} key={myAppointments._id} />}</div>
+                                        ? <>{isCompleted
+                                            ?  <div><p id="no-appointments">All Examination completed</p></div>
+                                            :  <div id="appointments-list">{<AppointmentMedical appointment={myAppointments} key={myAppointments._id} />}</div>
+                                        } </>
+                                       
                                         : <div><p id="no-appointments">No appointments yet</p></div>
                                     }
                                 </ul></>

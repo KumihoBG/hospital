@@ -6,7 +6,12 @@ const Medical = require('../models/medicalModel');
 async function getAllExaminations() {
     let query = await Examination.find().populate('patient').populate('medical').exec();
     return query;
-  }
+}
+
+async function getSingleExamination(examinationId) {
+    let query = await Examination.findById(examinationId).populate('patient').populate('medical').exec();
+    return query;
+}
 
 async function setExamination(newExamination, patientId, medicalId) {
     const examination = new Examination(newExamination);
@@ -32,15 +37,14 @@ async function setExamination(newExamination, patientId, medicalId) {
     }
 }
 
-async function uploadResult(selectedFile, examinationId, userId, medicalId) {
+async function uploadResult(image, examinationId, userId, medicalId) {
     const examination = await Examination.findById(examinationId);
     const user = await User.findById(userId);
     const medical = await Medical.findById(medicalId);
-    console.log('selectedFile', selectedFile);
-    console.log(typeof examination.results);
+
     try {
         if(examination) {
-            examination.results.push(selectedFile);
+            examination.results.push(image);
             examination.isCompleted = true;
         } else {
             throw new Error('Examination does not exist');
@@ -67,5 +71,6 @@ async function uploadResult(selectedFile, examinationId, userId, medicalId) {
 module.exports = {
     getAllExaminations,
     setExamination,
-    uploadResult
+    uploadResult,
+    getSingleExamination
 }
