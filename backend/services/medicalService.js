@@ -20,8 +20,10 @@ async function getAllAppointments() {
 }
 
 async function getCurrentAppointment(id) {
-  let query = await Appointment.findById(id).populate('patient').populate('medical').exec();
-  return query;
+  if (id !== undefined) {
+    const appointment = await Appointment.findById(id).populate('patient').populate('medical').exec();
+    return appointment;
+  }
 }
 
 async function getCurrentExamination(id) {

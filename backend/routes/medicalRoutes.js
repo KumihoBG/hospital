@@ -32,6 +32,7 @@ router.get('/appointments', async (req, res) => {
 });
 
 router.get('/appointments/:id', async (req, res) => {
+  console.log('req.params.id', req.params.id);
   const currentAppointment = await getCurrentAppointment(req.params.id);
   return res.status(200).json(currentAppointment);
 });

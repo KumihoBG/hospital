@@ -45,8 +45,10 @@ function PublicPatientProfile() {
         try {
             const singleProfile = await getPatientProfile(patientId);
             appId = singleProfile.myAppointments[0];
+            if (appId !== undefined) {
             const currentAppointment = await getMyAppointment(appId);
             setMyAppointments(currentAppointment);
+            }
         } catch (err) {
             console.log(err.message);
             toast(`${err.message}`, {
@@ -114,7 +116,7 @@ function PublicPatientProfile() {
             console.log(err.message);
         }
     }
-
+    
     return (
         <div>
             <Grid id="profile-container" container spacing={2}>
@@ -167,7 +169,7 @@ function PublicPatientProfile() {
                         <p>Patient of Medical Professional:<br />
                             <span className='bolder-names'>
                                 <Link to={`/my-medical-professional/${myDoctor}`}>
-                                    {medicalName}
+                                    {medicalName || 'Not chosen yet'}
                                 </Link>
                             </span>
                         </p>
@@ -190,7 +192,7 @@ function PublicPatientProfile() {
                             <h5>My appointments</h5>
                         </div>
                             <ul className="appointment-block">
-                                {myAppointments
+                                {myAppointments.length > 0
                                     ? <div id="appointments-list">{<Appointment appointment={myAppointments} key={myAppointments._id} />}</div>
                                     : <div><p id="no-appointments">No appointments yet</p></div>
                                 }

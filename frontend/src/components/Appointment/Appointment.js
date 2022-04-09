@@ -37,9 +37,11 @@ function Appointment({ appointment }) {
   async function checkMyExaminationResult(examinationId) {
     try {
         const myExaminationResult = await getMyExaminationResult(examinationId);
+        if (myExaminationResult.length > 0) {
         const resultsArray = myExaminationResult[0].results;
         const resultIdFound = resultsArray[0];
         getMyResultsFileName(resultIdFound);
+        }
     } catch (err) {
         console.log(err.message);
     }
