@@ -26,8 +26,9 @@ function Login() {
 
         if (isSuccess || user) {
             navigate('/home');
-            if (user.medical[0] !== undefined) {
-                sessionStorage.setItem('myDoctor', user.medical[0]);
+            const userLogged = JSON.parse(sessionStorage.getItem('user'));	
+            if (userLogged.medical[0] !== undefined) {
+                sessionStorage.setItem('myDoctor', userLogged?.medical[0]);
             }
         }
 
@@ -48,31 +49,16 @@ function Login() {
             email,
             password,
         }
+
         if (email === '' || password === '') {
-            toast('Please fill in all fields!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            })
+            toast.error('Please fill in all fields!');
             return;
         }
         try {
             dispatch(login(userData));
         } catch (err) {
             console.log(err.message);
-            toast(`${err.message}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            })
+            toast.error(`${err.message}`);
         }
 }
 

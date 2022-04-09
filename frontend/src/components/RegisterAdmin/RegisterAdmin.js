@@ -43,23 +43,26 @@ function RegisterAdmin() {
     const onSubmit = (e) => {
         e.preventDefault()
 
+        if (username === '' || password === '' || rePass === '') {
+            toast.error('Please fill all the fields');
+            return;
+        }
         if (password !== rePass) {
-            toast("Two passwords don't match!", {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            })
-        } else {
-            const userData = {
-                username,
-                password,
-                role: 'admin',
-            }
+            toast.error("Two passwords don't match!");
+            return;
+        }
+        const userData = {
+            username,
+            password,
+            role: 'admin',
+        }
+        try {
             dispatch(registerAdmin(userData))
+        } catch (err) {
+            console.log(err.message);
+            toast.error(`${err.message}`);
+            dispatch(reset())
+            dispatch(isError(err.message))
         }
     }
 
@@ -81,7 +84,7 @@ function RegisterAdmin() {
                                     onChange={onChange}></input><br></br>
                             </div>
                         </div>
-    
+
                         <div className="form-group">
                             <label>Password</label><br></br>
                             <div className="icon">

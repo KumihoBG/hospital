@@ -76,20 +76,22 @@ const login = async (userData) => {
       method: 'POST',
       body: JSON.stringify(userData)
     });
-    if (response.status === 200) {
-      const data = await response.json();
-      if (!data.error) {
+    const data = await response.json();
+
+    if (data.stack !== null) {
+      if (response.status === 200) {
         sessionStorage.setItem('user', JSON.stringify(data));
         sessionStorage.setItem('userId', data._id);
         sessionStorage.setItem('username', data.username);
         sessionStorage.setItem('email', data.email);
         sessionStorage.setItem('role', data.role);
-        if (data.medical !== undefined) {
+        if (data.medical.length > 0) {
           sessionStorage.setItem('hasDoctor', true);
         }
-      } else {
-        return data.error;
+        return data;
       }
+    } else {
+      return data.error;
     }
   } catch (error) {
     console.error(error);
@@ -107,17 +109,18 @@ const loginMedical = async (userData) => {
       method: 'POST',
       body: JSON.stringify(userData)
     });
-    if (response.status === 200) {
-      const data = await response.json();
-      if (!data.error) {
+    const data = await response.json();
+    if (data.stack !== null) {
+      if (response.status === 200) {
         sessionStorage.setItem('user', JSON.stringify(data));
         sessionStorage.setItem('userId', data._id);
         sessionStorage.setItem('username', data.username);
         sessionStorage.setItem('email', data.email);
         sessionStorage.setItem('role', data.role);
-      } else {
-        return data.error;
+        return data;
       }
+    } else {
+      return data.error;
     }
   } catch (error) {
     console.error(error);
@@ -135,16 +138,17 @@ const loginAdmin = async (userData) => {
       method: 'POST',
       body: JSON.stringify(userData)
     });
-    if (response.status === 200) {
-      const data = await response.json();
-      if (!data.error) {
+    const data = await response.json();
+    if (data.stack !== null) {
+      if (response.status === 200) {
         sessionStorage.setItem('user', JSON.stringify(data));
         sessionStorage.setItem('userId', data._id);
         sessionStorage.setItem('username', data.username);
         sessionStorage.setItem('role', data.role);
-      } else {
-        return data.error;
+        return data;
       }
+    } else {
+      return data.error;
     }
   } catch (error) {
     console.error(error);

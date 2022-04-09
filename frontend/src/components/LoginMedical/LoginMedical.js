@@ -46,18 +46,14 @@ function LoginMedical() {
             password,
         }
         if (email === '' || password === '') {
-            toast('Please fill in all fields!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error('Please fill in all fields!');
             return;
-        } else {
+        } 
+        try {
             dispatch(loginMedicalProfessional(userData));
+        } catch (err) {
+            console.log(err.message);
+            toast.error(`${err.message}`);
         }
     }
 

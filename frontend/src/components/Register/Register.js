@@ -50,16 +50,14 @@ function Register() {
     const onSubmit = (e) => {
         e.preventDefault()
 
+        if (username === '' || password === '' || rePass === '' || name === '' || email === '') {
+            toast.error('Please fill all the fields');
+            return;
+        }
+
         if (password !== rePass) {
-            toast("Two passwords don't match!", {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            })
+            toast.error("Two passwords don't match!");
+            return;
         } else {
             if (imageUrl === '') {
                 switch(gender) {
@@ -84,15 +82,7 @@ function Register() {
                 dispatch(register(userData))
             } catch(err) {
                 console.log(err.message);
-                toast(`${err.message}`, {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                })
+                toast.error(`${err.message}`);
                 dispatch(reset())
                 dispatch(isError(err.message))
             }   

@@ -24,9 +24,12 @@ function MedicalProfessionalCollection() {
             <h4 className="staff-title">My Patients List</h4>
             <h6>Browse information about your patients.</h6>
             <ul className="collection">
-                {patients.map(patient => {
-                    return <Patient patient={patient} key={patient._id} />
-                })}
+                {patients.length > 0
+                    ? <>{patients.map(patient => {
+                        return <Patient patient={patient} key={patient._id} />
+                    })}</>
+                    : <div id="no-patients"><p>No patients yet</p></div>
+                }
             </ul>
         </div>
     )
