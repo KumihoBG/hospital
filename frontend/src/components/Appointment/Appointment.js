@@ -11,6 +11,7 @@ function Appointment({ appointment }) {
   const [medicalInfo, setMedicalInfo] = useState({});
   const [examinationId, setExaminationId] = useState('');
   const [filename, setFilename] = useState('');
+  const [deleted, setDeleted] = useState(false);
   const userId = sessionStorage.getItem('userId');
   const navigate = useNavigate();
 
@@ -30,7 +31,8 @@ function Appointment({ appointment }) {
         return examinationIdFetch;
       }
     } catch (err) {
-      console.log(err.message)
+      console.log(err.message);
+      toast.error(`${err.message}`);
     }
   }
 
@@ -44,6 +46,7 @@ function Appointment({ appointment }) {
       }
     } catch (err) {
       console.log(err.message);
+      toast.error(`${err.message}`);
     }
   }
 
@@ -84,18 +87,6 @@ function Appointment({ appointment }) {
   }
 
   async function checkIfIsCompleted() {
-    if (completed) {
-      toast(`Your examination procedure is over. Check results below`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      })
-      return;
-    }
     if (completed === false && appointment.isApproved === "Yes") {
       toast('You have approved appointments. Check status.', {
         position: "top-right",
@@ -121,6 +112,7 @@ function Appointment({ appointment }) {
       return file;
     } catch (err) {
       console.log(err.message);
+      toast.error(`${err.message}`);
     }
   }
 
@@ -130,19 +122,40 @@ function Appointment({ appointment }) {
       setFilename(resultFileName.filename);
     } catch (err) {
       console.log(err.message);
+      toast.error(`${err.message}`);
+    }
+  }
+
+  async function deleteExamination(event) {
+    event.preventDefault();
+    try {
+      console.log('examinationId', examinationId);
+      const deleteResult = await authService.deleteMyExamination(userId, examinationId);
+      if (deleteResult.length === 0) {
+        toast.success('Examination deleted');
+        setDeleted(true);
+        return deleteResult;
+      }
+    } catch (err) {
+      console.log(err.message);
+      toast.error(`${err.message}`);
     }
   }
 
   return (
     <>
       {examinationId
-        ? <div>
-          <p id="no-appointments">Your examination has been completed</p>
-          <div className="section-title">
-            <h5>Results</h5>
-            <button onClick={getMyResults} className="results-link" type="submit" alt="Patient Examination Results">View Results</button>
+        ? <>{deleted
+          ? <div><p id="no-appointments">No appointments yet</p></div>
+          : <div>
+            <p id="no-appointments">Your examination has been completed</p>
+            <div className="section-title">
+              <h5>Results</h5>
+              <button onClick={getMyResults} className="results-link" type="submit">View Results</button>
+              <button onClick={deleteExamination} className="results-link" type="submit">Delete Examination</button>
+            </div>
           </div>
-        </div>
+        }</>
         : <div>
           <li className="card-content">
             <p><span className="description-paragraph">Date:</span> {appointment.date}</p>
@@ -168,7 +181,6 @@ function Appointment({ appointment }) {
           }
         </div>
       }
-
     </>
   )
 }

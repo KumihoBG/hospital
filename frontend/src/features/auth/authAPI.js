@@ -211,6 +211,24 @@ export const getMyExamination = async (userId) => {
     return data;
   } catch (error) {
     console.error(error);
+    return error;
+  }
+}
+
+// Delete my examination
+export const deleteMyExamination = async (userId, examinationId) => {
+  try {
+    const response = await fetch(`${BASE_LOCAL_URL}/users/patient/${userId}/my-examinations/delete/${examinationId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'DELETE',
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    return error;
   }
 }
 
@@ -335,7 +353,8 @@ const authService = {
   isAuthenticated,
   deleteSingleUser,
   editSingleUser,
-  getMyExamination
+  getMyExamination,
+  deleteMyExamination
 }
 
 export default authService;

@@ -119,6 +119,18 @@ const getMyExaminations = asyncHandler(async (req, res) => {
   res.status(200).json(myExaminations);
 });
 
+const deleteMyExamination = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.userId);
+  console.log('req.params.userId', req.params.userId);
+  console.log('examId', req.params.resultId);
+  const examinationId = req.params.resultId;
+  const myExaminations = user.myExaminations;
+  const index = myExaminations.findIndex(examination => examination._id.toString() === examinationId);
+  myExaminations.splice(index, 1);
+  await user.save();
+  res.status(200).json(myExaminations);
+});
+
 const chooseMedicalAction = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.userId);
   const medical = await Medical.findById(req.body._id);
@@ -306,5 +318,6 @@ module.exports = {
   deleteSinglePatient,
   editSinglePatient,
   getSingleMedical,
-  getMyExaminations
+  getMyExaminations,
+  deleteMyExamination
 }
