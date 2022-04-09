@@ -117,6 +117,7 @@ function PublicPatientProfile() {
         }
     }
     
+    
     return (
         <div>
             <Grid id="profile-container" container spacing={2}>
@@ -192,7 +193,7 @@ function PublicPatientProfile() {
                             <h5>My appointments</h5>
                         </div>
                             <ul className="appointment-block">
-                                {myAppointments.length > 0
+                                {myAppointments || myAppointments.length > 0
                                     ? <div id="appointments-list">{<Appointment appointment={myAppointments} key={myAppointments._id} />}</div>
                                     : <div><p id="no-appointments">No appointments yet</p></div>
                                 }

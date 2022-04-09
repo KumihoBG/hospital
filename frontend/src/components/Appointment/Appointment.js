@@ -12,14 +12,14 @@ function Appointment({ appointment }) {
   const [examinationId, setExaminationId] = useState('');
   const [filename, setFilename] = useState('');
   const userId = sessionStorage.getItem('userId');
-  const navigate = useNavigate();  
-  
+  const navigate = useNavigate();
+
   useEffect(() => {
     setMedicalInfo(appointment);
     getMyExaminationId();
     checkIfIsCompleted();
     checkMyExaminationResult(examinationId);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [appointment]);
 
   async function getMyExaminationId() {
@@ -28,7 +28,7 @@ function Appointment({ appointment }) {
       if (examinationIdFetch.length > 0) {
         setExaminationId(examinationIdFetch[0]);
         return examinationIdFetch;
-      } 
+      }
     } catch (err) {
       console.log(err.message)
     }
@@ -36,16 +36,16 @@ function Appointment({ appointment }) {
 
   async function checkMyExaminationResult(examinationId) {
     try {
-        const myExaminationResult = await getMyExaminationResult(examinationId);
-        if (myExaminationResult.length > 0) {
+      const myExaminationResult = await getMyExaminationResult(examinationId);
+      if (myExaminationResult.length > 0) {
         const resultsArray = myExaminationResult[0].results;
         const resultIdFound = resultsArray[0];
         getMyResultsFileName(resultIdFound);
-        }
+      }
     } catch (err) {
-        console.log(err.message);
+      console.log(err.message);
     }
-}
+  }
 
   async function onRequestExamination(event) {
     event.preventDefault();
@@ -85,43 +85,43 @@ function Appointment({ appointment }) {
 
   async function checkIfIsCompleted() {
     if (completed) {
-        toast(`Your examination procedure is over. Check results below`, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        })
-    } else {
-      if (appointment.isApproved === "Yes") {
-        toast('You have approved appointments. Check status.', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        })
-      } else if (appointment.isApproved === "No") {
-        requestExamBtn.style.display = "none";
-      }
+      toast(`Your examination procedure is over. Check results below`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+      return;
+    }
+    if (completed === false && appointment.isApproved === "Yes") {
+      toast('You have approved appointments. Check status.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+    } else if (appointment.isApproved === "No") {
+      requestExamBtn.style.display = "none";
     }
   }
 
   async function getMyResults(event) {
     event.preventDefault();
-      try {
-          const file = await getImage(filename);
-          console.log('file', file);
-          sessionStorage.setItem('isCompleted', true);
-          navigate(`/uploads/image/${filename}`);
-          return file;
-      } catch (err) {
-          console.log(err.message);
-      }
+    try {
+      const file = await getImage(filename);
+      console.log('file', file);
+      sessionStorage.setItem('isCompleted', true);
+      navigate(`/uploads/image/${filename}`);
+      return file;
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   async function getMyResultsFileName(resultId) {
@@ -132,7 +132,7 @@ function Appointment({ appointment }) {
       console.log(err.message);
     }
   }
- 
+
   return (
     <>
       {examinationId

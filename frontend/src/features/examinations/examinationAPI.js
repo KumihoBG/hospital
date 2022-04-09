@@ -85,7 +85,6 @@ export async function getImage(filename) {
                 'Content-Disposition': 'inline'
             }
         });
-        console.log('image', image);
         const result = await image.json();
         return result;
     } catch (error) {

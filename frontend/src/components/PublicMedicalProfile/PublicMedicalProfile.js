@@ -165,7 +165,7 @@ function PublicMedicalProfile() {
                             {checkMedical
                                 ? null
                                 : <><Link to={`/chat/${userId || myDoctor}`} className="profile-buttons" onClick={setChatName}>Send Message</Link><br />
-                                    <Link className="profile-buttons" to={`/medicals/request-appointment/${userId || user.medical[0]}`}>Request an appointment</Link></>
+                                    <Link className="profile-buttons" to={`/medicals/request-appointment/${userId || myDoctor}`}>Request an appointment</Link></>
                             }
                         </div>
                     </div>

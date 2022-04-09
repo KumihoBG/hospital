@@ -37,21 +37,24 @@ router.post('/upload/:examinationId/:medicalId/:userId', upload.single('file'), 
     const image = new ImageModel(file);
     image.save();
 
-    const result = await uploadResult(image, examinationId, userId, medicalId);
-    console.log('result', result);
-    res.status(200).json(result).json({
-        message: 'File uploaded successfully!',
-        file: req.file
-    });
-
+    try {
+        const result = await uploadResult(image, examinationId, userId, medicalId);
+        res.status(200).json(result).json({
+            message: 'File uploaded successfully!',
+            file: req.file
+        });
+    } catch (err) {
+        console.log(err.message)
+        return err.message;
+    }
 });
 
 router.get('/download/:filename', async (req, res) => {
     const filename = req.params.filename;
     const gfs = Grid(mongoose.connection.db, mongoose.mongo);
     gfs.collection('uploads');
-    gfs.files.findOne({filename: filename}, (err, file) => {
-        if(!file || file.length === 0) {
+    gfs.files.findOne({ filename: filename }, (err, file) => {
+        if (!file || file.length === 0) {
             return res.status(404).json({
                 err: 'File not found'
             });
@@ -65,19 +68,19 @@ router.get('/image/:filename', async (req, res) => {
     let gridfsBucket;
     let gfs = Grid(mongoose.connection.db, mongoose.mongo);
     gridfsBucket = new mongoose.mongo.GridFSBucket(gfs.db, {
-          bucketName: 'uploads'
+        bucketName: 'uploads'
     });
     gfs = Grid(gfs.db, mongoose.mongo);
     gfs.collection('uploads');
 
-    gfs.files.findOne({filename: filename}, (err, file) => {
-        if(!file || file.length === 0) {
+    gfs.files.findOne({ filename: filename }, (err, file) => {
+        if (!file || file.length === 0) {
             return res.status(404).json({
                 err: 'File not found'
             });
         }
         // Check if image
-        if(file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
+        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
             // Read output to browser
             const readStream = gridfsBucket.openDownloadStream(file._id);
             readStream.pipe(res);
@@ -92,7 +95,7 @@ router.get('/image/:filename', async (req, res) => {
 router.get('/images/:imageId', async (req, res) => {
     const imageId = req.params.imageId;
     const image = await ImageModel.findById(imageId);
-    if(!image) {
+    if (!image) {
         return res.status(404).json({
             err: 'Image not found'
         });

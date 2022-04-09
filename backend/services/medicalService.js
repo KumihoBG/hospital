@@ -48,11 +48,11 @@ async function requestAppointment(medicalId, userId, newAppointment) {
     const appointment = new Appointment(newAppointment);
     appointment.isApproved = 'No';
     user.myAppointments.push(appointment);
+    return Promise.all([user.save(), medical.save(), appointment.save()]);
   } else {
     throw new Error('You already have an appointment');
   }
 
-  return Promise.all([user.save(), medical.save(), appointment.save()]);
 }
 
 async function approveAppointment(appointmentId) {
