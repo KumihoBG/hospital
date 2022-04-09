@@ -15,6 +15,7 @@ function PublicMedicalProfile() {
     const { medicalId } = useParams();
     const [profile, setProfile] = useState([]);
     const isMedical = sessionStorage.getItem('role') === 'medical-professional';
+    const myDoctor = sessionStorage.getItem('myDoctor');
     const checkMedical = isMedical === true;
     const [myAppointments, setMyAppointments] = useState([]);
     const [examinationId, setExaminationId] = useState('');
@@ -146,7 +147,6 @@ function PublicMedicalProfile() {
         }
     }
 
-    console.log('isCompleted', isCompleted);
     return (
         <div>
             <Grid id="profile-container" container spacing={2}>
@@ -164,7 +164,7 @@ function PublicMedicalProfile() {
                             </p>
                             {checkMedical
                                 ? null
-                                : <><Link to={`/chat/${userId || user.medical[0]}`} className="profile-buttons" onClick={setChatName}>Send Message</Link><br />
+                                : <><Link to={`/chat/${userId || myDoctor}`} className="profile-buttons" onClick={setChatName}>Send Message</Link><br />
                                     <Link className="profile-buttons" to={`/medicals/request-appointment/${userId || user.medical[0]}`}>Request an appointment</Link></>
                             }
                         </div>
@@ -211,10 +211,10 @@ function PublicMedicalProfile() {
                                 <ul className="appointment-block">
                                     {myAppointments.length !== 0
                                         ? <>{isCompleted
-                                            ?  <div><p id="no-appointments">All Examination completed</p></div>
-                                            :  <div id="appointments-list">{<AppointmentMedical appointment={myAppointments} key={myAppointments._id} />}</div>
+                                            ? <div><p id="no-appointments">All Examination completed</p></div>
+                                            : <div id="appointments-list">{<AppointmentMedical appointment={myAppointments} key={myAppointments._id} />}</div>
                                         } </>
-                                       
+
                                         : <div><p id="no-appointments">No appointments yet</p></div>
                                     }
                                 </ul></>
@@ -237,10 +237,12 @@ function PublicMedicalProfile() {
                                 </tr>
                             </tbody>
                         </table>
-
-                        <div className="section-title">
-                            <i className="small material-icons">pageview</i> <Link className="results-link" to="/" alt="Patient Examination Results">Upload Results</Link>
-                        </div>
+                        {checkMedical
+                            ? <div className="section-title">
+                                <i className="small material-icons">pageview</i> <Link className="results-link" to="/" alt="Patient Examination Results">Upload Results</Link>
+                            </div>
+                            : null
+                        }
                     </>
                 </Grid>
             </Grid>

@@ -64,6 +64,7 @@ io.on('connect', socket => {
 
   })
   socket.on('join-room', (room, cb) => {
+    console.log('join room', room);
     socket.join(room)
     cb(`Joined ${room}`)
   })  

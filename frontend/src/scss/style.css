@@ -1027,6 +1027,7 @@ ul:not(.browser-default) {
   width: 100%;
   height: 90vh;
   padding: 3%;
+  color: #000;
 }
 
 #chat-container #message-container {
@@ -1177,7 +1178,7 @@ ul:not(.browser-default) {
 
 .sendMessageBtn, #sendMessage, .sendMessageOption, #chat-container #sendBtn,
 #chat-container #joinBtn {
-  background: #0a857a;
+  background: #499cdf;
   color: #fff;
   padding: 10px 40px;
   border: none;

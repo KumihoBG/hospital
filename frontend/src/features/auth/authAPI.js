@@ -226,7 +226,6 @@ export const chooseMyDoctor = async (medicalId, userId) => {
       body: JSON.stringify(myDoctor)
     });
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
