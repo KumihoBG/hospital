@@ -69,10 +69,17 @@ export const registerAdmin = createAsyncThunk(
 // Login user
 export const login = createAsyncThunk('patient/login', async (user, thunkAPI) => {
   try {
-    return await authService.login(user)
+    const newUser = await authService.login(user);
+    if (newUser) {
+      return newUser;
+    } else {
+      return thunkAPI.rejectWithValue('Invalid credentials');
+    }
   } catch (error) {
     const message =
-      (error.response && error.response.data && error.response.data.message) ||
+      (error.response 
+      && error.response.data 
+      && error.response.data.message) ||
       error.message ||
       error.toString()
     return thunkAPI.rejectWithValue(message)
@@ -82,7 +89,12 @@ export const login = createAsyncThunk('patient/login', async (user, thunkAPI) =>
 // Login medical professional
 export const loginMedicalProfessional = createAsyncThunk('medical/login', async (user, thunkAPI) => {
   try {
-    return await authService.loginMedical(user);
+    const newMedical = await authService.loginMedical(user);
+    if (newMedical) {
+      return newMedical;
+    } else {
+      return thunkAPI.rejectWithValue('Invalid credentials');
+    }
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
@@ -95,7 +107,12 @@ export const loginMedicalProfessional = createAsyncThunk('medical/login', async 
 // Login admin
 export const loginAdmin = createAsyncThunk('users/login-admin', async (user, thunkAPI) => {
   try {
-    return await authService.loginAdmin(user)
+    const newAdmin = await authService.loginAdmin(user);	
+    if (newAdmin) {
+      return newAdmin;
+    } else {
+      return thunkAPI.rejectWithValue('Invalid credentials');
+    }
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||

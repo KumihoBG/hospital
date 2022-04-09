@@ -59,57 +59,69 @@ function Login() {
                 progress: undefined,
             })
             return;
-        } else {
-            dispatch(login(userData));
         }
-    }
+        try {
+            dispatch(login(userData));
+        } catch (err) {
+            console.log(err.message);
+            toast(`${err.message}`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
+        }
+}
 
-    return (
-        <>
-            <div className="login-container">
-                <div className="form-container">
-                    <form className="register-form" onSubmit={onSubmit} method="POST">
-                        <h3>Login to your Patient account</h3>
-                        <div className="form-group">
-                            <label>Email</label><br></br>
-                            <div className="icon">
-                                <input
-                                    name="email"
-                                    type="text"
-                                    autoComplete="email"
-                                    className="form-control"
-                                    value={email}
-                                    onChange={onChange}>
-                                </input><br></br>
-                            </div>
+return (
+    <>
+        <div className="login-container">
+            <div className="form-container">
+                <form className="register-form" onSubmit={onSubmit} method="POST">
+                    <h3>Login to your Patient account</h3>
+                    <div className="form-group">
+                        <label>Email</label><br></br>
+                        <div className="icon">
+                            <input
+                                name="email"
+                                type="text"
+                                autoComplete="email"
+                                className="form-control"
+                                value={email}
+                                onChange={onChange}>
+                            </input><br></br>
                         </div>
-
-                        <div className="form-group">
-                            <label>Password</label><br></br>
-                            <div className="icon">
-                                <input
-                                    className="form-control"
-                                    autoComplete="current-password"
-                                    name="password"
-                                    value={password}
-                                    type="password"
-                                    onChange={onChange}>
-                                </input>
-                                <br></br>
-                            </div>
-                        </div>
-
-                        <div>
-                            <button type="submit" className="loginBtn">Login</button>
-                        </div>
-                    </form>
-                    <div className="second">
-                        <p>Don't have an account? Create new <Link className="register-redirect" to="/register-patient" alt="register">patient</Link> or <Link className="register-redirect" to="/register-medical" alt="register">professional</Link> account</p>
                     </div>
+
+                    <div className="form-group">
+                        <label>Password</label><br></br>
+                        <div className="icon">
+                            <input
+                                className="form-control"
+                                autoComplete="current-password"
+                                name="password"
+                                value={password}
+                                type="password"
+                                onChange={onChange}>
+                            </input>
+                            <br></br>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="submit" className="loginBtn">Login</button>
+                    </div>
+                </form>
+                <div className="second">
+                    <p>Don't have an account? Create new <Link className="register-redirect" to="/register-patient" alt="register">patient</Link> or <Link className="register-redirect" to="/register-medical" alt="register">professional</Link> account</p>
                 </div>
             </div>
-        </>
-    )
+        </div>
+    </>
+)
 }
 
 export default Login;

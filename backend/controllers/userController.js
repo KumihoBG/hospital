@@ -72,6 +72,9 @@ const loginUser = asyncHandler(async (req, res) => {
   const isMatch = await bcrypt.compare(password, user.hashedPassword);
   
   if (isMatch === false) {
+    res.status(400).json({
+      error: "Invalid user credentials"
+      });
       throw new Error('Wrong password.');
   } else {
     if (user && isMatch === true) {

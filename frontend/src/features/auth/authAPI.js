@@ -76,18 +76,24 @@ const login = async (userData) => {
       method: 'POST',
       body: JSON.stringify(userData)
     });
-    const data = await response.json();
-    sessionStorage.setItem('user', JSON.stringify(data));
-    sessionStorage.setItem('userId', data._id);
-    sessionStorage.setItem('username', data.username);
-    sessionStorage.setItem('email', data.email);
-    sessionStorage.setItem('role', data.role);
-    if (data.medical !== undefined) {
-      sessionStorage.setItem('hasDoctor', true);
-    } 
-    return data;
+    if (response.status === 200) {
+      const data = await response.json();
+      if (!data.error) {
+        sessionStorage.setItem('user', JSON.stringify(data));
+        sessionStorage.setItem('userId', data._id);
+        sessionStorage.setItem('username', data.username);
+        sessionStorage.setItem('email', data.email);
+        sessionStorage.setItem('role', data.role);
+        if (data.medical !== undefined) {
+          sessionStorage.setItem('hasDoctor', true);
+        }
+      } else {
+        return data.error;
+      }
+    }
   } catch (error) {
     console.error(error);
+    return error;
   }
 }
 
@@ -101,15 +107,21 @@ const loginMedical = async (userData) => {
       method: 'POST',
       body: JSON.stringify(userData)
     });
-    const data = await response.json();
-    sessionStorage.setItem('user', JSON.stringify(data));
-    sessionStorage.setItem('userId', data._id);
-    sessionStorage.setItem('username', data.username);
-    sessionStorage.setItem('email', data.email);
-    sessionStorage.setItem('role', data.role);
-    return data;
+    if (response.status === 200) {
+      const data = await response.json();
+      if (!data.error) {
+        sessionStorage.setItem('user', JSON.stringify(data));
+        sessionStorage.setItem('userId', data._id);
+        sessionStorage.setItem('username', data.username);
+        sessionStorage.setItem('email', data.email);
+        sessionStorage.setItem('role', data.role);
+      } else {
+        return data.error;
+      }
+    }
   } catch (error) {
     console.error(error);
+    return error;
   }
 }
 
@@ -123,14 +135,20 @@ const loginAdmin = async (userData) => {
       method: 'POST',
       body: JSON.stringify(userData)
     });
-    const data = await response.json();
-    sessionStorage.setItem('user', JSON.stringify(data));
-    sessionStorage.setItem('userId', data._id);
-    sessionStorage.setItem('username', data.username);
-    sessionStorage.setItem('role', data.role);
-    return data;
+    if (response.status === 200) {
+      const data = await response.json();
+      if (!data.error) {
+        sessionStorage.setItem('user', JSON.stringify(data));
+        sessionStorage.setItem('userId', data._id);
+        sessionStorage.setItem('username', data.username);
+        sessionStorage.setItem('role', data.role);
+      } else {
+        return data.error;
+      }
+    }
   } catch (error) {
     console.error(error);
+    return error;
   }
 }
 

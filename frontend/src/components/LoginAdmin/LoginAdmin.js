@@ -26,7 +26,6 @@ function LoginAdmin() {
 
         if (isSuccess || user) {
             navigate('/home');
-            sessionStorage.setItem('myDoctor', user.medical[0]);
         }
 
         dispatch(reset())
@@ -58,7 +57,20 @@ function LoginAdmin() {
             })
             return;
         } else {
-            dispatch(loginAdmin(userData));
+            try {
+                dispatch(loginAdmin(userData));
+            } catch (err) {
+                console.log(err.message);
+                toast(`${err.message}`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
+            }
         }
     }
 
@@ -72,11 +84,11 @@ function LoginAdmin() {
                             <label>Username</label><br></br>
                             <div className="icon">
                                 <input
-                                    name="email"
+                                    name="username"
                                     type="text"
-                                    autoComplete="email"
+                                    autoComplete="username"
                                     className="form-control"
-                                    value={username}
+                                    default={username}
                                     onChange={onChange}>
                                 </input><br></br>
                             </div>
