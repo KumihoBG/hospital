@@ -9,11 +9,10 @@ const requestExamBtn = document.getElementById('requestExamBtn');
 function Appointment({ appointment }) {
   const [medicalInfo, setMedicalInfo] = useState({});
   const [examinationId, setExaminationId] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [isCompleted, setIsCompleted] = useState(false);
   const [isDownloaded, setIsDownloaded] = useState(false);
-  const [image, setImage] = useState();
   const [filename, setFilename] = useState('');
-  const [resultId, setResultId] = useState('');
   const userId = sessionStorage.getItem('userId');
   const navigate = useNavigate();  
 
@@ -22,6 +21,7 @@ function Appointment({ appointment }) {
     getMyExaminationId();
     checkIfIsCompleted();
     checkMyExaminationResult(examinationId);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [appointment]);
 
   async function getMyExaminationId() {
@@ -43,7 +43,6 @@ function Appointment({ appointment }) {
         const myExaminationResult = await getMyExaminationResult(examinationId);
         const resultsArray = myExaminationResult[0].results;
         const resultIdFound = resultsArray[0];
-        setResultId(resultIdFound);
         getMyResultsFileName(resultIdFound);
     } catch (err) {
         console.log(err.message);
@@ -119,7 +118,6 @@ function Appointment({ appointment }) {
       try {
           const file = await getImage(filename);
           console.log('file', file);
-          setImage(file);
           setIsDownloaded(true);
           navigate(`/uploads/image/${filename}`);
           return file;
