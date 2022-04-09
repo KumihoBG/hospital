@@ -5,17 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import { requestExamination, getMyExaminationResult, getImage, getImageFileName } from '../../features/examinations/examinationAPI';
 import authService from '../../features/auth/authAPI.js';
 const requestExamBtn = document.getElementById('requestExamBtn');
+let completed = sessionStorage.getItem('isCompleted');
 
 function Appointment({ appointment }) {
   const [medicalInfo, setMedicalInfo] = useState({});
   const [examinationId, setExaminationId] = useState('');
-  // eslint-disable-next-line no-unused-vars
-  const [isCompleted, setIsCompleted] = useState(false);
-  const [isDownloaded, setIsDownloaded] = useState(false);
   const [filename, setFilename] = useState('');
   const userId = sessionStorage.getItem('userId');
   const navigate = useNavigate();  
-
+  
   useEffect(() => {
     setMedicalInfo(appointment);
     getMyExaminationId();
@@ -30,9 +28,7 @@ function Appointment({ appointment }) {
       if (examinationIdFetch.length > 0) {
         setExaminationId(examinationIdFetch[0]);
         return examinationIdFetch;
-      } else {
-        setIsCompleted(true);
-      }
+      } 
     } catch (err) {
       console.log(err.message)
     }
@@ -86,7 +82,7 @@ function Appointment({ appointment }) {
   }
 
   async function checkIfIsCompleted() {
-    if (isDownloaded) {
+    if (completed) {
         toast(`Your examination procedure is over. Check results below`, {
           position: "top-right",
           autoClose: 5000,
@@ -118,7 +114,7 @@ function Appointment({ appointment }) {
       try {
           const file = await getImage(filename);
           console.log('file', file);
-          setIsDownloaded(true);
+          sessionStorage.setItem('isCompleted', true);
           navigate(`/uploads/image/${filename}`);
           return file;
       } catch (err) {
