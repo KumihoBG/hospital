@@ -49,9 +49,7 @@ async function uploadResult(image, examinationId, userId, medicalId) {
         } else {
             throw new Error('Examination does not exist');
         }
-        if(user.myExaminations.includes(examination._id)){
-            user.myExaminations = [];
-        } else {
+        if(!user.myExaminations.includes(examination._id)){
             throw new Error('Examination does not exist');
         }
         if(medical.myExaminations.includes(examination._id)){

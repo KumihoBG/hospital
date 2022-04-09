@@ -216,9 +216,6 @@ function PublicPatientProfile() {
                             </tr>
                         </tbody>
                     </table>
-                    <div className="section-title">
-                        <i className="small material-icons">pageview</i> <Link className="results-link" to="/" alt="Patient Examination Results">View Results</Link>
-                    </div>
                 </Grid>
             </Grid>
         </div>

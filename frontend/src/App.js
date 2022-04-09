@@ -24,6 +24,7 @@ import RegisterAdmin from './components/RegisterAdmin/RegisterAdmin.js';
 import LoginAdmin from './components/LoginAdmin/LoginAdmin.js';
 import EditUser from './components/EditUser/EditUser.js';
 import EditMedical from './components/EditMedical/EditMedical.js';
+import MedicalResult from './components/MedicalResult/MedicalResult.js';
 
 const MyPatients = lazy(() => {
   return Promise.all([
@@ -82,6 +83,7 @@ function App() {
             <Route path='/medicals/request-appointment/:userId' element={<Appointments />} />
             <Route path='/my-medical-professional/:medicalId' element={<PublicMedicalProfile />} />
             <Route path='/my-patients/patient/:patientId' element={<PublicPatientProfile />} />
+            <Route path='/uploads/image/:filename' element={<MedicalResult />} />
             <Route path='/chat/:userId' element={<Socket />} />
           </Route>
 

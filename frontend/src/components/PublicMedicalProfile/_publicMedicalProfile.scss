@@ -56,10 +56,16 @@
 }
 
 .results-link {
-    display: block;
     margin-top: 3%;
     text-decoration: none;
     margin-left: 10px;
+    padding: 10px 30px;
+    background: $light_blue;
+    color: $white;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
 }
 
 .send-message {

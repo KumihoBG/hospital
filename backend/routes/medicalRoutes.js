@@ -38,7 +38,6 @@ router.get('/appointments/:id', async (req, res) => {
 
 router.get('/:userId/my-examinations',async (req, res) => {
   const myExaminations = await getMyExaminations(req.params.userId);
-  console.log('myExaminations', myExaminations);
   return res.status(200).json(myExaminations);
 });
 
