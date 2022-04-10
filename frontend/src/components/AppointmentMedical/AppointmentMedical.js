@@ -16,6 +16,7 @@ function AppointmentMedical({ appointment }) {
     if (appointment.isApproved === 'Yes') {
       setApproved(true);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [appointment]);
 
   async function onApprove(event) {
@@ -93,7 +94,7 @@ function AppointmentMedical({ appointment }) {
         ? <button id="approveUserBtn" type="submit" onClick={onApprove}>Approve appointment</button>
         : <button id="disabledBtn-doctor" style={{ disabled: "true" }}>Approved</button>
       }
-      {!examinationId
+      {!examinationId.length > 0
         ? ""
         : <div className="request-examination-block">
           <h6><FaExclamationCircle /> Requested examination</h6>

@@ -20,8 +20,6 @@ function FileUploadPage({ medicalId, userId, examinationId }) {
                     if (response.status === 200) {
                         toast.success('File uploaded successfully. Examination procedure completed.');
                         window.location.reload();
-                    } else {
-                        toast.error('Something went wrong');
                     }
                 })
                 .catch((error) => {

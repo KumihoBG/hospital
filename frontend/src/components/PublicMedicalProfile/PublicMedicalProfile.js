@@ -18,7 +18,9 @@ function PublicMedicalProfile() {
     const myDoctor = sessionStorage.getItem('myDoctor');
     const checkMedical = isMedical === true;
     const [myAppointments, setMyAppointments] = useState([]);
+    // eslint-disable-next-line no-unused-vars
     const [examinationId, setExaminationId] = useState('');
+    // eslint-disable-next-line no-unused-vars
     const [isCompleted, setCompleted] = useState(false);
     // eslint-disable-next-line no-unused-vars
     const { user } = useSelector(
@@ -85,6 +87,7 @@ function PublicMedicalProfile() {
         event.preventDefault();
         try {
             const data = await checkForAppointment(profile._id);
+            console.log('data', data);
             const currentAppointment = data[0].patient.myAppointments[0];
             try {
                 const appointmentDetails = await getMyAppointment(currentAppointment);
@@ -210,11 +213,8 @@ function PublicMedicalProfile() {
                             </div>
                                 <ul className="appointment-block">
                                     {myAppointments.length !== 0
-                                        ? <>{isCompleted
-                                            ? <div><p id="no-appointments">All Examination completed</p></div>
-                                            : <div id="appointments-list">{<AppointmentMedical appointment={myAppointments} key={myAppointments._id} />}</div>
-                                        } </>
-
+                                        ? 
+                                        <div id="appointments-list">{<AppointmentMedical appointment={myAppointments} key={myAppointments._id} />}</div>
                                         : <div><p id="no-appointments">No appointments yet</p></div>
                                     }
                                 </ul></>

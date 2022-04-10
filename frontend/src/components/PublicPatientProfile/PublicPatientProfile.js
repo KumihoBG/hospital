@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import { useSelector } from 'react-redux';
-import { getPatientProfile, getMedicalProfile, deleteSingleUser } from '../../features/auth/authAPI.js';
+import { getPatientProfile, getMedicalProfile, deleteSingleUser, getMyExamination } from '../../features/auth/authAPI.js';
 import { getMyAppointment } from '../../features/appointments/appointmentsAPI.js';
 import { toast } from 'react-toastify';
 import Appointment from '../Appointment/Appointment.js';
@@ -16,6 +16,7 @@ function PublicPatientProfile() {
     const patientId = location.pathname.split('/')[3];
     const [profile, setProfile] = useState([]);
     const [myAppointments, setMyAppointments] = useState([]);
+    const [examinationId, setExaminationId] = useState('');
     const isMedical = sessionStorage.getItem('role') === 'medical-professional';
     const checkMedical = isMedical === true;
     const [medicalName, setMedicalName] = useState([]);
@@ -28,7 +29,7 @@ function PublicPatientProfile() {
         getCurrentPatient();
         getMedicalProfileInfo();
         getCurrentPatientAppointments();
-
+        getMyExaminationsId();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -46,8 +47,8 @@ function PublicPatientProfile() {
             const singleProfile = await getPatientProfile(patientId);
             appId = singleProfile.myAppointments[0];
             if (appId !== undefined) {
-            const currentAppointment = await getMyAppointment(appId);
-            setMyAppointments(currentAppointment);
+                const currentAppointment = await getMyAppointment(appId);
+                setMyAppointments(currentAppointment);
             }
         } catch (err) {
             console.log(err.message);
@@ -116,8 +117,25 @@ function PublicPatientProfile() {
             console.log(err.message);
         }
     }
-    
-    
+
+    async function getMyExaminationsId() {
+        try {
+            const examinationId = await getMyExamination(profile._id);
+            setExaminationId(examinationId);
+            return examinationId;
+        } catch (err) {
+            console.log(err.message);
+            toast(`${err.message}`, {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+        }
+    }
+    console.log('examinationId', examinationId);
     return (
         <div>
             <Grid id="profile-container" container spacing={2}>
@@ -163,18 +181,21 @@ function PublicPatientProfile() {
                             : null
                         }
                     </div>
-                    <div className="medication-details">
-                        <div className="section-title">
-                            <h5>Treated by:</h5>
+                    {!checkMedical
+                        ? <div className="medication-details">
+                            <div className="section-title">
+                                <h5>Treated by:</h5>
+                            </div>
+                            <p>Patient of Medical Professional:<br />
+                                <span className='bolder-names'>
+                                    <Link to={`/my-medical-professional/${myDoctor}`}>
+                                        {medicalName || 'Not chosen yet'}
+                                    </Link>
+                                </span>
+                            </p>
                         </div>
-                        <p>Patient of Medical Professional:<br />
-                            <span className='bolder-names'>
-                                <Link to={`/my-medical-professional/${myDoctor}`}>
-                                    {medicalName || 'Not chosen yet'}
-                                </Link>
-                            </span>
-                        </p>
-                    </div>
+                        : null
+                    }
                 </Grid>
 
                 <Grid id="patient-history-container" item xs={6}>
@@ -187,7 +208,8 @@ function PublicPatientProfile() {
                         <h5>Medical History</h5>
                     </div>
                     <div className="text-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum iusto enim optio alias necessitatibus, cupiditate eligendi quae ad assumenda quasi veritatis saepe odio repellendus delectus placeat possimus qui dicta itaque.</div>
-                    {checkMedical
+                    {appId !== undefined
+                    ? <>{checkMedical
                         ? ""
                         : <><div className="section-title">
                             <h5>My appointments</h5>
@@ -198,8 +220,13 @@ function PublicPatientProfile() {
                                     : <div><p id="no-appointments">No appointments yet</p></div>
                                 }
                             </ul></>
+                    }</>
+                    : <><h5>My appointments</h5><br />
+                    <div className="appointment-block">
+                        <div className="section-title">
+                            <p id="no-patient-appointments">No appointments yet</p>
+                        </div></div></>
                     }
-
                     <div className="section-title">
                         <h5>Medical examinations and results</h5>
                     </div>

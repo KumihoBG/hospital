@@ -1370,7 +1370,8 @@ ul:not(.browser-default) {
   font-size: 18px;
 }
 
-#no-appointments {
+#no-appointments,
+#no-patient-appointments {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1381,6 +1382,10 @@ ul:not(.browser-default) {
       -ms-flex-align: center;
           align-items: center;
   padding: 10px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 2%;
+  margin-bottom: 20px;
 }
 
 #appointments-list {

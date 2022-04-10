@@ -51,6 +51,7 @@ router.get('/appointments/check-for-approval/:userId', async (req, res) => {
   const allAppointments = await getAllAppointments();
   const allDoctors = [];
   const patient = [];
+
   for (let appointment in allAppointments) {
     allDoctors.push(allAppointments[appointment].medical);
     patient.push(allAppointments[appointment].patient);
