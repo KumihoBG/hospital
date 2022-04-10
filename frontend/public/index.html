@@ -11,7 +11,6 @@
   <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <script type="module" src="/js/script.js" defer></script>
   <title>NewLife Hospital</title>
 </head>
 
@@ -22,6 +21,14 @@
   <script src="/js/materialize.js"></script>
   <script src="/js/init.js"></script>
   <script src="https://unpkg.com/spinners-react/lib/umd/SpinnerCircular.min.js"></script>
+  <script type="module" src="/js/script.js"></script>
+  <script>
+     document.addEventListener('DOMContentLoaded', function() {
+            let elems = document.querySelectorAll('.dropdown-trigger');
+            // eslint-disable-next-line no-unused-vars
+            let instances = M.Dropdown.init(elems);
+          });
+  </script>
 </body>
 
 </html>

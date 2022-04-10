@@ -1,5 +1,7 @@
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
-const socket = io('http://localhost:5000');
+const socket = io('http://localhost:5000', {
+  transports:['websocket', 'polling']
+});
 const messageContainer = document.getElementById('message-container');
 const messageForm = document.getElementById('send-container');
 const messageInput = document.getElementById('message-input');
@@ -17,11 +19,12 @@ socket.on('join-room', (room) => {
   socket.emit('join-room', room);
 })
 
-socket.on('chat-message', data => {
+socket.on('send-chat-message', (data, room) => {
   appendMessage(`${data}`)
 })
 
 socket.on('receive-message', message => {
+  console.log('receive message', message);
   appendMessage(`${chatName}: ${message}`)
 })
 

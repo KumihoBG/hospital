@@ -153,7 +153,7 @@ function PublicPatientProfile() {
                             </p>
                             {!checkMedical
                                 ? null
-                                : <Link to={`/chat/${patientId}`} id="sendMessage" onClick={setChatName}>Send Message</Link>
+                                : <Link to={`/chat/${profile._id}`} id="sendMessage" onClick={setChatName}>Send Message</Link>
                             }
                         </div>
                     </div>

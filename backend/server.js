@@ -21,7 +21,7 @@ const options = {
   cors: {
     origin: ["http://localhost:3000"],
     methods: ["GET", "POST"],
-    transports: ["socket", "polling"]
+    transports: [ "websocket", "polling" ]
   }
 };
 
@@ -52,14 +52,17 @@ if (process.env.NODE_ENV === 'production') {
 
 io.on('connect', socket => {
   socket.on('join', function () {
+    console.log('join', room);
     socket.join(room);
   });
 
   socket.on('send-chat-message', (message, room) => {
     if (room === '') {
       socket.broadcast.emit('chat-message', message);
+      console.log('sent message', message);
     } else {
-      socket.to(room).emit('receive-message', message)
+      socket.to(room).emit('receive-message', message);
+      console.log('received message', message);
     }
 
   })

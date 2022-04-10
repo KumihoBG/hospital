@@ -84,9 +84,9 @@ function App() {
             <Route path='/my-medical-professional/:medicalId' element={<PublicMedicalProfile />} />
             <Route path='/my-patients/patient/:patientId' element={<PublicPatientProfile />} />
             <Route path='/uploads/image/:filename' element={<MedicalResult />} />
-            <Route path='/chat/:userId' element={<Socket />} />
           </Route>
 
+          <Route path='/chat/:userId' element={<Socket />} />
           <Route path='*' element={<NotFoundPage />} />
           <Route path='/404' element={<NotFoundPage />} />
         </Routes>
